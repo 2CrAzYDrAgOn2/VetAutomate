@@ -43,10 +43,11 @@
             buttonEnter.BackColor = Color.Transparent;
             buttonEnter.FlatStyle = FlatStyle.Flat;
             buttonEnter.Font = new Font("Segoe UI Semibold", 48F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            buttonEnter.ForeColor = Color.WhiteSmoke;
-            buttonEnter.Location = new Point(424, 349);
+            buttonEnter.ForeColor = Color.Black;
+            buttonEnter.Location = new Point(485, 465);
+            buttonEnter.Margin = new Padding(3, 4, 3, 4);
             buttonEnter.Name = "buttonEnter";
-            buttonEnter.Size = new Size(230, 93);
+            buttonEnter.Size = new Size(263, 124);
             buttonEnter.TabIndex = 2;
             buttonEnter.Text = "Войти";
             buttonEnter.UseVisualStyleBackColor = false;
@@ -55,20 +56,22 @@
             // textBoxPassword
             // 
             textBoxPassword.Font = new Font("Segoe UI Semibold", 48F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            textBoxPassword.Location = new Point(297, 250);
+            textBoxPassword.Location = new Point(339, 333);
+            textBoxPassword.Margin = new Padding(3, 4, 3, 4);
             textBoxPassword.MaxLength = 50;
             textBoxPassword.Name = "textBoxPassword";
             textBoxPassword.PasswordChar = '•';
-            textBoxPassword.Size = new Size(483, 93);
+            textBoxPassword.Size = new Size(551, 114);
             textBoxPassword.TabIndex = 1;
             // 
             // textBoxLogin
             // 
             textBoxLogin.Font = new Font("Segoe UI Semibold", 48F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            textBoxLogin.Location = new Point(297, 151);
+            textBoxLogin.Location = new Point(339, 201);
+            textBoxLogin.Margin = new Padding(3, 4, 3, 4);
             textBoxLogin.MaxLength = 50;
             textBoxLogin.Name = "textBoxLogin";
-            textBoxLogin.Size = new Size(483, 93);
+            textBoxLogin.Size = new Size(551, 114);
             textBoxLogin.TabIndex = 0;
             // 
             // labelRegister
@@ -76,10 +79,10 @@
             labelRegister.AutoSize = true;
             labelRegister.BackColor = Color.Transparent;
             labelRegister.Font = new Font("Segoe UI Semibold", 48F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            labelRegister.ForeColor = Color.WhiteSmoke;
-            labelRegister.Location = new Point(298, 12);
+            labelRegister.ForeColor = Color.Black;
+            labelRegister.Location = new Point(341, 16);
             labelRegister.Name = "labelRegister";
-            labelRegister.Size = new Size(412, 86);
+            labelRegister.Size = new Size(514, 106);
             labelRegister.TabIndex = 5;
             labelRegister.Text = "Регистрация";
             // 
@@ -88,10 +91,10 @@
             labelPassword.AutoSize = true;
             labelPassword.BackColor = Color.Transparent;
             labelPassword.Font = new Font("Segoe UI Semibold", 48F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            labelPassword.ForeColor = Color.WhiteSmoke;
-            labelPassword.Location = new Point(12, 253);
+            labelPassword.ForeColor = Color.Black;
+            labelPassword.Location = new Point(14, 337);
             labelPassword.Name = "labelPassword";
-            labelPassword.Size = new Size(279, 86);
+            labelPassword.Size = new Size(348, 106);
             labelPassword.TabIndex = 7;
             labelPassword.Text = "Пароль:";
             // 
@@ -100,10 +103,10 @@
             labelLogin.AutoSize = true;
             labelLogin.BackColor = Color.Transparent;
             labelLogin.Font = new Font("Segoe UI Semibold", 48F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            labelLogin.ForeColor = Color.WhiteSmoke;
-            labelLogin.Location = new Point(54, 154);
+            labelLogin.ForeColor = Color.Black;
+            labelLogin.Location = new Point(62, 205);
             labelLogin.Name = "labelLogin";
-            labelLogin.Size = new Size(237, 86);
+            labelLogin.Size = new Size(295, 106);
             labelLogin.TabIndex = 6;
             labelLogin.Text = "Логин:";
             // 
@@ -111,9 +114,10 @@
             // 
             buttonClear.BackColor = Color.Transparent;
             buttonClear.FlatStyle = FlatStyle.Flat;
-            buttonClear.Location = new Point(903, 12);
+            buttonClear.Location = new Point(1032, 16);
+            buttonClear.Margin = new Padding(3, 4, 3, 4);
             buttonClear.Name = "buttonClear";
-            buttonClear.Size = new Size(93, 93);
+            buttonClear.Size = new Size(106, 124);
             buttonClear.TabIndex = 3;
             buttonClear.UseVisualStyleBackColor = false;
             buttonClear.Click += ButtonClear_Click;
@@ -123,18 +127,19 @@
             buttonShow.BackColor = Color.Transparent;
             buttonShow.BackgroundImageLayout = ImageLayout.Center;
             buttonShow.FlatStyle = FlatStyle.Flat;
-            buttonShow.Location = new Point(786, 250);
+            buttonShow.Location = new Point(898, 333);
+            buttonShow.Margin = new Padding(3, 4, 3, 4);
             buttonShow.Name = "buttonShow";
-            buttonShow.Size = new Size(93, 93);
+            buttonShow.Size = new Size(106, 124);
             buttonShow.TabIndex = 4;
             buttonShow.UseVisualStyleBackColor = false;
             buttonShow.Click += ButtonShow_Click;
             // 
             // Signup
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1008, 537);
+            ClientSize = new Size(1152, 716);
             Controls.Add(textBoxLogin);
             Controls.Add(textBoxPassword);
             Controls.Add(buttonEnter);
@@ -144,6 +149,7 @@
             Controls.Add(labelLogin);
             Controls.Add(labelPassword);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(3, 4, 3, 4);
             MinimizeBox = false;
             Name = "Signup";
             Text = "Signup";

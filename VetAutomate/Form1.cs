@@ -48,21 +48,21 @@ namespace VetAutomate
         {
             try
             {
-                dataGridViewBooks.Columns.Add("BookID", "Номер");
-                dataGridViewBooks.Columns.Add("Title", "Заголовок");
-                dataGridViewBooks.Columns.Add("Author", "Автор");
-                dataGridViewBooks.Columns.Add("Genre", "Жанр");
-                dataGridViewBooks.Columns.Add("PublishedYear", "Год выпуска");
-                dataGridViewBooks.Columns.Add("ISBN", "ISBN");
-                dataGridViewBooks.Columns.Add("CopiesAvailable", "Доступно копий");
-                dataGridViewBooks.Columns.Add("IsNew", String.Empty);
-                dataGridViewLoans.Columns.Add("LoanID", "Номер");
-                dataGridViewLoans.Columns.Add("RegistrationID", "Номер пользователя");
-                dataGridViewLoans.Columns.Add("BookID", "Номер книги");
-                dataGridViewLoans.Columns.Add("LoanDate", "Дата выдачи");
-                dataGridViewLoans.Columns.Add("ReturnDate", "Дата возврата");
-                dataGridViewLoans.Columns.Add("IsReturned", "Статус");
-                dataGridViewLoans.Columns.Add("IsNew", String.Empty);
+                dataGridViewClients.Columns.Add("BookID", "Номер");
+                dataGridViewClients.Columns.Add("Title", "Заголовок");
+                dataGridViewClients.Columns.Add("Author", "Автор");
+                dataGridViewClients.Columns.Add("Genre", "Жанр");
+                dataGridViewClients.Columns.Add("PublishedYear", "Год выпуска");
+                dataGridViewClients.Columns.Add("ISBN", "ISBN");
+                dataGridViewClients.Columns.Add("CopiesAvailable", "Доступно копий");
+                dataGridViewClients.Columns.Add("IsNew", String.Empty);
+                dataGridViewPrescriptions.Columns.Add("LoanID", "Номер");
+                dataGridViewPrescriptions.Columns.Add("RegistrationID", "Номер пользователя");
+                dataGridViewPrescriptions.Columns.Add("BookID", "Номер книги");
+                dataGridViewPrescriptions.Columns.Add("LoanDate", "Дата выдачи");
+                dataGridViewPrescriptions.Columns.Add("ReturnDate", "Дата возврата");
+                dataGridViewPrescriptions.Columns.Add("IsReturned", "Статус");
+                dataGridViewPrescriptions.Columns.Add("IsNew", String.Empty);
             }
             catch (Exception ex)
             {
@@ -74,12 +74,12 @@ namespace VetAutomate
         {
             try
             {
-                textBoxBookID.Text = "";
-                textBoxTitleBooks.Text = "";
+                textBoxClientID.Text = "";
+                textBoxFullNameClients.Text = "";
                 textBoxAuthorBooks.Text = "";
-                textBoxGenreBooks.Text = "";
-                textBoxPublishedYearBooks.Text = "";
-                textBoxISBNBooks.Text = "";
+                textBoxEmailClients.Text = "";
+                textBoxAddress.Text = "";
+                textBoxINNClients.Text = "";
                 textBoxCopiesAvailableBooks.Text = "";
                 textBoxLoanID.Text = "";
                 textBoxRegistrationIDLoans.Text = "";
@@ -172,8 +172,8 @@ namespace VetAutomate
             try
             {
                 CreateColumns();
-                RefreshDataGrid(dataGridViewBooks, "Books");
-                RefreshDataGrid(dataGridViewLoans, "Loans");
+                RefreshDataGrid(dataGridViewClients, "Books");
+                RefreshDataGrid(dataGridViewPrescriptions, "Loans");
             }
             catch (Exception ex)
             {
@@ -189,12 +189,12 @@ namespace VetAutomate
                 switch (dataGridView.Name)
                 {
                     case "dataGridViewBooks":
-                        textBoxBookID.Text = dataGridViewRow.Cells[0].Value.ToString();
-                        textBoxTitleBooks.Text = dataGridViewRow.Cells[1].Value.ToString();
+                        textBoxClientID.Text = dataGridViewRow.Cells[0].Value.ToString();
+                        textBoxFullNameClients.Text = dataGridViewRow.Cells[1].Value.ToString();
                         textBoxAuthorBooks.Text = dataGridViewRow.Cells[2].Value.ToString();
-                        textBoxGenreBooks.Text = dataGridViewRow.Cells[3].Value.ToString();
-                        textBoxPublishedYearBooks.Text = dataGridViewRow.Cells[4].Value.ToString();
-                        textBoxISBNBooks.Text = dataGridViewRow.Cells[5].Value.ToString();
+                        textBoxEmailClients.Text = dataGridViewRow.Cells[3].Value.ToString();
+                        textBoxAddress.Text = dataGridViewRow.Cells[4].Value.ToString();
+                        textBoxINNClients.Text = dataGridViewRow.Cells[5].Value.ToString();
                         textBoxCopiesAvailableBooks.Text = dataGridViewRow.Cells[6].Value.ToString();
                         break;
 
@@ -235,7 +235,7 @@ namespace VetAutomate
                 switch (dataGridView.Name)
                 {
                     case "dataGridViewBooks":
-                        string searchStringEquipment = $"select * from Books where concat (BookID, Title, Author, Genre, PublishedYear, ISBN, CopiesAvailable) like '%" + textBoxSearchBooks.Text + "%'";
+                        string searchStringEquipment = $"select * from Books where concat (BookID, Title, Author, Genre, PublishedYear, ISBN, CopiesAvailable) like '%" + textBoxSearchClients.Text + "%'";
                         SqlCommand sqlCommandEquipment = new(searchStringEquipment, dataBase.GetConnection());
                         dataBase.OpenConnection();
                         SqlDataReader sqlDataReaderEquipment = sqlCommandEquipment.ExecuteReader();
@@ -247,7 +247,7 @@ namespace VetAutomate
                         break;
 
                     case "dataGridViewLoans":
-                        string searchStringSupplier = $"select * from Loans where concat (LoanID, RegistrationID, BookID, LoanDate, ReturnDate, IsReturned) like '%" + textBoxSearchLoans.Text + "%'";
+                        string searchStringSupplier = $"select * from Loans where concat (LoanID, RegistrationID, BookID, LoanDate, ReturnDate, IsReturned) like '%" + textBoxSearchPrescriptions.Text + "%'";
                         SqlCommand sqlCommandSupplier = new(searchStringSupplier, dataBase.GetConnection());
                         dataBase.OpenConnection();
                         SqlDataReader sqlDataReaderSupplier = sqlCommandSupplier.ExecuteReader();
@@ -413,12 +413,12 @@ namespace VetAutomate
                 switch (dataGridView.Name)
                 {
                     case "dataGridViewBooks":
-                        var bookID = textBoxBookID.Text;
-                        var titleBooks = textBoxTitleBooks.Text;
+                        var bookID = textBoxClientID.Text;
+                        var titleBooks = textBoxFullNameClients.Text;
                         var authorBooks = textBoxAuthorBooks.Text;
-                        var genreBooks = textBoxGenreBooks.Text;
-                        var publishedYearBooks = textBoxPublishedYearBooks.Text;
-                        var iSBNBooks = textBoxISBNBooks.Text;
+                        var genreBooks = textBoxEmailClients.Text;
+                        var publishedYearBooks = textBoxAddress.Text;
+                        var iSBNBooks = textBoxINNClients.Text;
                         var copiesAvailableBooks = textBoxCopiesAvailableBooks.Text;
                         dataGridView.Rows[selectedRowIndex].SetValues(bookID, titleBooks, authorBooks, genreBooks, publishedYearBooks, iSBNBooks, copiesAvailableBooks);
                         dataGridView.Rows[selectedRowIndex].Cells[7].Value = RowState.Modified;
@@ -593,8 +593,8 @@ namespace VetAutomate
         {
             try
             {
-                RefreshDataGrid(dataGridViewBooks, "Books");
-                RefreshDataGrid(dataGridViewLoans, "Loans");
+                RefreshDataGrid(dataGridViewClients, "Books");
+                RefreshDataGrid(dataGridViewPrescriptions, "Loans");
                 ClearFields();
             }
             catch (Exception ex)
@@ -647,7 +647,7 @@ namespace VetAutomate
         {
             try
             {
-                DeleteRow(dataGridViewBooks);
+                DeleteRow(dataGridViewClients);
                 ClearFields();
             }
             catch (Exception ex)
@@ -660,7 +660,7 @@ namespace VetAutomate
         {
             try
             {
-                DeleteRow(dataGridViewLoans);
+                DeleteRow(dataGridViewPrescriptions);
                 ClearFields();
             }
             catch (Exception ex)
@@ -673,7 +673,7 @@ namespace VetAutomate
         {
             try
             {
-                Change(dataGridViewBooks);
+                Change(dataGridViewClients);
                 ClearFields();
             }
             catch (Exception ex)
@@ -686,7 +686,7 @@ namespace VetAutomate
         {
             try
             {
-                Change(dataGridViewLoans);
+                Change(dataGridViewPrescriptions);
                 ClearFields();
             }
             catch (Exception ex)
@@ -701,7 +701,7 @@ namespace VetAutomate
             {
                 if (admin)
                 {
-                    UpdateBase(dataGridViewBooks);
+                    UpdateBase(dataGridViewClients);
                 }
                 else
                 {
@@ -718,7 +718,7 @@ namespace VetAutomate
         {
             try
             {
-                UpdateBase(dataGridViewLoans);
+                UpdateBase(dataGridViewPrescriptions);
             }
             catch (Exception ex)
             {
@@ -730,7 +730,7 @@ namespace VetAutomate
         {
             try
             {
-                ExportToWord(dataGridViewBooks);
+                ExportToWord(dataGridViewClients);
             }
             catch (Exception ex)
             {
@@ -742,7 +742,7 @@ namespace VetAutomate
         {
             try
             {
-                ExportToWord(dataGridViewLoans);
+                ExportToWord(dataGridViewPrescriptions);
             }
             catch (Exception ex)
             {
@@ -754,7 +754,7 @@ namespace VetAutomate
         {
             try
             {
-                ExportToExcel(dataGridViewBooks);
+                ExportToExcel(dataGridViewClients);
             }
             catch (Exception ex)
             {
@@ -766,7 +766,7 @@ namespace VetAutomate
         {
             try
             {
-                ExportToExcel(dataGridViewLoans);
+                ExportToExcel(dataGridViewPrescriptions);
             }
             catch (Exception ex)
             {
@@ -778,7 +778,7 @@ namespace VetAutomate
         {
             try
             {
-                ExportToTXT(dataGridViewBooks);
+                ExportToTXT(dataGridViewClients);
             }
             catch (Exception ex)
             {
@@ -790,7 +790,7 @@ namespace VetAutomate
         {
             try
             {
-                ExportToTXT(dataGridViewLoans);
+                ExportToTXT(dataGridViewPrescriptions);
             }
             catch (Exception ex)
             {
@@ -805,7 +805,7 @@ namespace VetAutomate
                 selectedRow = e.RowIndex;
                 if (e.RowIndex >= 0)
                 {
-                    DataGridView_CellClick(dataGridViewBooks, selectedRow);
+                    DataGridView_CellClick(dataGridViewClients, selectedRow);
                 }
             }
             catch (Exception ex)
@@ -821,7 +821,7 @@ namespace VetAutomate
                 selectedRow = e.RowIndex;
                 if (e.RowIndex >= 0)
                 {
-                    DataGridView_CellClick(dataGridViewLoans, selectedRow);
+                    DataGridView_CellClick(dataGridViewPrescriptions, selectedRow);
                 }
             }
             catch (Exception ex)
@@ -834,7 +834,7 @@ namespace VetAutomate
         {
             try
             {
-                Search(dataGridViewBooks);
+                Search(dataGridViewClients);
             }
             catch (Exception ex)
             {
@@ -846,7 +846,7 @@ namespace VetAutomate
         {
             try
             {
-                Search(dataGridViewLoans);
+                Search(dataGridViewPrescriptions);
             }
             catch (Exception ex)
             {
