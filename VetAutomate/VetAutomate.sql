@@ -11,6 +11,11 @@ CREATE TABLE Posts(
 	Post NVARCHAR(150) NOT NULL
 );
 
+CREATE TABLE PaymentMethods(
+	PaymentMethodID INT PRIMARY KEY IDENTITY(1,1),
+	PaymentMethod NVARCHAR(150) NOT NULL
+);
+
 CREATE TABLE Clients (
     ClientID INT PRIMARY KEY IDENTITY,
     FullName NVARCHAR(100) NOT NULL,
@@ -50,13 +55,13 @@ CREATE TABLE Veterinarians (
 CREATE TABLE Services (
     ServiceID INT PRIMARY KEY IDENTITY,
     ServiceName NVARCHAR(100) NOT NULL,
-    Price DECIMAL(10,2) NOT NULL
+    Price FLOAT NOT NULL
 );
 
 CREATE TABLE Invoices (
     InvoiceID INT PRIMARY KEY IDENTITY,
     ClientID INT FOREIGN KEY REFERENCES Clients(ClientID) ON DELETE CASCADE,
-    TotalAmount DECIMAL(10,2) NOT NULL,
+    TotalAmount FLOAT NOT NULL,
     InvoiceDate DATETIME DEFAULT GETDATE(),
     Paid BIT DEFAULT 0
 );
@@ -64,16 +69,16 @@ CREATE TABLE Invoices (
 CREATE TABLE Payments (
     PaymentID INT PRIMARY KEY IDENTITY,
     InvoiceID INT FOREIGN KEY REFERENCES Invoices(InvoiceID) ON DELETE CASCADE,
-    Amount DECIMAL(10,2) NOT NULL,
+    Amount FLOAT NOT NULL,
     PaymentDate DATETIME DEFAULT GETDATE(),
-    PaymentMethod NVARCHAR(50)
+    PaymentMethod INT FOREIGN KEY REFERENCES PaymentMethods(PaymentMethodID)
 );
 
 CREATE TABLE Medications (
     MedicationID INT PRIMARY KEY IDENTITY,
     Name NVARCHAR(100) NOT NULL,
     Description NVARCHAR(255),
-    Price DECIMAL(10,2)
+    Price FLOAT
 );
 
 CREATE TABLE Prescriptions (
@@ -102,6 +107,10 @@ INSERT INTO Posts (Post) VALUES
 ('Менеджер по работе с клиентами'),
 ('Администратор');
 
+INSERT INTO PaymentMethods (PaymentMethod) VALUES
+('Наличными'),
+('Картой');
+
 INSERT INTO Clients (FullName, Phone, Email, Address, INN) VALUES
 ('Иванов Иван Иванович', '+7 900 123 4567', 'ivanov@mail.ru', 'г. Москва, ул. Ленина, 1', '1234567890'),
 ('Петрова Ольга Васильевна', '+7 900 234 5678', 'petrova@mail.ru', 'г. Санкт-Петербург, ул. Пушкина, 2', '2345678901');
@@ -124,7 +133,7 @@ INSERT INTO Invoices (ClientID, TotalAmount, Paid) VALUES
 (2, 1500.00, 1);
 
 INSERT INTO Payments (InvoiceID, Amount, PaymentMethod) VALUES
-(2, 1500.00, 'Карта');
+(2, 1500.00, 1);
 
 INSERT INTO Medications (Name, Description, Price) VALUES
 ('Антибиотик', 'Применяется для лечения инфекций', 300.00),
@@ -140,6 +149,7 @@ INSERT INTO Registration (UserLogin, UserPassword, IsAdmin) VALUES
 
 SELECT * FROM Genders;
 SELECT * FROM Posts;
+SELECT * FROM PaymentMethods;
 SELECT * FROM Clients;
 SELECT * FROM Pets;
 SELECT * FROM Veterinarians;
@@ -149,6 +159,91 @@ SELECT * FROM Payments;
 SELECT * FROM Medications;
 SELECT * FROM Prescriptions;
 SELECT * FROM Registration;
+
+SELECT
+    c.FullName AS Client,
+    c.Phone,
+    c.Email,
+    p.Name AS PetName,
+    p.Species,
+    p.Breed,
+    COUNT(DISTINCT i.InvoiceID) AS VisitsCount,
+    SUM(i.TotalAmount) AS TotalSpent,
+    MAX(i.InvoiceDate) AS LastVisitDate
+FROM
+    Clients c
+JOIN
+    Pets p ON c.ClientID = p.OwnerID
+LEFT JOIN
+    Invoices i ON c.ClientID = i.ClientID
+LEFT JOIN
+    Payments pay ON i.InvoiceID = pay.InvoiceID
+WHERE
+    i.Paid = 1
+    AND i.InvoiceDate BETWEEN '2023-01-01' AND GetDate()
+GROUP BY
+    c.FullName,
+    c.Phone,
+    c.Email,
+    p.Name,
+    p.Species,
+    p.Breed
+ORDER BY
+    TotalSpent DESC;
+
+SELECT 
+    v.FullName AS Veterinarian,
+    p.Post AS Position,
+    COUNT(DISTINCT pr.PrescriptionID) AS PrescriptionsCount,
+    COUNT(DISTINCT pr.PetID) AS UniquePatientsCount,
+    COUNT(DISTINCT pr.MedicationID) AS UniqueMedicationsPrescribed
+FROM 
+    Veterinarians v
+JOIN 
+    Posts p ON v.PostID = p.PostID
+LEFT JOIN 
+    Prescriptions pr ON v.VetID = pr.VetID
+LEFT JOIN
+    Invoices i ON pr.PetID = i.ClientID -- Связь через клиента/владельца питомца
+WHERE 
+    i.InvoiceDate BETWEEN '2023-01-01' AND GETDATE() -- Используем дату из счетов
+    OR pr.PrescriptionID IS NOT NULL -- Учитываем все рецепты
+GROUP BY 
+    v.FullName, 
+    p.Post
+ORDER BY 
+    PrescriptionsCount DESC;
+
+SELECT
+    c.FullName AS Client,
+    c.Phone,
+    c.Email,
+    p.Name AS PetName,
+    p.Species,
+    p.Breed,
+    COUNT(DISTINCT i.InvoiceID) AS VisitsCount,
+    SUM(i.TotalAmount) AS TotalSpent,
+    MAX(i.InvoiceDate) AS LastVisitDate
+FROM
+    Clients c
+JOIN
+    Pets p ON c.ClientID = p.OwnerID
+LEFT JOIN
+    Invoices i ON c.ClientID = i.ClientID
+LEFT JOIN
+    Payments pay ON i.InvoiceID = pay.InvoiceID
+WHERE
+    i.Paid = 1
+    AND i.InvoiceDate BETWEEN '2023-01-01' AND GetDate()
+GROUP BY
+    c.FullName,
+    c.Phone,
+    c.Email,
+    p.Name,
+    p.Species,
+    p.Breed
+ORDER BY
+    TotalSpent DESC;
 
 DROP DATABASE VetAutomate;
 

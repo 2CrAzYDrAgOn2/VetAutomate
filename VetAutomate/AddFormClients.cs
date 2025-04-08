@@ -2,11 +2,11 @@
 
 namespace VetAutomate
 {
-    public partial class AddFormBooks : Form
+    public partial class AddFormClients : Form
     {
         private readonly DataBase dataBase = new();
 
-        public AddFormBooks()
+        public AddFormClients()
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
@@ -17,14 +17,14 @@ namespace VetAutomate
             try
             {
                 dataBase.OpenConnection();
-                var title = textBoxTitleBooks.Text;
-                var author = textBoxAuthorBooks.Text;
-                var genre = textBoxGenreBooks.Text;
-                var publishedYear = textBoxPublishedYearBooks.Text;
-                var iSBN = textBoxISBNBooks.Text;
-                var copiesAvailable = textBoxCopiesAvailableBooks.Text;
-                var addQuery = $"insert into Books (Title, Author, Genre, PublishedYear, ISBN, CopiesAvailable) values ('{title}', '{author}', '{genre}', '{publishedYear}', '{iSBN}', '{copiesAvailable}')";
-                var sqlCommand = new SqlCommand(addQuery, dataBase.GetConnection());
+                var fullName = textBoxFullNameClients.Text;
+                var phone = maskedTextBoxPhoneClients.Text;
+                var email = textBoxEmailClients.Text;
+                var address = textBoxAddress.Text;
+                var inn = textBoxINNClients.Text;
+                var registrationDate = dateTimePickerRegistrationDate.Value;
+                var insertQuery = $"INSERT INTO Clients (FullName, Phone, Email, Address, INN, RegistrationDate) VALUES ('{fullName}', '{phone}', '{email}', '{address}', '{inn}', '{registrationDate}')";
+                var sqlCommand = new SqlCommand(insertQuery, dataBase.GetConnection());
                 sqlCommand.ExecuteNonQuery();
                 MessageBox.Show("Запись успешно создана!", "Успех!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }

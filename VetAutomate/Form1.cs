@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Net;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using Application = Microsoft.Office.Interop.Word.Application;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace VetAutomate
@@ -48,20 +49,61 @@ namespace VetAutomate
         {
             try
             {
-                dataGridViewClients.Columns.Add("BookID", "Номер");
-                dataGridViewClients.Columns.Add("Title", "Заголовок");
-                dataGridViewClients.Columns.Add("Author", "Автор");
-                dataGridViewClients.Columns.Add("Genre", "Жанр");
-                dataGridViewClients.Columns.Add("PublishedYear", "Год выпуска");
-                dataGridViewClients.Columns.Add("ISBN", "ISBN");
-                dataGridViewClients.Columns.Add("CopiesAvailable", "Доступно копий");
+                dataGridViewClients.Columns.Add("ClientID", "Номер");
+                dataGridViewClients.Columns.Add("FullName", "ФИО");
+                dataGridViewClients.Columns.Add("Phone", "Телефон");
+                dataGridViewClients.Columns.Add("Email", "Email");
+                dataGridViewClients.Columns.Add("Address", "Адрес");
+                dataGridViewClients.Columns.Add("INN", "ИНН");
+                dataGridViewClients.Columns.Add("RegistrationDate", "Дата регистрации");
                 dataGridViewClients.Columns.Add("IsNew", String.Empty);
-                dataGridViewPrescriptions.Columns.Add("LoanID", "Номер");
-                dataGridViewPrescriptions.Columns.Add("RegistrationID", "Номер пользователя");
-                dataGridViewPrescriptions.Columns.Add("BookID", "Номер книги");
-                dataGridViewPrescriptions.Columns.Add("LoanDate", "Дата выдачи");
-                dataGridViewPrescriptions.Columns.Add("ReturnDate", "Дата возврата");
-                dataGridViewPrescriptions.Columns.Add("IsReturned", "Статус");
+                dataGridViewPets.Columns.Add("PetID", "Номер");
+                dataGridViewPets.Columns.Add("Name", "Кличка");
+                dataGridViewPets.Columns.Add("Species", "Вид");
+                dataGridViewPets.Columns.Add("Breed", "Порода");
+                dataGridViewPets.Columns.Add("BirthDate", "Дата рождения");
+                dataGridViewPets.Columns.Add("OwnerID", "ID владельца");
+                dataGridViewPets.Columns.Add("IsNew", String.Empty);
+                dataGridViewVeterinarians.Columns.Add("VetID", "Номер");
+                dataGridViewVeterinarians.Columns.Add("FullName", "ФИО");
+                dataGridViewVeterinarians.Columns.Add("BirthDate", "Дата рождения");
+                dataGridViewVeterinarians.Columns.Add("BirthPlace", "Место рождения");
+                dataGridViewVeterinarians.Columns.Add("PassportSeries", "Серия паспорта");
+                dataGridViewVeterinarians.Columns.Add("PassportNumber", "Номер паспорта");
+                dataGridViewVeterinarians.Columns.Add("Phone", "Телефон");
+                dataGridViewVeterinarians.Columns.Add("Email", "Email");
+                dataGridViewVeterinarians.Columns.Add("INN", "ИНН");
+                dataGridViewVeterinarians.Columns.Add("DateOfEmployment", "Дата найма");
+                dataGridViewVeterinarians.Columns.Add("PostID", "Должность");
+                dataGridViewVeterinarians.Columns.Add("GenderID", "Пол");
+                dataGridViewVeterinarians.Columns.Add("IsNew", String.Empty);
+                dataGridViewServices.Columns.Add("ServiceID", "Номер");
+                dataGridViewServices.Columns.Add("ServiceName", "Услуга");
+                dataGridViewServices.Columns.Add("Price", "Цена");
+                dataGridViewServices.Columns.Add("IsNew", String.Empty);
+                dataGridViewInvoices.Columns.Add("InvoiceID", "Номер");
+                dataGridViewInvoices.Columns.Add("ClientID", "ID клиента");
+                dataGridViewInvoices.Columns.Add("TotalAmount", "Сумма");
+                dataGridViewInvoices.Columns.Add("InvoiceDate", "Дата счета");
+                dataGridViewInvoices.Columns.Add("Paid", "Оплачено");
+                dataGridViewInvoices.Columns.Add("IsNew", String.Empty);
+                dataGridViewPayments.Columns.Add("PaymentID", "Номер");
+                dataGridViewPayments.Columns.Add("InvoiceID", "ID счета");
+                dataGridViewPayments.Columns.Add("Amount", "Сумма");
+                dataGridViewPayments.Columns.Add("PaymentDate", "Дата оплаты");
+                dataGridViewPayments.Columns.Add("PaymentMethod", "Способ оплаты");
+                dataGridViewPayments.Columns.Add("IsNew", String.Empty);
+                dataGridViewMedications.Columns.Add("MedicationID", "Номер");
+                dataGridViewMedications.Columns.Add("Name", "Название");
+                dataGridViewMedications.Columns.Add("Description", "Описание");
+                dataGridViewMedications.Columns.Add("Price", "Цена");
+                dataGridViewMedications.Columns.Add("IsNew", String.Empty);
+                dataGridViewPrescriptions.Columns.Add("PrescriptionID", "Номер");
+                dataGridViewPrescriptions.Columns.Add("PetID", "ID питомца");
+                dataGridViewPrescriptions.Columns.Add("VetID", "ID ветеринара");
+                dataGridViewPrescriptions.Columns.Add("MedicationID", "ID лекарства");
+                dataGridViewPrescriptions.Columns.Add("Dosage", "Дозировка");
+                dataGridViewPrescriptions.Columns.Add("Instructions", "Инструкции");
                 dataGridViewPrescriptions.Columns.Add("IsNew", String.Empty);
             }
             catch (Exception ex)
@@ -76,17 +118,43 @@ namespace VetAutomate
             {
                 textBoxClientID.Text = "";
                 textBoxFullNameClients.Text = "";
-                textBoxAuthorBooks.Text = "";
+                maskedTextBoxPhoneClients.Text = "";
                 textBoxEmailClients.Text = "";
                 textBoxAddress.Text = "";
                 textBoxINNClients.Text = "";
-                textBoxCopiesAvailableBooks.Text = "";
-                textBoxLoanID.Text = "";
-                textBoxRegistrationIDLoans.Text = "";
-                textBoxBookIDLoans.Text = "";
-                dateTimePickerLoanDateLoans.Text = "";
-                dateTimePickerReturnDateLoans.Text = "";
-                textBoxIsReturnedLoans.Text = "";
+                textBoxPetID.Text = "";
+                textBoxNamePets.Text = "";
+                textBoxSpecies.Text = "";
+                textBoxBreed.Text = "";
+                textBoxOwnerID.Text = "";
+                textBoxVetID.Text = "";
+                textBoxFullNameVeterinarians.Text = "";
+                textBoxBirthPlace.Text = "";
+                textBoxPassportSeries.Text = "";
+                textBoxPassportNumber.Text = "";
+                maskedTextBoxPhoneVeterinarians.Text = "";
+                textBoxEmailVeterinarians.Text = "";
+                textBoxINNVeterinarians.Text = "";
+                textBoxServiceID.Text = "";
+                textBoxServiceName.Text = "";
+                textBoxPriceServices.Text = "";
+                textBoxInvoiceID.Text = "";
+                textBoxClientIDInvoices.Text = "";
+                textBoxTotalAmount.Text = "";
+                checkBoxPaid.Checked = false;
+                textBoxPaymentID.Text = "";
+                textBoxInvoiceIDPayments.Text = "";
+                textBoxAmount.Text = "";
+                textBoxMedicationID.Text = "";
+                textBoxNameMedications.Text = "";
+                textBoxDescription.Text = "";
+                textBoxPriceMedications.Text = "";
+                textBoxPrescriptionID.Text = "";
+                textBoxPetIDPrescriptions.Text = "";
+                textBoxVetID.Text = "";
+                textBoxMedicationIDPrescriptions.Text = "";
+                textBoxDosage.Text = "";
+                textBoxInstructions.Text = "";
             }
             catch (Exception ex)
             {
@@ -100,12 +168,36 @@ namespace VetAutomate
             {
                 switch (dataGridView.Name)
                 {
-                    case "dataGridViewBooks":
-                        dataGridView.Rows.Add(iDataRecord.GetInt32(0), iDataRecord.GetString(1), iDataRecord.GetString(2), iDataRecord.GetString(3), iDataRecord.GetInt32(4), iDataRecord.GetString(5), iDataRecord.GetInt32(6), RowState.Modified);
+                    case "dataGridViewClients":
+                        dataGridView.Rows.Add(iDataRecord.GetInt32(0), iDataRecord.GetString(1), iDataRecord.GetString(2), iDataRecord.GetString(3), iDataRecord.GetString(4), iDataRecord.GetString(5), iDataRecord.GetDateTime(6).ToString("yyyy-MM-dd"), RowState.Modified);
                         break;
 
-                    case "dataGridViewLoans":
-                        dataGridView.Rows.Add(iDataRecord.GetInt32(0), iDataRecord.GetInt32(1), iDataRecord.GetInt32(2), iDataRecord.GetDateTime(3).ToString("yyyy-MM-dd"), iDataRecord.IsDBNull(4) ? "" : iDataRecord.GetDateTime(4).ToString("yyyy-MM-dd"), iDataRecord.GetBoolean(5), RowState.Modified);
+                    case "dataGridViewPets":
+                        dataGridView.Rows.Add(iDataRecord.GetInt32(0), iDataRecord.GetString(1), iDataRecord.GetString(2), iDataRecord.GetString(3), iDataRecord.GetDateTime(4).ToString("yyyy-MM-dd"), iDataRecord.GetInt32(5), RowState.Modified);
+                        break;
+
+                    case "dataGridViewVeterinarians":
+                        dataGridView.Rows.Add(iDataRecord.GetInt32(0), iDataRecord.GetString(1), iDataRecord.GetDateTime(2).ToString("yyyy-MM-dd"), iDataRecord.GetString(3), iDataRecord.GetString(4), iDataRecord.GetString(5), iDataRecord.GetString(6), iDataRecord.GetString(7), iDataRecord.GetString(8), iDataRecord.GetDateTime(9).ToString("yyyy-MM-dd"), iDataRecord.GetInt32(10), iDataRecord.GetInt32(11), RowState.Modified);
+                        break;
+
+                    case "dataGridViewServices":
+                        dataGridView.Rows.Add(iDataRecord.GetInt32(0), iDataRecord.GetString(1), iDataRecord.GetDouble(2), RowState.Modified);
+                        break;
+
+                    case "dataGridViewInvoices":
+                        dataGridView.Rows.Add(iDataRecord.GetInt32(0), iDataRecord.GetInt32(1), iDataRecord.GetDouble(2), iDataRecord.GetDateTime(3).ToString("yyyy-MM-dd HH:mm:ss"), iDataRecord.GetBoolean(4), RowState.Modified);
+                        break;
+
+                    case "dataGridViewPayments":
+                        dataGridView.Rows.Add(iDataRecord.GetInt32(0), iDataRecord.GetInt32(1), iDataRecord.GetDouble(2), iDataRecord.GetDateTime(3).ToString("yyyy-MM-dd HH:mm:ss"), iDataRecord.GetInt32(4), RowState.Modified);
+                        break;
+
+                    case "dataGridViewMedications":
+                        dataGridView.Rows.Add(iDataRecord.GetInt32(0), iDataRecord.GetString(1), iDataRecord.GetString(2), iDataRecord.GetDouble(3), RowState.Modified);
+                        break;
+
+                    case "dataGridViewPrescriptions":
+                        dataGridView.Rows.Add(iDataRecord.GetInt32(0), iDataRecord.GetInt32(1), iDataRecord.GetInt32(2), iDataRecord.GetInt32(3), iDataRecord.GetString(4), iDataRecord.GetString(5), RowState.Modified);
                         break;
                 }
             }
@@ -162,8 +254,8 @@ namespace VetAutomate
 
         private void ShowBalloonTip()
         {
-            notifyIcon.BalloonTipTitle = "Учет библиотеки";
-            notifyIcon.BalloonTipText = $"Все права защищены.";
+            notifyIcon.BalloonTipTitle = "Учет ветеринарной клиники";
+            notifyIcon.BalloonTipText = "Все права защищены.";
             notifyIcon.ShowBalloonTip(3000);
         }
 
@@ -172,8 +264,14 @@ namespace VetAutomate
             try
             {
                 CreateColumns();
-                RefreshDataGrid(dataGridViewClients, "Books");
-                RefreshDataGrid(dataGridViewPrescriptions, "Loans");
+                RefreshDataGrid(dataGridViewClients, "Clients");
+                RefreshDataGrid(dataGridViewPets, "Pets");
+                RefreshDataGrid(dataGridViewVeterinarians, "Veterinarians");
+                RefreshDataGrid(dataGridViewServices, "Services");
+                RefreshDataGrid(dataGridViewInvoices, "Invoices");
+                RefreshDataGrid(dataGridViewPayments, "Payments");
+                RefreshDataGrid(dataGridViewMedications, "Medications");
+                RefreshDataGrid(dataGridViewPrescriptions, "Prescriptions");
             }
             catch (Exception ex)
             {
@@ -188,36 +286,114 @@ namespace VetAutomate
                 DataGridViewRow dataGridViewRow = dataGridView.Rows[selectedRow];
                 switch (dataGridView.Name)
                 {
-                    case "dataGridViewBooks":
+                    case "dataGridViewClients":
                         textBoxClientID.Text = dataGridViewRow.Cells[0].Value.ToString();
                         textBoxFullNameClients.Text = dataGridViewRow.Cells[1].Value.ToString();
-                        textBoxAuthorBooks.Text = dataGridViewRow.Cells[2].Value.ToString();
+                        maskedTextBoxPhoneClients.Text = dataGridViewRow.Cells[2].Value.ToString();
                         textBoxEmailClients.Text = dataGridViewRow.Cells[3].Value.ToString();
                         textBoxAddress.Text = dataGridViewRow.Cells[4].Value.ToString();
                         textBoxINNClients.Text = dataGridViewRow.Cells[5].Value.ToString();
-                        textBoxCopiesAvailableBooks.Text = dataGridViewRow.Cells[6].Value.ToString();
+                        dateTimePickerRegistrationDate.Text = dataGridViewRow.Cells[6].Value.ToString();
                         break;
 
-                    case "dataGridViewLoans":
-                        textBoxLoanID.Text = dataGridViewRow.Cells[0].Value.ToString();
-                        var registrationID = dataGridViewRow.Cells[1].Value.ToString();
-                        string query = $"SELECT UserLogin FROM Registration WHERE RegistrationID = {registrationID}";
-                        SqlCommand command = new(query, dataBase.GetConnection());
+                    case "dataGridViewPets":
+                        textBoxPetID.Text = dataGridViewRow.Cells[0].Value.ToString();
+                        textBoxNamePets.Text = dataGridViewRow.Cells[1].Value.ToString();
+                        textBoxSpecies.Text = dataGridViewRow.Cells[2].Value.ToString();
+                        textBoxBreed.Text = dataGridViewRow.Cells[3].Value.ToString();
+                        dateTimePickerBirthDatePets.Text = dataGridViewRow.Cells[4].Value.ToString();
+                        var ownerID = dataGridViewRow.Cells[5].Value.ToString();
+                        string queryOwner = $"SELECT FullName FROM Clients WHERE ClientID = {ownerID}";
+                        SqlCommand commandOwner = new(queryOwner, dataBase.GetConnection());
                         dataBase.OpenConnection();
-                        object result = command.ExecuteScalar();
-                        textBoxRegistrationIDLoans.Text = result.ToString();
-                        textBoxBookIDLoans.Text = dataGridViewRow.Cells[2].Value.ToString();
-                        dateTimePickerLoanDateLoans.Text = dataGridViewRow.Cells[3].Value.ToString();
-                        dateTimePickerReturnDateLoans.Text = dataGridViewRow.Cells[4].Value?.ToString();
-                        if (dataGridViewRow.Cells[4].Value?.ToString() == "")
-                        {
-                            checkBoxReturnDateLoans.Checked = true;
-                        }
-                        else
-                        {
-                            checkBoxReturnDateLoans.Checked = false;
-                        }
-                        textBoxIsReturnedLoans.Text = dataGridViewRow.Cells[5].Value.ToString();
+                        object resultOwner = commandOwner.ExecuteScalar();
+                        textBoxOwnerID.Text = resultOwner.ToString();
+                        break;
+
+                    case "dataGridViewVeterinarians":
+                        textBoxVetID.Text = dataGridViewRow.Cells[0].Value.ToString();
+                        textBoxFullNameVeterinarians.Text = dataGridViewRow.Cells[1].Value.ToString();
+                        dateTimePickerBirthDateVeterinarians.Text = dataGridViewRow.Cells[2].Value.ToString();
+                        textBoxBirthPlace.Text = dataGridViewRow.Cells[3].Value.ToString();
+                        textBoxPassportSeries.Text = dataGridViewRow.Cells[4].Value.ToString();
+                        textBoxPassportNumber.Text = dataGridViewRow.Cells[5].Value.ToString();
+                        maskedTextBoxPhoneVeterinarians.Text = dataGridViewRow.Cells[6].Value.ToString();
+                        textBoxEmailVeterinarians.Text = dataGridViewRow.Cells[7].Value.ToString();
+                        textBoxINNVeterinarians.Text = dataGridViewRow.Cells[8].Value.ToString();
+                        dateTimePickerDateOfEmployment.Text = dataGridViewRow.Cells[9].Value.ToString();
+                        var postID = dataGridViewRow.Cells[10].Value.ToString();
+                        string queryPost = $"SELECT Post FROM Posts WHERE PostID = {postID}";
+                        SqlCommand commandPost = new(queryPost, dataBase.GetConnection());
+                        dataBase.OpenConnection();
+                        object resultPost = commandPost.ExecuteScalar();
+                        comboBoxPost.Text = resultPost.ToString();
+                        var genderID = dataGridViewRow.Cells[11].Value.ToString();
+                        string queryGender = $"SELECT Gender FROM Genders WHERE GenderID = {genderID}";
+                        SqlCommand commandGender = new(queryGender, dataBase.GetConnection());
+                        object resultGender = commandGender.ExecuteScalar();
+                        comboBoxGender.Text = resultGender.ToString();
+                        dataBase.CloseConnection();
+                        break;
+
+                    case "dataGridViewServices":
+                        textBoxServiceID.Text = dataGridViewRow.Cells[0].Value.ToString();
+                        textBoxServiceName.Text = dataGridViewRow.Cells[1].Value.ToString();
+                        textBoxPriceServices.Text = dataGridViewRow.Cells[2].Value.ToString();
+                        break;
+
+                    case "dataGridViewInvoices":
+                        textBoxInvoiceID.Text = dataGridViewRow.Cells[0].Value.ToString();
+                        var clientIDInvoice = dataGridViewRow.Cells[1].Value.ToString();
+                        string queryClientInvoice = $"SELECT FullName FROM Clients WHERE ClientID = {clientIDInvoice}";
+                        SqlCommand commandClientInvoice = new(queryClientInvoice, dataBase.GetConnection());
+                        dataBase.OpenConnection();
+                        object resultClientInvoice = commandClientInvoice.ExecuteScalar();
+                        textBoxClientIDInvoices.Text = resultClientInvoice.ToString();
+                        textBoxTotalAmount.Text = dataGridViewRow.Cells[2].Value.ToString();
+                        dateTimePickerInvoiceDate.Text = dataGridViewRow.Cells[3].Value.ToString();
+                        checkBoxPaid.Checked = Convert.ToBoolean(dataGridViewRow.Cells[4].Value);
+                        break;
+
+                    case "dataGridViewPayments":
+                        textBoxPaymentID.Text = dataGridViewRow.Cells[0].Value.ToString();
+                        textBoxInvoiceIDPayments.Text = dataGridViewRow.Cells[1].Value.ToString();
+                        textBoxAmount.Text = dataGridViewRow.Cells[2].Value.ToString();
+                        dateTimePickerPaymentDate.Text = dataGridViewRow.Cells[3].Value.ToString();
+                        var paymentMethod = dataGridViewRow.Cells[4].Value.ToString();
+                        string queryMethod = $"SELECT PaymentMethod FROM PaymentMethods WHERE PaymentMethodID = {paymentMethod}";
+                        SqlCommand commandMethod = new(queryMethod, dataBase.GetConnection());
+                        dataBase.OpenConnection();
+                        object resultMethod = commandMethod.ExecuteScalar();
+                        comboBoxPaymentMethod.Text = resultMethod.ToString();
+                        break;
+
+                    case "dataGridViewMedications":
+                        textBoxMedicationID.Text = dataGridViewRow.Cells[0].Value.ToString();
+                        textBoxNameMedications.Text = dataGridViewRow.Cells[1].Value.ToString();
+                        textBoxDescription.Text = dataGridViewRow.Cells[2].Value.ToString();
+                        textBoxPriceMedications.Text = dataGridViewRow.Cells[3].Value.ToString();
+                        break;
+
+                    case "dataGridViewPrescriptions":
+                        textBoxPrescriptionID.Text = dataGridViewRow.Cells[0].Value.ToString();
+                        var petID = dataGridViewRow.Cells[1].Value.ToString();
+                        string queryPet = $"SELECT Name FROM Pets WHERE PetID = {petID}";
+                        SqlCommand commandPet = new(queryPet, dataBase.GetConnection());
+                        dataBase.OpenConnection();
+                        object resultPet = commandPet.ExecuteScalar();
+                        textBoxPetIDPrescriptions.Text = resultPet.ToString();
+                        var vetID = dataGridViewRow.Cells[2].Value.ToString();
+                        string queryVet = $"SELECT FullName FROM Veterinarians WHERE VetID = {vetID}";
+                        SqlCommand commandVet = new(queryVet, dataBase.GetConnection());
+                        object resultVet = commandVet.ExecuteScalar();
+                        textBoxVetIDPrescriptions.Text = resultVet.ToString();
+                        var medicationID = dataGridViewRow.Cells[3].Value.ToString();
+                        string queryMedication = $"SELECT Name FROM Medications WHERE MedicationID = {medicationID}";
+                        SqlCommand commandMedication = new(queryMedication, dataBase.GetConnection());
+                        object resultMedication = commandMedication.ExecuteScalar();
+                        textBoxMedicationIDPrescriptions.Text = resultMedication.ToString();
+                        textBoxDosage.Text = dataGridViewRow.Cells[4].Value.ToString();
+                        textBoxInstructions.Text = dataGridViewRow.Cells[5].Value.ToString();
                         break;
                 }
             }
@@ -234,28 +410,100 @@ namespace VetAutomate
                 dataGridView.Rows.Clear();
                 switch (dataGridView.Name)
                 {
-                    case "dataGridViewBooks":
-                        string searchStringEquipment = $"select * from Books where concat (BookID, Title, Author, Genre, PublishedYear, ISBN, CopiesAvailable) like '%" + textBoxSearchClients.Text + "%'";
-                        SqlCommand sqlCommandEquipment = new(searchStringEquipment, dataBase.GetConnection());
+                    case "dataGridViewClients":
+                        string queryClients = $"SELECT * FROM Clients WHERE CONCAT(ClientID, FullName, Phone, Email, Address, INN, RegistrationDate) LIKE '%{textBoxSearchClients.Text}%'";
+                        SqlCommand cmdClients = new(queryClients, dataBase.GetConnection());
                         dataBase.OpenConnection();
-                        SqlDataReader sqlDataReaderEquipment = sqlCommandEquipment.ExecuteReader();
-                        while (sqlDataReaderEquipment.Read())
+                        SqlDataReader readerClients = cmdClients.ExecuteReader();
+                        while (readerClients.Read())
                         {
-                            ReadSingleRow(dataGridView, sqlDataReaderEquipment);
+                            ReadSingleRow(dataGridView, readerClients);
                         }
-                        sqlDataReaderEquipment.Close();
+                        readerClients.Close();
                         break;
 
-                    case "dataGridViewLoans":
-                        string searchStringSupplier = $"select * from Loans where concat (LoanID, RegistrationID, BookID, LoanDate, ReturnDate, IsReturned) like '%" + textBoxSearchPrescriptions.Text + "%'";
-                        SqlCommand sqlCommandSupplier = new(searchStringSupplier, dataBase.GetConnection());
+                    case "dataGridViewPets":
+                        string queryPets = $"SELECT * FROM Pets WHERE CONCAT(PetID, Name, Species, Breed, BirthDate, OwnerID) LIKE '%{textBoxSearchClients.Text}%'";
+                        SqlCommand cmdPets = new(queryPets, dataBase.GetConnection());
                         dataBase.OpenConnection();
-                        SqlDataReader sqlDataReaderSupplier = sqlCommandSupplier.ExecuteReader();
-                        while (sqlDataReaderSupplier.Read())
+                        SqlDataReader readerPets = cmdPets.ExecuteReader();
+                        while (readerPets.Read())
                         {
-                            ReadSingleRow(dataGridView, sqlDataReaderSupplier);
+                            ReadSingleRow(dataGridView, readerPets);
                         }
-                        sqlDataReaderSupplier.Close();
+                        readerPets.Close();
+                        break;
+
+                    case "dataGridViewVeterinarians":
+                        string queryVets = $"SELECT * FROM Veterinarians WHERE CONCAT(VetID, FullName, BirthDate, BirthPlace, PassportSeries, PassportNumber, Phone, Email, INN, DateOfEmployment, PostID, GenderID) LIKE '%{textBoxSearchClients.Text}%'";
+                        SqlCommand cmdVets = new(queryVets, dataBase.GetConnection());
+                        dataBase.OpenConnection();
+                        SqlDataReader readerVets = cmdVets.ExecuteReader();
+                        while (readerVets.Read())
+                        {
+                            ReadSingleRow(dataGridView, readerVets);
+                        }
+                        readerVets.Close();
+                        break;
+
+                    case "dataGridViewServices":
+                        string queryServices = $"SELECT * FROM Services WHERE CONCAT(ServiceID, Name, Price) LIKE '%{textBoxSearchClients.Text}%'";
+                        SqlCommand cmdServices = new(queryServices, dataBase.GetConnection());
+                        dataBase.OpenConnection();
+                        SqlDataReader readerServices = cmdServices.ExecuteReader();
+                        while (readerServices.Read())
+                        {
+                            ReadSingleRow(dataGridView, readerServices);
+                        }
+                        readerServices.Close();
+                        break;
+
+                    case "dataGridViewInvoices":
+                        string queryInvoices = $"SELECT * FROM Invoices WHERE CONCAT(InvoiceID, ClientID, TotalAmount, InvoiceDate, Paid) LIKE '%{textBoxSearchClients.Text}%'";
+                        SqlCommand cmdInvoices = new(queryInvoices, dataBase.GetConnection());
+                        dataBase.OpenConnection();
+                        SqlDataReader readerInvoices = cmdInvoices.ExecuteReader();
+                        while (readerInvoices.Read())
+                        {
+                            ReadSingleRow(dataGridView, readerInvoices);
+                        }
+                        readerInvoices.Close();
+                        break;
+
+                    case "dataGridViewPayments":
+                        string queryPayments = $"SELECT * FROM Payments WHERE CONCAT(PaymentID, InvoiceID, Amount, PaymentDate, PaymentMethod) LIKE '%{textBoxSearchClients.Text}%'";
+                        SqlCommand cmdPayments = new(queryPayments, dataBase.GetConnection());
+                        dataBase.OpenConnection();
+                        SqlDataReader readerPayments = cmdPayments.ExecuteReader();
+                        while (readerPayments.Read())
+                        {
+                            ReadSingleRow(dataGridView, readerPayments);
+                        }
+                        readerPayments.Close();
+                        break;
+
+                    case "dataGridViewMedications":
+                        string queryMeds = $"SELECT * FROM Medications WHERE CONCAT(MedicationID, Name, Description, Price) LIKE '%{textBoxSearchClients.Text}%'";
+                        SqlCommand cmdMeds = new(queryMeds, dataBase.GetConnection());
+                        dataBase.OpenConnection();
+                        SqlDataReader readerMeds = cmdMeds.ExecuteReader();
+                        while (readerMeds.Read())
+                        {
+                            ReadSingleRow(dataGridView, readerMeds);
+                        }
+                        readerMeds.Close();
+                        break;
+
+                    case "dataGridViewPrescriptions":
+                        string queryPrescriptions = $"SELECT * FROM Prescriptions WHERE CONCAT(PrescriptionID, PetID, VetID, MedicationID, Dosage, Instructions) LIKE '%{textBoxSearchClients.Text}%'";
+                        SqlCommand cmdPrescriptions = new(queryPrescriptions, dataBase.GetConnection());
+                        dataBase.OpenConnection();
+                        SqlDataReader readerPrescriptions = cmdPrescriptions.ExecuteReader();
+                        while (readerPrescriptions.Read())
+                        {
+                            ReadSingleRow(dataGridView, readerPrescriptions);
+                        }
+                        readerPrescriptions.Close();
                         break;
                 }
             }
@@ -273,7 +521,7 @@ namespace VetAutomate
                 dataGridView.Rows[index].Visible = false;
                 switch (dataGridView.Name)
                 {
-                    case "dataGridViewBooks":
+                    case "dataGridViewClients":
                         if (dataGridView.Rows[index].Cells[0].Value.ToString() == string.Empty)
                         {
                             dataGridView.Rows[index].Cells[7].Value = RowState.Deleted;
@@ -282,7 +530,61 @@ namespace VetAutomate
                         dataGridView.Rows[index].Cells[7].Value = RowState.Deleted;
                         break;
 
-                    case "dataGridViewLoans":
+                    case "dataGridViewPets":
+                        if (dataGridView.Rows[index].Cells[0].Value.ToString() == string.Empty)
+                        {
+                            dataGridView.Rows[index].Cells[6].Value = RowState.Deleted;
+                            return;
+                        }
+                        dataGridView.Rows[index].Cells[6].Value = RowState.Deleted;
+                        break;
+
+                    case "dataGridViewVeterinarians":
+                        if (dataGridView.Rows[index].Cells[0].Value.ToString() == string.Empty)
+                        {
+                            dataGridView.Rows[index].Cells[12].Value = RowState.Deleted;
+                            return;
+                        }
+                        dataGridView.Rows[index].Cells[12].Value = RowState.Deleted;
+                        break;
+
+                    case "dataGridViewServices":
+                        if (dataGridView.Rows[index].Cells[0].Value.ToString() == string.Empty)
+                        {
+                            dataGridView.Rows[index].Cells[3].Value = RowState.Deleted;
+                            return;
+                        }
+                        dataGridView.Rows[index].Cells[3].Value = RowState.Deleted;
+                        break;
+
+                    case "dataGridViewInvoices":
+                        if (dataGridView.Rows[index].Cells[0].Value.ToString() == string.Empty)
+                        {
+                            dataGridView.Rows[index].Cells[5].Value = RowState.Deleted;
+                            return;
+                        }
+                        dataGridView.Rows[index].Cells[5].Value = RowState.Deleted;
+                        break;
+
+                    case "dataGridViewPayments":
+                        if (dataGridView.Rows[index].Cells[0].Value.ToString() == string.Empty)
+                        {
+                            dataGridView.Rows[index].Cells[5].Value = RowState.Deleted;
+                            return;
+                        }
+                        dataGridView.Rows[index].Cells[5].Value = RowState.Deleted;
+                        break;
+
+                    case "dataGridViewMedications":
+                        if (dataGridView.Rows[index].Cells[0].Value.ToString() == string.Empty)
+                        {
+                            dataGridView.Rows[index].Cells[4].Value = RowState.Deleted;
+                            return;
+                        }
+                        dataGridView.Rows[index].Cells[4].Value = RowState.Deleted;
+                        break;
+
+                    case "dataGridViewPrescriptions":
                         if (dataGridView.Rows[index].Cells[0].Value.ToString() == string.Empty)
                         {
                             dataGridView.Rows[index].Cells[6].Value = RowState.Deleted;
@@ -307,89 +609,269 @@ namespace VetAutomate
                 {
                     switch (dataGridView.Name)
                     {
-                        case "dataGridViewBooks":
-                            var rowStateBooks = (RowState)dataGridView.Rows[index].Cells[7].Value;
-                            if (rowStateBooks == RowState.Existed)
-                            {
+                        case "dataGridViewClients":
+                            var rowStateClients = (RowState)dataGridView.Rows[index].Cells[7].Value;
+                            if (rowStateClients == RowState.Existed)
                                 continue;
-                            }
-                            if (rowStateBooks == RowState.Deleted)
+                            if (rowStateClients == RowState.Deleted)
                             {
-                                var bookID = Convert.ToInt32(dataGridView.Rows[index].Cells[0].Value);
-                                var deleteQuery = $"delete from Books where BookID = '{bookID}'";
-                                var sqlCommand = new SqlCommand(deleteQuery, dataBase.GetConnection());
-                                sqlCommand.ExecuteNonQuery();
+                                var clientID = Convert.ToInt32(dataGridView.Rows[index].Cells[0].Value);
+                                var deleteQuery = $"DELETE FROM Clients WHERE ClientID = '{clientID}'";
+                                new SqlCommand(deleteQuery, dataBase.GetConnection()).ExecuteNonQuery();
                             }
-                            if (rowStateBooks == RowState.Modified)
+                            if (rowStateClients == RowState.Modified)
                             {
-                                var bookID = dataGridView.Rows[index].Cells[0].Value.ToString();
-                                var title = dataGridView.Rows[index].Cells[1].Value.ToString();
-                                var author = dataGridView.Rows[index].Cells[2].Value.ToString();
-                                var genre = dataGridView.Rows[index].Cells[3].Value.ToString();
-                                var publishedYear = dataGridView.Rows[index].Cells[4].Value.ToString();
-                                var iSBN = dataGridView.Rows[index].Cells[5].Value.ToString();
-                                var copiesAvailable = dataGridView.Rows[index].Cells[6].Value.ToString();
-                                var changeQuery = $"update Books set Title = '{title}', Author = '{author}', Genre = '{genre}', PublishedYear = '{publishedYear}', ISBN = '{iSBN}', CopiesAvailable = '{copiesAvailable}' where BookID = '{bookID}'";
-                                var sqlCommand = new SqlCommand(changeQuery, dataBase.GetConnection());
-                                sqlCommand.ExecuteNonQuery();
+                                var clientID = dataGridView.Rows[index].Cells[0].Value.ToString();
+                                var fullName = dataGridView.Rows[index].Cells[1].Value.ToString();
+                                var phone = dataGridView.Rows[index].Cells[2].Value.ToString();
+                                var email = dataGridView.Rows[index].Cells[3].Value.ToString();
+                                var address = dataGridView.Rows[index].Cells[4].Value.ToString();
+                                var inn = dataGridView.Rows[index].Cells[5].Value.ToString();
+                                var registrationDate = dataGridView.Rows[index].Cells[6].Value.ToString();
+                                var updateQuery = $"UPDATE Clients SET FullName = '{fullName}', Phone = '{phone}', Email = '{email}', Address = '{address}', INN = '{inn}', RegistrationDate = '{registrationDate}' WHERE ClientID = '{clientID}'";
+                                new SqlCommand(updateQuery, dataBase.GetConnection()).ExecuteNonQuery();
                             }
-                            if (rowStateBooks == RowState.New)
+                            if (rowStateClients == RowState.New)
                             {
-                                var title = dataGridView.Rows[index].Cells[1].Value.ToString();
-                                var author = dataGridView.Rows[index].Cells[2].Value.ToString();
-                                var genre = dataGridView.Rows[index].Cells[3].Value.ToString();
-                                var publishedYear = dataGridView.Rows[index].Cells[4].Value.ToString();
-                                var iSBN = dataGridView.Rows[index].Cells[5].Value.ToString();
-                                var copiesAvailable = dataGridView.Rows[index].Cells[6].Value.ToString();
-                                var newQuery = $"insert into Books (Title, Author, Genre, PublishedYear, ISBN, CopiesAvailable) values ('{title}', '{author}', '{genre}', '{publishedYear}', '{iSBN}', '{copiesAvailable}')";
-                                var sqlCommand = new SqlCommand(newQuery, dataBase.GetConnection());
-                                sqlCommand.ExecuteNonQuery();
+                                var fullName = dataGridView.Rows[index].Cells[1].Value.ToString();
+                                var phone = dataGridView.Rows[index].Cells[2].Value.ToString();
+                                var email = dataGridView.Rows[index].Cells[3].Value.ToString();
+                                var address = dataGridView.Rows[index].Cells[4].Value.ToString();
+                                var inn = dataGridView.Rows[index].Cells[5].Value.ToString();
+                                var registrationDate = dataGridView.Rows[index].Cells[6].Value.ToString();
+                                var insertQuery = $"INSERT INTO Clients (FullName, Phone, Email, Address, INN, RegistrationDate) VALUES ('{fullName}', '{phone}', '{email}', '{address}', '{inn}', '{registrationDate}')";
+                                new SqlCommand(insertQuery, dataBase.GetConnection()).ExecuteNonQuery();
                             }
                             break;
 
-                        case "dataGridViewLoans":
-                            var rowStateLoans = (RowState)dataGridView.Rows[index].Cells[6].Value;
-                            if (rowStateLoans == RowState.Existed)
-                            {
+                        case "dataGridViewPets":
+                            var rowStatePets = (RowState)dataGridView.Rows[index].Cells[6].Value;
+                            if (rowStatePets == RowState.Existed)
                                 continue;
-                            }
-                            if (rowStateLoans == RowState.Deleted)
+                            if (rowStatePets == RowState.Deleted)
                             {
-                                var loanID = Convert.ToInt32(dataGridView.Rows[index].Cells[0].Value);
-                                var bookID = dataGridView.Rows[index].Cells[2].Value.ToString();
-                                var isReturned = dataGridView.Rows[index].Cells[5].Value.ToString();
-                                if (isReturned == "False")
-                                {
-                                    string updateCopiesQuery = $"UPDATE Books SET CopiesAvailable = CopiesAvailable + 1 WHERE BookID = '{bookID}'";
-                                    SqlCommand updateCopiesCommand = new(updateCopiesQuery, dataBase.GetConnection());
-                                    updateCopiesCommand.ExecuteNonQuery();
-                                }
-                                var deleteQuery = $"delete from Loans where LoanID = '{loanID}'";
-                                var sqlCommand = new SqlCommand(deleteQuery, dataBase.GetConnection());
-                                sqlCommand.ExecuteNonQuery();
+                                var petID = Convert.ToInt32(dataGridView.Rows[index].Cells[0].Value);
+                                var deleteQuery = $"DELETE FROM Pets WHERE PetID = '{petID}'";
+                                new SqlCommand(deleteQuery, dataBase.GetConnection()).ExecuteNonQuery();
                             }
-                            if (rowStateLoans == RowState.Modified)
+                            if (rowStatePets == RowState.Modified)
                             {
-                                var loanID = dataGridView.Rows[index].Cells[0].Value.ToString();
-                                var registrationID = dataGridView.Rows[index].Cells[1].Value.ToString();
-                                var bookID = dataGridView.Rows[index].Cells[2].Value.ToString();
-                                var loanDate = dataGridView.Rows[index].Cells[3].Value.ToString();
-                                var returnDate = dataGridView.Rows[index].Cells[4].Value?.ToString();
-                                var isReturned = dataGridView.Rows[index].Cells[5].Value.ToString();
-                                var changeQuery = $"update Loans set RegistrationID = '{registrationID}', BookID = '{bookID}', LoanDate = '{loanDate}', ReturnDate = {(string.IsNullOrEmpty(returnDate) ? "NULL" : $"'{returnDate}'")}, IsReturned = '{isReturned}' where LoanID = '{loanID}'";
-                                var sqlCommand = new SqlCommand(changeQuery, dataBase.GetConnection());
-                                sqlCommand.ExecuteNonQuery();
+                                var petID = dataGridView.Rows[index].Cells[0].Value.ToString();
+                                var name = dataGridView.Rows[index].Cells[1].Value.ToString();
+                                var species = dataGridView.Rows[index].Cells[2].Value.ToString();
+                                var breed = dataGridView.Rows[index].Cells[3].Value.ToString();
+                                var birthDate = dataGridView.Rows[index].Cells[4].Value.ToString();
+                                var ownerID = dataGridView.Rows[index].Cells[5].Value.ToString();
+                                var updateQuery = $"UPDATE Pets SET Name = '{name}', Species = '{species}', Breed = '{breed}', BirthDate = '{birthDate}', OwnerID = '{ownerID}' WHERE PetID = '{petID}'";
+                                new SqlCommand(updateQuery, dataBase.GetConnection()).ExecuteNonQuery();
                             }
-                            if (rowStateLoans == RowState.New)
+                            if (rowStatePets == RowState.New)
                             {
-                                var registrationID = dataGridView.Rows[index].Cells[1].Value.ToString();
-                                var bookID = dataGridView.Rows[index].Cells[2].Value.ToString();
-                                var loanDate = dataGridView.Rows[index].Cells[3].Value.ToString();
-                                var returnDate = dataGridView.Rows[index].Cells[4].Value.ToString();
-                                var isReturned = dataGridView.Rows[index].Cells[5].Value.ToString();
-                                var newQuery = $"insert into Loans (RegistrationID, BookID, LoanDate, ReturnDate, ReturnDate, IsReturned) values ('{registrationID}', '{bookID}', '{loanDate}', '{returnDate}', '{isReturned}')";
-                                var sqlCommand = new SqlCommand(newQuery, dataBase.GetConnection());
-                                sqlCommand.ExecuteNonQuery();
+                                var name = dataGridView.Rows[index].Cells[1].Value.ToString();
+                                var species = dataGridView.Rows[index].Cells[2].Value.ToString();
+                                var breed = dataGridView.Rows[index].Cells[3].Value.ToString();
+                                var birthDate = dataGridView.Rows[index].Cells[4].Value.ToString();
+                                var ownerID = dataGridView.Rows[index].Cells[5].Value.ToString();
+                                var insertQuery = $"INSERT INTO Pets (Name, Species, Breed, BirthDate, OwnerID) VALUES ('{name}', '{species}', '{breed}', '{birthDate}', '{ownerID}')";
+                                new SqlCommand(insertQuery, dataBase.GetConnection()).ExecuteNonQuery();
+                            }
+                            break;
+
+                        case "dataGridViewVeterinarians":
+                            var rowStateVets = (RowState)dataGridView.Rows[index].Cells[12].Value;
+                            if (rowStateVets == RowState.Existed)
+                                continue;
+
+                            if (rowStateVets == RowState.Deleted)
+                            {
+                                var vetID = Convert.ToInt32(dataGridView.Rows[index].Cells[0].Value);
+                                var deleteQuery = $"DELETE FROM Veterinarians WHERE VetID = '{vetID}'";
+                                new SqlCommand(deleteQuery, dataBase.GetConnection()).ExecuteNonQuery();
+                            }
+                            if (rowStateVets == RowState.Modified)
+                            {
+                                var vetID = dataGridView.Rows[index].Cells[0].Value.ToString();
+                                var fullName = dataGridView.Rows[index].Cells[1].Value.ToString();
+                                var birthDate = dataGridView.Rows[index].Cells[2].Value.ToString();
+                                var birthPlace = dataGridView.Rows[index].Cells[3].Value.ToString();
+                                var passportSeries = dataGridView.Rows[index].Cells[4].Value.ToString();
+                                var passportNumber = dataGridView.Rows[index].Cells[5].Value.ToString();
+                                var phone = dataGridView.Rows[index].Cells[6].Value.ToString();
+                                var email = dataGridView.Rows[index].Cells[7].Value.ToString();
+                                var inn = dataGridView.Rows[index].Cells[8].Value.ToString();
+                                var dateOfEmployment = dataGridView.Rows[index].Cells[9].Value.ToString();
+                                var postID = dataGridView.Rows[index].Cells[10].Value.ToString();
+                                var genderID = dataGridView.Rows[index].Cells[11].Value.ToString();
+                                var updateQuery = $"UPDATE Veterinarians SET FullName = '{fullName}', BirthDate = '{birthDate}', BirthPlace = '{birthPlace}', PassportSeries = '{passportSeries}', PassportNumber = '{passportNumber}', Phone = '{phone}', Email = '{email}', INN = '{inn}', DateOfEmployment = '{dateOfEmployment}', PostID = '{postID}', GenderID = '{genderID}' WHERE VetID = '{vetID}'";
+                                new SqlCommand(updateQuery, dataBase.GetConnection()).ExecuteNonQuery();
+                            }
+                            if (rowStateVets == RowState.New)
+                            {
+                                var fullName = dataGridView.Rows[index].Cells[1].Value.ToString();
+                                var birthDate = dataGridView.Rows[index].Cells[2].Value.ToString();
+                                var birthPlace = dataGridView.Rows[index].Cells[3].Value.ToString();
+                                var passportSeries = dataGridView.Rows[index].Cells[4].Value.ToString();
+                                var passportNumber = dataGridView.Rows[index].Cells[5].Value.ToString();
+                                var phone = dataGridView.Rows[index].Cells[6].Value.ToString();
+                                var email = dataGridView.Rows[index].Cells[7].Value.ToString();
+                                var inn = dataGridView.Rows[index].Cells[8].Value.ToString();
+                                var dateOfEmployment = dataGridView.Rows[index].Cells[9].Value.ToString();
+                                var postID = dataGridView.Rows[index].Cells[10].Value.ToString();
+                                var genderID = dataGridView.Rows[index].Cells[11].Value.ToString();
+                                var insertQuery = $"INSERT INTO Veterinarians (FullName, BirthDate, BirthPlace, PassportSeries, PassportNumber, Phone, Email, INN, DateOfEmoloyment, PostID, GenderID) VALUES ('{fullName}', '{birthDate}', '{birthPlace}', '{passportSeries}', '{passportNumber}', '{phone}', '{email}', '{inn}', '{dateOfEmployment}', '{postID}', '{genderID}')";
+                                new SqlCommand(insertQuery, dataBase.GetConnection()).ExecuteNonQuery();
+                            }
+                            break;
+
+                        case "dataGridViewServices":
+                            var rowStateServices = (RowState)dataGridView.Rows[index].Cells[3].Value;
+                            if (rowStateServices == RowState.Existed)
+                                continue;
+                            if (rowStateServices == RowState.Deleted)
+                            {
+                                var serviceID = Convert.ToInt32(dataGridView.Rows[index].Cells[0].Value);
+                                var deleteQuery = $"DELETE FROM Services WHERE ServiceID = '{serviceID}'";
+                                new SqlCommand(deleteQuery, dataBase.GetConnection()).ExecuteNonQuery();
+                            }
+                            if (rowStateServices == RowState.Modified)
+                            {
+                                var serviceID = dataGridView.Rows[index].Cells[0].Value.ToString();
+                                var serviceName = dataGridView.Rows[index].Cells[1].Value.ToString();
+                                var price = dataGridView.Rows[index].Cells[2].Value.ToString();
+                                var updateQuery = $"UPDATE Services SET ServiceName = '{serviceName}', Price = '{price}' WHERE ServiceID = '{serviceID}'";
+                                new SqlCommand(updateQuery, dataBase.GetConnection()).ExecuteNonQuery();
+                            }
+                            if (rowStateServices == RowState.New)
+                            {
+                                var serviceName = dataGridView.Rows[index].Cells[1].Value.ToString();
+                                var price = dataGridView.Rows[index].Cells[2].Value.ToString();
+                                var insertQuery = $"INSERT INTO Services (ServiceName, Price) VALUES ('{serviceName}', '{price}')";
+                                new SqlCommand(insertQuery, dataBase.GetConnection()).ExecuteNonQuery();
+                            }
+                            break;
+
+                        case "dataGridViewInvoices":
+                            var rowStateInvoices = (RowState)dataGridView.Rows[index].Cells[5].Value;
+                            if (rowStateInvoices == RowState.Existed)
+                                continue;
+                            if (rowStateInvoices == RowState.Deleted)
+                            {
+                                var invoiceID = Convert.ToInt32(dataGridView.Rows[index].Cells[0].Value);
+                                var deleteQuery = $"DELETE FROM Invoices WHERE InvoiceID = '{invoiceID}'";
+                                new SqlCommand(deleteQuery, dataBase.GetConnection()).ExecuteNonQuery();
+                            }
+                            if (rowStateInvoices == RowState.Modified)
+                            {
+                                var invoiceID = dataGridView.Rows[index].Cells[0].Value.ToString();
+                                var clientID = dataGridView.Rows[index].Cells[1].Value.ToString();
+                                var totalAmount = dataGridView.Rows[index].Cells[2].Value.ToString();
+                                var invoiceDate = dataGridView.Rows[index].Cells[3].Value.ToString();
+                                var paid = Convert.ToBoolean(dataGridView.Rows[index].Cells[4].Value) ? 1 : 0;
+                                var updateQuery = $"UPDATE Invoices SET ClientID = '{clientID}', TotalAmount = '{totalAmount}', InvoiceDate = '{invoiceDate}', Paid = '{paid}' WHERE InvoiceID = '{invoiceID}'";
+                                new SqlCommand(updateQuery, dataBase.GetConnection()).ExecuteNonQuery();
+                            }
+                            if (rowStateInvoices == RowState.New)
+                            {
+                                var clientID = dataGridView.Rows[index].Cells[1].Value.ToString();
+                                var totalAmount = dataGridView.Rows[index].Cells[2].Value.ToString();
+                                var invoiceDate = dataGridView.Rows[index].Cells[3].Value.ToString();
+                                var paid = Convert.ToBoolean(dataGridView.Rows[index].Cells[4].Value) ? 1 : 0;
+                                var insertQuery = $"INSERT INTO Invoices (ClientID, TotalAmount, InvoiceDate, Paid) VALUES ('{clientID}', '{totalAmount}', '{invoiceDate}' '{paid}')";
+                                new SqlCommand(insertQuery, dataBase.GetConnection()).ExecuteNonQuery();
+                            }
+                            break;
+
+                        case "dataGridViewPayments":
+                            var rowStatePayments = (RowState)dataGridView.Rows[index].Cells[5].Value;
+                            if (rowStatePayments == RowState.Existed)
+                                continue;
+                            if (rowStatePayments == RowState.Deleted)
+                            {
+                                var paymentID = Convert.ToInt32(dataGridView.Rows[index].Cells[0].Value);
+                                var deleteQuery = $"DELETE FROM Payments WHERE PaymentID = '{paymentID}'";
+                                new SqlCommand(deleteQuery, dataBase.GetConnection()).ExecuteNonQuery();
+                            }
+                            if (rowStatePayments == RowState.Modified)
+                            {
+                                var paymentID = dataGridView.Rows[index].Cells[0].Value.ToString();
+                                var invoiceID = dataGridView.Rows[index].Cells[1].Value.ToString();
+                                var amount = dataGridView.Rows[index].Cells[2].Value.ToString();
+                                var paymentDate = dataGridView.Rows[index].Cells[3].Value.ToString();
+                                var method = dataGridView.Rows[index].Cells[4].Value.ToString();
+                                var updateQuery = $"UPDATE Payments SET InvoiceID = '{invoiceID}', Amount = '{amount}', PaymentDate = '{paymentDate}', PaymentMethod = '{method}' WHERE PaymentID = '{paymentID}'";
+                                new SqlCommand(updateQuery, dataBase.GetConnection()).ExecuteNonQuery();
+                            }
+                            if (rowStatePayments == RowState.New)
+                            {
+                                var invoiceID = dataGridView.Rows[index].Cells[1].Value.ToString();
+                                var amount = dataGridView.Rows[index].Cells[2].Value.ToString();
+                                var paymentDate = dataGridView.Rows[index].Cells[3].Value.ToString();
+                                var method = dataGridView.Rows[index].Cells[4].Value.ToString();
+                                var insertQuery = $"INSERT INTO Payments (InvoiceID, Amount, PaymentMethod) VALUES ('{invoiceID}', '{amount}', '{method}')";
+                                new SqlCommand(insertQuery, dataBase.GetConnection()).ExecuteNonQuery();
+                            }
+                            break;
+
+                        case "dataGridViewMedications":
+                            var rowStateMedications = (RowState)dataGridView.Rows[index].Cells[4].Value;
+                            if (rowStateMedications == RowState.Existed)
+                                continue;
+                            if (rowStateMedications == RowState.Deleted)
+                            {
+                                var medicationID = Convert.ToInt32(dataGridView.Rows[index].Cells[0].Value);
+                                var deleteQuery = $"DELETE FROM Medications WHERE MedicationID = '{medicationID}'";
+                                new SqlCommand(deleteQuery, dataBase.GetConnection()).ExecuteNonQuery();
+                            }
+                            if (rowStateMedications == RowState.Modified)
+                            {
+                                var medicationID = dataGridView.Rows[index].Cells[0].Value.ToString();
+                                var name = dataGridView.Rows[index].Cells[1].Value.ToString();
+                                var description = dataGridView.Rows[index].Cells[2].Value.ToString();
+                                var price = dataGridView.Rows[index].Cells[3].Value.ToString();
+                                var updateQuery = $"UPDATE Medications SET Name = '{name}', Description = '{description}', Price = '{price}' WHERE MedicationID = '{medicationID}'";
+                                new SqlCommand(updateQuery, dataBase.GetConnection()).ExecuteNonQuery();
+                            }
+                            if (rowStateMedications == RowState.New)
+                            {
+                                var name = dataGridView.Rows[index].Cells[1].Value.ToString();
+                                var description = dataGridView.Rows[index].Cells[2].Value.ToString();
+                                var price = dataGridView.Rows[index].Cells[3].Value.ToString();
+                                var insertQuery = $"INSERT INTO Medications (Name, Description, Price) VALUES ('{name}', '{description}', '{price}')";
+                                new SqlCommand(insertQuery, dataBase.GetConnection()).ExecuteNonQuery();
+                            }
+                            break;
+
+                        case "dataGridViewPrescriptions":
+                            var rowStatePrescriptions = (RowState)dataGridView.Rows[index].Cells[6].Value;
+                            if (rowStatePrescriptions == RowState.Existed)
+                                continue;
+
+                            if (rowStatePrescriptions == RowState.Deleted)
+                            {
+                                var prescriptionID = Convert.ToInt32(dataGridView.Rows[index].Cells[0].Value);
+                                var deleteQuery = $"DELETE FROM Prescriptions WHERE PrescriptionID = '{prescriptionID}'";
+                                new SqlCommand(deleteQuery, dataBase.GetConnection()).ExecuteNonQuery();
+                            }
+                            if (rowStatePrescriptions == RowState.Modified)
+                            {
+                                var prescriptionID = dataGridView.Rows[index].Cells[0].Value.ToString();
+                                var petID = dataGridView.Rows[index].Cells[1].Value.ToString();
+                                var vetID = dataGridView.Rows[index].Cells[2].Value.ToString();
+                                var medicationID = dataGridView.Rows[index].Cells[3].Value.ToString();
+                                var dosage = dataGridView.Rows[index].Cells[4].Value.ToString();
+                                var instructions = dataGridView.Rows[index].Cells[5].Value.ToString();
+                                var updateQuery = $"UPDATE Prescriptions SET PetID = '{petID}', VetID = '{vetID}', MedicationID = '{medicationID}', Dosage = '{dosage}', Instructions = '{instructions}' WHERE PrescriptionID = '{prescriptionID}'";
+                                new SqlCommand(updateQuery, dataBase.GetConnection()).ExecuteNonQuery();
+                            }
+                            if (rowStatePrescriptions == RowState.New)
+                            {
+                                var petID = dataGridView.Rows[index].Cells[1].Value.ToString();
+                                var vetID = dataGridView.Rows[index].Cells[2].Value.ToString();
+                                var medicationID = dataGridView.Rows[index].Cells[3].Value.ToString();
+                                var dosage = dataGridView.Rows[index].Cells[4].Value.ToString();
+                                var instructions = dataGridView.Rows[index].Cells[5].Value.ToString();
+                                var insertQuery = $"INSERT INTO Prescriptions (PetID, VetID, MedicationID, Dosage, Instructions) VALUES ('{petID}', '{vetID}', '{medicationID}', '{dosage}', '{instructions}')";
+                                new SqlCommand(insertQuery, dataBase.GetConnection()).ExecuteNonQuery();
                             }
                             break;
                     }
@@ -412,35 +894,127 @@ namespace VetAutomate
                 var selectedRowIndex = dataGridView.CurrentCell.RowIndex;
                 switch (dataGridView.Name)
                 {
-                    case "dataGridViewBooks":
-                        var bookID = textBoxClientID.Text;
-                        var titleBooks = textBoxFullNameClients.Text;
-                        var authorBooks = textBoxAuthorBooks.Text;
-                        var genreBooks = textBoxEmailClients.Text;
-                        var publishedYearBooks = textBoxAddress.Text;
-                        var iSBNBooks = textBoxINNClients.Text;
-                        var copiesAvailableBooks = textBoxCopiesAvailableBooks.Text;
-                        dataGridView.Rows[selectedRowIndex].SetValues(bookID, titleBooks, authorBooks, genreBooks, publishedYearBooks, iSBNBooks, copiesAvailableBooks);
+                    case "dataGridViewClients":
+                        var clientID = textBoxClientID.Text;
+                        var fullName = textBoxFullNameClients.Text;
+                        var phone = maskedTextBoxPhoneClients.Text;
+                        var email = textBoxEmailClients.Text;
+                        var address = textBoxAddress.Text;
+                        var inn = textBoxINNClients.Text;
+                        var registrationDate = dateTimePickerRegistrationDate.Value;
+                        dataGridView.Rows[selectedRowIndex].SetValues(clientID, fullName, phone, email, address, inn, registrationDate);
                         dataGridView.Rows[selectedRowIndex].Cells[7].Value = RowState.Modified;
                         break;
 
-                    case "dataGridViewLoans":
-                        var loanID = textBoxLoanID.Text;
-                        var userLogin = textBoxRegistrationIDLoans.Text;
-                        string query = $"SELECT RegistrationID FROM Registration WHERE UserLogin = '{userLogin}'";
-                        SqlCommand command = new(query, dataBase.GetConnection());
+                    case "dataGridViewPets":
+                        var petID = textBoxPetID.Text;
+                        var name = textBoxNamePets.Text;
+                        var species = textBoxSpecies.Text;
+                        var breed = textBoxBreed.Text;
+                        var birthDate = dateTimePickerBirthDatePets.Value;
+                        var ownerLogin = textBoxOwnerID.Text;
+                        string queryOwner = $"SELECT ClientID FROM Clients WHERE FullName = '{ownerLogin}'";
+                        SqlCommand commandOwner = new(queryOwner, dataBase.GetConnection());
                         dataBase.OpenConnection();
-                        object result = command.ExecuteScalar();
-                        var registrationIDLoans = result.ToString();
-                        var bookIDLoans = textBoxBookIDLoans.Text;
-                        var loanDateLoans = dateTimePickerLoanDateLoans.Value;
-                        DateTime? returnDateLoans = dateTimePickerReturnDateLoans.Value;
-                        if (checkBoxReturnDateLoans.Checked)
-                        {
-                            returnDateLoans = null;
-                        }
-                        var isReturnedLoans = textBoxIsReturnedLoans.Text;
-                        dataGridView.Rows[selectedRowIndex].SetValues(loanID, registrationIDLoans, bookIDLoans, loanDateLoans, returnDateLoans, isReturnedLoans);
+                        object resultOwner = commandOwner.ExecuteScalar();
+                        var ownerID = resultOwner?.ToString() ?? "0";
+                        dataGridView.Rows[selectedRowIndex].SetValues(petID, name, species, breed, birthDate, ownerID);
+                        dataGridView.Rows[selectedRowIndex].Cells[6].Value = RowState.Modified;
+                        break;
+
+                    case "dataGridViewVeterinarians":
+                        var vetID = textBoxVetID.Text;
+                        var fullNameVet = textBoxFullNameVeterinarians.Text;
+                        var birthDateVet = dateTimePickerBirthDateVeterinarians.Value;
+                        var birthPlace = textBoxBirthPlace.Text;
+                        var passportSeries = textBoxPassportSeries.Text;
+                        var passportNumber = textBoxPassportNumber.Text;
+                        var phoneVet = maskedTextBoxPhoneVeterinarians.Text;
+                        var emailVet = textBoxEmailVeterinarians.Text;
+                        var innVet = textBoxINNVeterinarians.Text;
+                        var dateOfEmployement = dateTimePickerDateOfEmployment.Value;
+                        string queryGender = $"SELECT GenderID FROM Genders WHERE Gender = '{comboBoxGender.Text}'";
+                        SqlCommand commandGender = new(queryGender, dataBase.GetConnection());
+                        dataBase.OpenConnection();
+                        object resultGender = commandGender.ExecuteScalar();
+                        var genderID = resultGender?.ToString() ?? "0";
+                        string queryPost = $"SELECT PostID FROM Posts WHERE Post = '{comboBoxPost.Text}'";
+                        SqlCommand commandPost = new(queryPost, dataBase.GetConnection());
+                        dataBase.OpenConnection();
+                        object resultPost = commandPost.ExecuteScalar();
+                        var postID = resultPost?.ToString() ?? "0";
+                        dataGridView.Rows[selectedRowIndex].SetValues(vetID, fullNameVet, birthDateVet, birthPlace, passportSeries, passportNumber, phoneVet, emailVet, innVet, dateOfEmployement, genderID, postID);
+                        dataGridView.Rows[selectedRowIndex].Cells[12].Value = RowState.Modified;
+                        break;
+
+                    case "dataGridViewServices":
+                        var serviceID = textBoxServiceID.Text;
+                        var serviceName = textBoxServiceName.Text;
+                        var price = textBoxPriceServices.Text;
+                        dataGridView.Rows[selectedRowIndex].SetValues(serviceID, serviceName, price);
+                        dataGridView.Rows[selectedRowIndex].Cells[3].Value = RowState.Modified;
+                        break;
+
+                    case "dataGridViewInvoices":
+                        var invoiceID = textBoxInvoiceID.Text;
+                        var clientLogin = textBoxClientIDInvoices.Text;
+                        string queryClient = $"SELECT ClientID FROM Clients WHERE FullName = '{clientLogin}'";
+                        SqlCommand commandClient = new(queryClient, dataBase.GetConnection());
+                        dataBase.OpenConnection();
+                        object resultClient = commandClient.ExecuteScalar();
+                        var clientIDInvoice = resultClient?.ToString() ?? "0";
+                        var totalAmount = textBoxTotalAmount.Text;
+                        var invoiceDate = dateTimePickerInvoiceDate.Value;
+                        var paid = checkBoxPaid.Checked ? "True" : "False";
+                        dataGridView.Rows[selectedRowIndex].SetValues(invoiceID, clientIDInvoice, totalAmount, invoiceDate, paid);
+                        dataGridView.Rows[selectedRowIndex].Cells[5].Value = RowState.Modified;
+                        break;
+
+                    case "dataGridViewPayments":
+                        var paymentID = textBoxPaymentID.Text;
+                        var invoiceIDPayment = textBoxInvoiceIDPayments.Text;
+                        var amount = textBoxAmount.Text;
+                        var paymentDate = dateTimePickerPaymentDate.Value;
+                        var paymentMethodName = comboBoxPaymentMethod.Text;
+                        string queryPaymentMethod = $"SELECT PaymentMethodID FROM PaymentMethods WHERE PaymentMethod = '{paymentMethodName}'";
+                        SqlCommand commandPaymentMethod = new(queryPaymentMethod, dataBase.GetConnection());
+                        dataBase.OpenConnection();
+                        object resultPaymentMethod = commandPaymentMethod.ExecuteScalar();
+                        var paymentMethodID = resultPaymentMethod?.ToString() ?? "0";
+                        dataGridView.Rows[selectedRowIndex].SetValues(paymentID, invoiceIDPayment, amount, paymentDate, paymentMethodID);
+                        dataGridView.Rows[selectedRowIndex].Cells[5].Value = RowState.Modified;
+                        break;
+
+                    case "dataGridViewMedications":
+                        var medicationID = textBoxMedicationID.Text;
+                        var nameMed = textBoxNameMedications.Text;
+                        var description = textBoxDescription.Text;
+                        var priceMed = textBoxPriceMedications.Text;
+                        dataGridView.Rows[selectedRowIndex].SetValues(medicationID, nameMed, description, priceMed);
+                        dataGridView.Rows[selectedRowIndex].Cells[4].Value = RowState.Modified;
+                        break;
+
+                    case "dataGridViewPrescriptions":
+                        var prescriptionID = textBoxPrescriptionID.Text;
+                        var petName = textBoxPetIDPrescriptions.Text;
+                        string queryPet = $"SELECT PetID FROM Pets WHERE Name = '{petName}'";
+                        SqlCommand commandPet = new(queryPet, dataBase.GetConnection());
+                        dataBase.OpenConnection();
+                        object resultPet = commandPet.ExecuteScalar();
+                        var petIDPres = resultPet?.ToString() ?? "0";
+                        var vetName = textBoxVetIDPrescriptions.Text;
+                        string queryVet = $"SELECT VetID FROM Veterinarians WHERE FullName = '{vetName}'";
+                        SqlCommand commandVet = new(queryVet, dataBase.GetConnection());
+                        object resultVet = commandVet.ExecuteScalar();
+                        var vetIDPres = resultVet?.ToString();
+                        var medName = textBoxMedicationIDPrescriptions.Text;
+                        string queryMed = $"SELECT MedicationID FROM Medications WHERE Name = '{medName}'";
+                        SqlCommand commandMed = new(queryMed, dataBase.GetConnection());
+                        object resultMed = commandMed.ExecuteScalar();
+                        var medicationIDPres = resultMed?.ToString() ?? "0";
+                        var dosage = textBoxDosage.Text;
+                        var instructions = textBoxInstructions.Text;
+                        dataGridView.Rows[selectedRowIndex].SetValues(prescriptionID, petIDPres, vetIDPres, medicationIDPres, dosage, instructions);
                         dataGridView.Rows[selectedRowIndex].Cells[6].Value = RowState.Modified;
                         break;
                 }
@@ -463,12 +1037,36 @@ namespace VetAutomate
                 Paragraph title = doc.Paragraphs.Add();
                 switch (dataGridView.Name)
                 {
-                    case "dataGridViewBooks":
-                        title.Range.Text = "Данные книг";
+                    case "dataGridViewClients":
+                        title.Range.Text = "Данные клиентов";
                         break;
 
-                    case "dataGridViewLoans":
-                        title.Range.Text = "Данные выдач";
+                    case "dataGridViewPets":
+                        title.Range.Text = "Данные питомцев";
+                        break;
+
+                    case "dataGridViewVeterinarians":
+                        title.Range.Text = "Данные ветеринаров";
+                        break;
+
+                    case "dataGridViewServices":
+                        title.Range.Text = "Данные услуг";
+                        break;
+
+                    case "dataGridViewInvoices":
+                        title.Range.Text = "Данные счетов";
+                        break;
+
+                    case "dataGridViewPayments":
+                        title.Range.Text = "Данные платежей";
+                        break;
+
+                    case "dataGridViewMedications":
+                        title.Range.Text = "Данные лекарств";
+                        break;
+
+                    case "dataGridViewPrescriptions":
+                        title.Range.Text = "Данные записей в книжке";
                         break;
                 }
                 title.Range.Font.Bold = 1;
@@ -507,12 +1105,36 @@ namespace VetAutomate
                 string title = "";
                 switch (dataGridView.Name)
                 {
-                    case "dataGridViewBooks":
-                        title = "Данные книг";
+                    case "dataGridViewClients":
+                        title = "Данные клиентов";
                         break;
 
-                    case "dataGridViewLoans":
-                        title = "Данные выдач";
+                    case "dataGridViewPets":
+                        title = "Данные питомцев";
+                        break;
+
+                    case "dataGridViewVeterinarians":
+                        title = "Данные ветеринаров";
+                        break;
+
+                    case "dataGridViewServices":
+                        title = "Данные услуг";
+                        break;
+
+                    case "dataGridViewInvoices":
+                        title = "Данные счетов";
+                        break;
+
+                    case "dataGridViewPayments":
+                        title = "Данные платежей";
+                        break;
+
+                    case "dataGridViewMedications":
+                        title = "Данные лекарств";
+                        break;
+
+                    case "dataGridViewPrescriptions":
+                        title = "Данные записей в книжке";
                         break;
                 }
                 Excel.Range titleRange = worksheet.Range[worksheet.Cells[1, 1], worksheet.Cells[1, dataGridView.ColumnCount - 1]];
@@ -549,12 +1171,36 @@ namespace VetAutomate
             string text = "";
             switch (dataGridView.Name)
             {
-                case "dataGridViewBooks":
-                    text += "Данные книг\n\n";
+                case "dataGridViewClients":
+                    text += "Данные клиентов\n\n";
                     break;
 
-                case "dataGridViewLoans":
-                    text += "Данные выдач\n\n";
+                case "dataGridViewPets":
+                    text += "Данные питомцев\n\n";
+                    break;
+
+                case "dataGridViewVeterinarians":
+                    text += "Данные ветеринаров\n\n";
+                    break;
+
+                case "dataGridViewServices":
+                    text += "Данные услуг\n\n";
+                    break;
+
+                case "dataGridViewInvoices":
+                    text += "Данные счетов\n\n";
+                    break;
+
+                case "dataGridViewPayments":
+                    text += "Данные платежей\n\n";
+                    break;
+
+                case "dataGridViewMedications":
+                    text += "Данные лекарств\n\n";
+                    break;
+
+                case "dataGridViewPrescriptions":
+                    text += "Данные записей в книжке\n\n";
                     break;
             }
             for (int col = 0; col < dataGridView.ColumnCount; col++)
@@ -575,17 +1221,130 @@ namespace VetAutomate
             Process.Start(new ProcessStartInfo(filePath) { UseShellExecute = true });
         }
 
-        private void CheckBoxReturnDateLoans_CheckedChanged(object sender, EventArgs e)
+        private void Reports(string report)
         {
-            if (checkBoxReturnDateLoans.Checked)
+            dataBase.OpenConnection();
+            var wordApp = new Application { Visible = true };
+            Document doc = wordApp.Documents.Add();
+            Paragraph title = doc.Paragraphs.Add();
+            string query = "";
+            switch (report)
             {
-                dateTimePickerReturnDateLoans.Enabled = false;
-                textBoxIsReturnedLoans.Text = "0";
+                case "Payments":
+                    title.Range.Text = "Отчет по доходам клиники за период";
+                    query = @"SELECT
+                                c.FullName AS Client,
+                                c.Phone,
+                                c.Email,
+                                p.Name AS PetName,
+                                p.Species,
+                                p.Breed,
+                                COUNT(DISTINCT i.InvoiceID) AS VisitsCount,
+                                SUM(i.TotalAmount) AS TotalSpent,
+                                MAX(i.InvoiceDate) AS LastVisitDate
+                            FROM
+                                Clients c
+                            JOIN
+                                Pets p ON c.ClientID = p.OwnerID
+                            LEFT JOIN
+                                Invoices i ON c.ClientID = i.ClientID
+                            LEFT JOIN
+                                Payments pay ON i.InvoiceID = pay.InvoiceID
+                            WHERE
+                                i.Paid = 1
+                                AND i.InvoiceDate BETWEEN '2023-01-01' AND GetDate()
+                            GROUP BY
+                                c.FullName,
+                                c.Phone,
+                                c.Email,
+                                p.Name,
+                                p.Species,
+                                p.Breed
+                            ORDER BY
+                                TotalSpent DESC;";
+                    break;
+
+                case "Veterinarians":
+                    title.Range.Text = "Отчет по активности ветеринаров";
+                    query = @"SELECT
+                                v.FullName AS Veterinarian,
+                                p.Post AS Position,
+                                COUNT(DISTINCT pr.PrescriptionID) AS PrescriptionsCount,
+                                COUNT(DISTINCT pr.PetID) AS UniquePatientsCount,
+                                COUNT(DISTINCT pr.MedicationID) AS UniqueMedicationsPrescribed
+                            FROM
+                                Veterinarians v
+                            JOIN
+                                Posts p ON v.PostID = p.PostID
+                            LEFT JOIN
+                                Prescriptions pr ON v.VetID = pr.VetID
+                            LEFT JOIN
+                                Invoices i ON pr.PetID = i.ClientID -- Связь через клиента/владельца питомца
+                            WHERE
+                                i.InvoiceDate BETWEEN '2023-01-01' AND GETDATE() -- Используем дату из счетов
+                                OR pr.PrescriptionID IS NOT NULL -- Учитываем все рецепты
+                            GROUP BY
+                                v.FullName,
+                                p.Post
+                            ORDER BY
+                                PrescriptionsCount DESC;";
+                    break;
+
+                case "Clients":
+                    title.Range.Text = "Отчет по клиентам и их питомцам";
+                    query = @"SELECT
+                                c.FullName AS Client,
+                                c.Phone,
+                                c.Email,
+                                p.Name AS PetName,
+                                p.Species,
+                                p.Breed,
+                                COUNT(DISTINCT i.InvoiceID) AS VisitsCount,
+                                SUM(i.TotalAmount) AS TotalSpent,
+                                MAX(i.InvoiceDate) AS LastVisitDate
+                            FROM
+                                Clients c
+                            JOIN
+                                Pets p ON c.ClientID = p.OwnerID
+                            LEFT JOIN
+                                Invoices i ON c.ClientID = i.ClientID
+                            LEFT JOIN
+                                Payments pay ON i.InvoiceID = pay.InvoiceID
+                            WHERE
+                                i.Paid = 1
+                                AND i.InvoiceDate BETWEEN '2023-01-01' AND GetDate()
+                            GROUP BY
+                                c.FullName,
+                                c.Phone,
+                                c.Email,
+                                p.Name,
+                                p.Species,
+                                p.Breed
+                            ORDER BY
+                                TotalSpent DESC;";
+                    break;
             }
-            else
+            SqlCommand command = new(query, dataBase.GetConnection());
+            SqlDataAdapter adapter = new(command);
+            System.Data.DataTable dataTable = new();
+            adapter.Fill(dataTable);
+            dataBase.CloseConnection();
+            title.Range.Font.Bold = 1;
+            title.Range.Font.Size = 14;
+            title.Alignment = WdParagraphAlignment.wdAlignParagraphCenter;
+            title.Range.InsertParagraphAfter();
+            Table table = doc.Tables.Add(title.Range, dataTable.Rows.Count + 1, dataTable.Columns.Count);
+            table.Borders.Enable = 1;
+            for (int col = 0; col < dataTable.Columns.Count; col++)
             {
-                dateTimePickerReturnDateLoans.Enabled = true;
-                textBoxIsReturnedLoans.Text = "1";
+                table.Cell(1, col + 1).Range.Text = dataTable.Columns[col].ColumnName;
+            }
+            for (int row = 0; row < dataTable.Rows.Count; row++)
+            {
+                for (int col = 0; col < dataTable.Columns.Count; col++)
+                {
+                    table.Cell(row + 2, col + 1).Range.Text = dataTable.Rows[row][col].ToString();
+                }
             }
         }
 
@@ -593,8 +1352,14 @@ namespace VetAutomate
         {
             try
             {
-                RefreshDataGrid(dataGridViewClients, "Books");
-                RefreshDataGrid(dataGridViewPrescriptions, "Loans");
+                RefreshDataGrid(dataGridViewClients, "Clients");
+                RefreshDataGrid(dataGridViewPets, "Pets");
+                RefreshDataGrid(dataGridViewVeterinarians, "Veterinarians");
+                RefreshDataGrid(dataGridViewServices, "Services");
+                RefreshDataGrid(dataGridViewInvoices, "Invoices");
+                RefreshDataGrid(dataGridViewPayments, "Payments");
+                RefreshDataGrid(dataGridViewMedications, "Medications");
+                RefreshDataGrid(dataGridViewPrescriptions, "Prescriptions");
                 ClearFields();
             }
             catch (Exception ex)
@@ -615,11 +1380,11 @@ namespace VetAutomate
             }
         }
 
-        private void ButtonNewBook_Click(object sender, EventArgs e)
+        private void ButtonNewClient_Click(object sender, EventArgs e)
         {
             try
             {
-                AddFormBooks addForm = new();
+                AddFormClients addForm = new();
                 addForm.Show();
                 ClearFields();
             }
@@ -629,11 +1394,11 @@ namespace VetAutomate
             }
         }
 
-        private void ButtonNewLoan_Click(object sender, EventArgs e)
+        private void ButtonNewPet_Click(object sender, EventArgs e)
         {
             try
             {
-                AddFormLoans addForm = new();
+                AddFormPets addForm = new();
                 addForm.Show();
                 ClearFields();
             }
@@ -643,7 +1408,91 @@ namespace VetAutomate
             }
         }
 
-        private void ButtonDeleteBook_Click(object sender, EventArgs e)
+        private void ButtonNewVeterinarian_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AddFormVeterinarians addForm = new();
+                addForm.Show();
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonNewService_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AddFormServices addForm = new();
+                addForm.Show();
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonNewInvoice_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AddFormInvoices addForm = new();
+                addForm.Show();
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonNewPayment_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AddFormPayments addForm = new();
+                addForm.Show();
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonNewMedication_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AddFormMedications addForm = new();
+                addForm.Show();
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonNewPrescription_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                AddFormPrescriptions addForm = new();
+                addForm.Show();
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonDeleteClient_Click(object sender, EventArgs e)
         {
             try
             {
@@ -656,7 +1505,85 @@ namespace VetAutomate
             }
         }
 
-        private void ButtonDeleteLoan_Click(object sender, EventArgs e)
+        private void ButtonDeletePet_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DeleteRow(dataGridViewPets);
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonDeleteVeterinarian_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DeleteRow(dataGridViewVeterinarians);
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonDeleteService_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DeleteRow(dataGridViewServices);
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonDeleteInvoice_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DeleteRow(dataGridViewInvoices);
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonDeletePayment_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DeleteRow(dataGridViewPayments);
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonDeleteMedication_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DeleteRow(dataGridViewMedications);
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonDeletePrescription_Click(object sender, EventArgs e)
         {
             try
             {
@@ -669,7 +1596,7 @@ namespace VetAutomate
             }
         }
 
-        private void ButtonChangeBook_Click(object sender, EventArgs e)
+        private void ButtonChangeClient_Click(object sender, EventArgs e)
         {
             try
             {
@@ -682,7 +1609,85 @@ namespace VetAutomate
             }
         }
 
-        private void ButtonChangeLoan_Click(object sender, EventArgs e)
+        private void ButtonChangePet_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Change(dataGridViewPets);
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonChangeVeterinarian_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Change(dataGridViewVeterinarians);
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonChangeService_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Change(dataGridViewServices);
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonChangeInvoice_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Change(dataGridViewInvoices);
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonChangePayment_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Change(dataGridViewPayments);
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonChangeMedication_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Change(dataGridViewMedications);
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonChangePrescription_Click(object sender, EventArgs e)
         {
             try
             {
@@ -695,13 +1700,38 @@ namespace VetAutomate
             }
         }
 
-        private void ButtonSaveBook_Click(object sender, EventArgs e)
+        private void ButtonSaveClient_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Change(dataGridViewClients);
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonSavePet_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                UpdateBase(dataGridViewPets);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonSaveVeterinarian_Click(object sender, EventArgs e)
         {
             try
             {
                 if (admin)
                 {
-                    UpdateBase(dataGridViewClients);
+                    UpdateBase(dataGridViewVeterinarians);
                 }
                 else
                 {
@@ -714,7 +1744,62 @@ namespace VetAutomate
             }
         }
 
-        private void ButtonSaveLoan_Click(object sender, EventArgs e)
+        private void ButtonSaveService_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (admin)
+                {
+                    UpdateBase(dataGridViewServices);
+                }
+                else
+                {
+                    MessageBox.Show("У вас недостаточно прав!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonSaveInvoice_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                UpdateBase(dataGridViewInvoices);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonSavePayment_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                UpdateBase(dataGridViewPayments);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonSaveMedication_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                UpdateBase(dataGridViewMedications);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonSavePrescription_Click(object sender, EventArgs e)
         {
             try
             {
@@ -726,11 +1811,11 @@ namespace VetAutomate
             }
         }
 
-        private void ButtonWordBook_Click(object sender, EventArgs e)
+        private void ButtonWordClient_Click(object sender, EventArgs e)
         {
             try
             {
-                ExportToWord(dataGridViewClients);
+                UpdateBase(dataGridViewClients);
             }
             catch (Exception ex)
             {
@@ -738,7 +1823,79 @@ namespace VetAutomate
             }
         }
 
-        private void ButtonWordLoan_Click(object sender, EventArgs e)
+        private void ButtonWordPet_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ExportToWord(dataGridViewPets);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonWordVeterinarian_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ExportToWord(dataGridViewVeterinarians);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonWordService_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ExportToWord(dataGridViewServices);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonWordInvoice_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ExportToWord(dataGridViewInvoices);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonWordPayment_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ExportToWord(dataGridViewPayments);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonWordMedication_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ExportToWord(dataGridViewMedications);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonWordPrescription_Click(object sender, EventArgs e)
         {
             try
             {
@@ -750,7 +1907,7 @@ namespace VetAutomate
             }
         }
 
-        private void ButtonExcelBook_Click(object sender, EventArgs e)
+        private void ButtonExcelClient_Click(object sender, EventArgs e)
         {
             try
             {
@@ -762,7 +1919,79 @@ namespace VetAutomate
             }
         }
 
-        private void ButtonExcelLoan_Click(object sender, EventArgs e)
+        private void ButtonExcelPet_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ExportToExcel(dataGridViewPets);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonExcelVeterinarian_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ExportToExcel(dataGridViewVeterinarians);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonExcelService_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ExportToExcel(dataGridViewServices);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonExcelInvoice_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ExportToExcel(dataGridViewInvoices);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonExcelPayment_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ExportToExcel(dataGridViewPayments);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonExcelMedication_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ExportToExcel(dataGridViewMedications);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonExcelPrescription_Click(object sender, EventArgs e)
         {
             try
             {
@@ -774,7 +2003,7 @@ namespace VetAutomate
             }
         }
 
-        private void ButtonTXTBook_Click(object sender, EventArgs e)
+        private void ButtonTXTClient_Click(object sender, EventArgs e)
         {
             try
             {
@@ -786,7 +2015,79 @@ namespace VetAutomate
             }
         }
 
-        private void ButtonTXTLoan_Click(object sender, EventArgs e)
+        private void ButtonTXTPet_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ExportToTXT(dataGridViewPets);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonTXTVeterinarian_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ExportToTXT(dataGridViewVeterinarians);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonTXTService_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ExportToTXT(dataGridViewServices);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonTXTInvoice_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ExportToTXT(dataGridViewInvoices);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonTXTPayment_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ExportToTXT(dataGridViewPayments);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonTXTMedication_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ExportToTXT(dataGridViewMedications);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void ButtonTXTPrescription_Click(object sender, EventArgs e)
         {
             try
             {
@@ -798,7 +2099,7 @@ namespace VetAutomate
             }
         }
 
-        private void DataGridViewBooks_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void DataGridViewClients_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
@@ -814,7 +2115,103 @@ namespace VetAutomate
             }
         }
 
-        private void DataGridViewLoans_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void DataGridViewPets_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                selectedRow = e.RowIndex;
+                if (e.RowIndex >= 0)
+                {
+                    DataGridView_CellClick(dataGridViewPets, selectedRow);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void DataGridViewVeterinarians_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                selectedRow = e.RowIndex;
+                if (e.RowIndex >= 0)
+                {
+                    DataGridView_CellClick(dataGridViewVeterinarians, selectedRow);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void DataGridViewServices_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                selectedRow = e.RowIndex;
+                if (e.RowIndex >= 0)
+                {
+                    DataGridView_CellClick(dataGridViewServices, selectedRow);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void DataGridViewInvoices_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                selectedRow = e.RowIndex;
+                if (e.RowIndex >= 0)
+                {
+                    DataGridView_CellClick(dataGridViewInvoices, selectedRow);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void DataGridViewPayments_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                selectedRow = e.RowIndex;
+                if (e.RowIndex >= 0)
+                {
+                    DataGridView_CellClick(dataGridViewPayments, selectedRow);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void DataGridViewMedications_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                selectedRow = e.RowIndex;
+                if (e.RowIndex >= 0)
+                {
+                    DataGridView_CellClick(dataGridViewMedications, selectedRow);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void DataGridViewPrescriptions_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
@@ -830,7 +2227,7 @@ namespace VetAutomate
             }
         }
 
-        private void TextBoxSearchBooks_TextChanged(object sender, EventArgs e)
+        private void TextBoxSearchClients_TextChanged(object sender, EventArgs e)
         {
             try
             {
@@ -842,7 +2239,79 @@ namespace VetAutomate
             }
         }
 
-        private void TextBoxSearchLoans_TextChanged(object sender, EventArgs e)
+        private void TextBoxSearchPets_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Search(dataGridViewPets);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void TextBoxSearchVeterinarians_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Search(dataGridViewVeterinarians);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void TextBoxSearchServices_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Search(dataGridViewServices);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void TextBoxSearchInvoices_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Search(dataGridViewInvoices);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void TextBoxSearchPayments_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Search(dataGridViewPayments);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void TextBoxSearchMedications_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Search(dataGridViewMedications);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void TextBoxSearchPrescriptions_TextChanged(object sender, EventArgs e)
         {
             try
             {
@@ -852,6 +2321,21 @@ namespace VetAutomate
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void ButtonReportClients_Click(object sender, EventArgs e)
+        {
+            Reports("Clients");
+        }
+
+        private void ButtonReportVeterinarians_Click(object sender, EventArgs e)
+        {
+            Reports("Veterinarians");
+        }
+
+        private void ButtonReportPayments_Click(object sender, EventArgs e)
+        {
+            Reports("Payments");
         }
     }
 }
