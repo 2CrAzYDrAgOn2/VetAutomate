@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             tabPageClients = new TabPage();
             panelTitleClients = new Panel();
+            buttonReportClients = new Button();
             labelTitleClients = new Label();
             buttonClearClients = new Button();
             buttonRefreshClients = new Button();
@@ -94,6 +95,7 @@
             buttonTXTPet = new Button();
             tabPageVeterinars = new TabPage();
             panelTItleVeterinarians = new Panel();
+            buttonReportVeterinarians = new Button();
             labelTitleVeterinarians = new Label();
             buttonClearVeterinarians = new Button();
             buttonRefreshVeterinarians = new Button();
@@ -188,6 +190,7 @@
             buttonTXTInvoice = new Button();
             tabPagePayments = new TabPage();
             panelTitlePayments = new Panel();
+            buttonReportPayments = new Button();
             labelTitlePayments = new Label();
             buttonClearPayments = new Button();
             buttonRefreshPayments = new Button();
@@ -270,9 +273,6 @@
             buttonWordPrescription = new Button();
             buttonExcelPrescription = new Button();
             buttonTXTPrescription = new Button();
-            buttonReportClients = new Button();
-            buttonReportVeterinarians = new Button();
-            buttonReportPayments = new Button();
             tabPageClients.SuspendLayout();
             panelTitleClients.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewClients).BeginInit();
@@ -318,6 +318,7 @@
             // 
             // tabPageClients
             // 
+            tabPageClients.BackgroundImage = (Image)resources.GetObject("tabPageClients.BackgroundImage");
             tabPageClients.Controls.Add(panelTitleClients);
             tabPageClients.Controls.Add(dataGridViewClients);
             tabPageClients.Controls.Add(panelRecordClients);
@@ -344,6 +345,20 @@
             panelTitleClients.Name = "panelTitleClients";
             panelTitleClients.Size = new Size(876, 84);
             panelTitleClients.TabIndex = 3;
+            // 
+            // buttonReportClients
+            // 
+            buttonReportClients.BackgroundImage = (Image)resources.GetObject("buttonReportClients.BackgroundImage");
+            buttonReportClients.BackgroundImageLayout = ImageLayout.Stretch;
+            buttonReportClients.FlatStyle = FlatStyle.Flat;
+            buttonReportClients.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonReportClients.Location = new Point(442, 3);
+            buttonReportClients.Margin = new Padding(4, 3, 4, 3);
+            buttonReportClients.Name = "buttonReportClients";
+            buttonReportClients.Size = new Size(78, 77);
+            buttonReportClients.TabIndex = 5;
+            buttonReportClients.UseVisualStyleBackColor = true;
+            buttonReportClients.Click += ButtonReportClients_Click;
             // 
             // labelTitleClients
             // 
@@ -721,6 +736,7 @@
             // 
             // tabPagePets
             // 
+            tabPagePets.BackgroundImage = (Image)resources.GetObject("tabPagePets.BackgroundImage");
             tabPagePets.Controls.Add(panelTitlePets);
             tabPagePets.Controls.Add(dataGridViewPets);
             tabPagePets.Controls.Add(panelRecordPets);
@@ -1084,6 +1100,7 @@
             // 
             // tabPageVeterinars
             // 
+            tabPageVeterinars.BackgroundImage = (Image)resources.GetObject("tabPageVeterinars.BackgroundImage");
             tabPageVeterinars.Controls.Add(panelTItleVeterinarians);
             tabPageVeterinars.Controls.Add(dataGridViewVeterinarians);
             tabPageVeterinars.Controls.Add(panelRecordVeterinarians);
@@ -1110,6 +1127,20 @@
             panelTItleVeterinarians.Name = "panelTItleVeterinarians";
             panelTItleVeterinarians.Size = new Size(876, 84);
             panelTItleVeterinarians.TabIndex = 3;
+            // 
+            // buttonReportVeterinarians
+            // 
+            buttonReportVeterinarians.BackgroundImage = (Image)resources.GetObject("buttonReportVeterinarians.BackgroundImage");
+            buttonReportVeterinarians.BackgroundImageLayout = ImageLayout.Stretch;
+            buttonReportVeterinarians.FlatStyle = FlatStyle.Flat;
+            buttonReportVeterinarians.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonReportVeterinarians.Location = new Point(442, 3);
+            buttonReportVeterinarians.Margin = new Padding(4, 3, 4, 3);
+            buttonReportVeterinarians.Name = "buttonReportVeterinarians";
+            buttonReportVeterinarians.Size = new Size(78, 77);
+            buttonReportVeterinarians.TabIndex = 5;
+            buttonReportVeterinarians.UseVisualStyleBackColor = true;
+            buttonReportVeterinarians.Click += ButtonReportVeterinarians_Click;
             // 
             // labelTitleVeterinarians
             // 
@@ -1584,6 +1615,7 @@
             // 
             // tabPageServices
             // 
+            tabPageServices.BackgroundImage = (Image)resources.GetObject("tabPageServices.BackgroundImage");
             tabPageServices.Controls.Add(panelTitleServices);
             tabPageServices.Controls.Add(dataGridViewServices);
             tabPageServices.Controls.Add(panelRecordServices);
@@ -1882,6 +1914,7 @@
             // 
             // tabPageInvoices
             // 
+            tabPageInvoices.BackgroundImage = (Image)resources.GetObject("tabPageInvoices.BackgroundImage");
             tabPageInvoices.Controls.Add(panelTitleInvoices);
             tabPageInvoices.Controls.Add(dataGridViewInvoices);
             tabPageInvoices.Controls.Add(panelRecordInvoices);
@@ -2225,6 +2258,7 @@
             // 
             // tabPagePayments
             // 
+            tabPagePayments.BackgroundImage = (Image)resources.GetObject("tabPagePayments.BackgroundImage");
             tabPagePayments.Controls.Add(panelTitlePayments);
             tabPagePayments.Controls.Add(dataGridViewPayments);
             tabPagePayments.Controls.Add(panelRecordPayments);
@@ -2251,6 +2285,20 @@
             panelTitlePayments.Name = "panelTitlePayments";
             panelTitlePayments.Size = new Size(876, 84);
             panelTitlePayments.TabIndex = 3;
+            // 
+            // buttonReportPayments
+            // 
+            buttonReportPayments.BackgroundImage = (Image)resources.GetObject("buttonReportPayments.BackgroundImage");
+            buttonReportPayments.BackgroundImageLayout = ImageLayout.Stretch;
+            buttonReportPayments.FlatStyle = FlatStyle.Flat;
+            buttonReportPayments.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonReportPayments.Location = new Point(442, 3);
+            buttonReportPayments.Margin = new Padding(4, 3, 4, 3);
+            buttonReportPayments.Name = "buttonReportPayments";
+            buttonReportPayments.Size = new Size(78, 77);
+            buttonReportPayments.TabIndex = 5;
+            buttonReportPayments.UseVisualStyleBackColor = true;
+            buttonReportPayments.Click += ButtonReportPayments_Click;
             // 
             // labelTitlePayments
             // 
@@ -2569,6 +2617,7 @@
             // 
             // tabPageMedications
             // 
+            tabPageMedications.BackgroundImage = (Image)resources.GetObject("tabPageMedications.BackgroundImage");
             tabPageMedications.Controls.Add(panelTitleMedications);
             tabPageMedications.Controls.Add(dataGridViewMedications);
             tabPageMedications.Controls.Add(panelRecordMedications);
@@ -2889,6 +2938,7 @@
             // 
             // tabPagePrescriptions
             // 
+            tabPagePrescriptions.BackgroundImage = (Image)resources.GetObject("tabPagePrescriptions.BackgroundImage");
             tabPagePrescriptions.Controls.Add(panelTitlePrescriptions);
             tabPagePrescriptions.Controls.Add(dataGridViewPrescriptions);
             tabPagePrescriptions.Controls.Add(panelRecordPrescriptions);
@@ -3251,52 +3301,11 @@
             buttonTXTPrescription.UseVisualStyleBackColor = true;
             buttonTXTPrescription.Click += ButtonTXTPrescription_Click;
             // 
-            // buttonReportClients
-            // 
-            buttonReportClients.BackgroundImage = (Image)resources.GetObject("buttonReportClients.BackgroundImage");
-            buttonReportClients.BackgroundImageLayout = ImageLayout.Stretch;
-            buttonReportClients.FlatStyle = FlatStyle.Flat;
-            buttonReportClients.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonReportClients.Location = new Point(442, 3);
-            buttonReportClients.Margin = new Padding(4, 3, 4, 3);
-            buttonReportClients.Name = "buttonReportClients";
-            buttonReportClients.Size = new Size(78, 77);
-            buttonReportClients.TabIndex = 5;
-            buttonReportClients.UseVisualStyleBackColor = true;
-            buttonReportClients.Click += ButtonReportClients_Click;
-            // 
-            // buttonReportVeterinarians
-            // 
-            buttonReportVeterinarians.BackgroundImage = (Image)resources.GetObject("buttonReportVeterinarians.BackgroundImage");
-            buttonReportVeterinarians.BackgroundImageLayout = ImageLayout.Stretch;
-            buttonReportVeterinarians.FlatStyle = FlatStyle.Flat;
-            buttonReportVeterinarians.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonReportVeterinarians.Location = new Point(442, 3);
-            buttonReportVeterinarians.Margin = new Padding(4, 3, 4, 3);
-            buttonReportVeterinarians.Name = "buttonReportVeterinarians";
-            buttonReportVeterinarians.Size = new Size(78, 77);
-            buttonReportVeterinarians.TabIndex = 5;
-            buttonReportVeterinarians.UseVisualStyleBackColor = true;
-            buttonReportVeterinarians.Click += ButtonReportVeterinarians_Click;
-            // 
-            // buttonReportPayments
-            // 
-            buttonReportPayments.BackgroundImage = (Image)resources.GetObject("buttonReportPayments.BackgroundImage");
-            buttonReportPayments.BackgroundImageLayout = ImageLayout.Stretch;
-            buttonReportPayments.FlatStyle = FlatStyle.Flat;
-            buttonReportPayments.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonReportPayments.Location = new Point(442, 3);
-            buttonReportPayments.Margin = new Padding(4, 3, 4, 3);
-            buttonReportPayments.Name = "buttonReportPayments";
-            buttonReportPayments.Size = new Size(78, 77);
-            buttonReportPayments.TabIndex = 5;
-            buttonReportPayments.UseVisualStyleBackColor = true;
-            buttonReportPayments.Click += ButtonReportPayments_Click;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(895, 1033);
             Controls.Add(tabControl1);
             FormBorderStyle = FormBorderStyle.FixedSingle;

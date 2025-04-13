@@ -167,6 +167,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(896, 841);
             Controls.Add(labelTitle);
             Controls.Add(label1);
@@ -179,7 +180,10 @@
             Controls.Add(labelPaid);
             Controls.Add(checkBoxPaid);
             Controls.Add(buttonSave);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "AddFormInvoices";
             Text = "Добавить чек";
             ResumeLayout(false);
