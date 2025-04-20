@@ -13,6 +13,11 @@ namespace VetAutomate
             StartPosition = FormStartPosition.CenterScreen;
         }
 
+        /// <summary>
+        /// ButtonEnter_Click вызывается при нажатии на кнопку "Войти"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonEnter_Click(object sender, EventArgs e)
         {
             var login = textBoxLogin.Text;
@@ -47,12 +52,22 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonClear_Click вызывается при нажатии на кнопку очистки
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonClear_Click(object sender, EventArgs e)
         {
             textBoxLogin.Text = "";
             textBoxPassword.Text = "";
         }
 
+        /// <summary>
+        /// ButtonShow_Click вызывается при нажатии на кнопку показа пароля
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonShow_Click(object sender, EventArgs e)
         {
             if (textBoxPassword.PasswordChar == '•')

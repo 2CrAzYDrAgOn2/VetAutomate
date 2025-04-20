@@ -45,6 +45,9 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// CreateColumns() вызывается при создании колонок
+        /// </summary>
         private void CreateColumns()
         {
             try
@@ -112,6 +115,9 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ClearFields() вызывается при очистке полей
+        /// </summary>
         private void ClearFields()
         {
             try
@@ -162,6 +168,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ReadSingleRow() вызывается при чтении каждой строки
+        /// </summary>
+        /// <param name="dataGridView"></param>
+        /// <param name="iDataRecord"></param>
         private static void ReadSingleRow(DataGridView dataGridView, IDataRecord iDataRecord)
         {
             try
@@ -207,6 +218,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// RefreshDataGrid() вызывается при обновлении базы данных
+        /// </summary>
+        /// <param name="dataGridView"></param>
+        /// <param name="tableName"></param>
         private void RefreshDataGrid(DataGridView dataGridView, string tableName)
         {
             try
@@ -228,6 +244,9 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// InitializeNotifyIcon() вызывается при инициализации иконки в трее
+        /// </summary>
         private void InitializeNotifyIcon()
         {
             notifyIcon = new NotifyIcon
@@ -237,6 +256,9 @@ namespace VetAutomate
             };
         }
 
+        /// <summary>
+        /// InitializeTimer() вызывается при инициализации таймера
+        /// </summary>
         private void InitializeTimer()
         {
             timer = new System.Windows.Forms.Timer
@@ -247,11 +269,19 @@ namespace VetAutomate
             timer.Start();
         }
 
+        /// <summary>
+        /// Timer_Tick() вызывается при завершении тайиера
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Timer_Tick(object sender, EventArgs e)
         {
             ShowBalloonTip();
         }
 
+        /// <summary>
+        /// ShowBalloonTip() вызывается при показе уведомления
+        /// </summary>
         private void ShowBalloonTip()
         {
             notifyIcon.BalloonTipTitle = "Учет ветеринарной клиники";
@@ -259,6 +289,11 @@ namespace VetAutomate
             notifyIcon.ShowBalloonTip(3000);
         }
 
+        /// <summary>
+        /// Form1_Load() вызывается при загрузке сцены
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {
             try
@@ -279,6 +314,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// DataGridView_CellClick() вызывается при нажатии на ячейку
+        /// </summary>
+        /// <param name="dataGridView"></param>
+        /// <param name="selectedRow"></param>
         private void DataGridView_CellClick(DataGridView dataGridView, int selectedRow)
         {
             try
@@ -403,6 +443,10 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// Search() вызывается при вводе текста в строку
+        /// </summary>
+        /// <param name="dataGridView"></param>
         private void Search(DataGridView dataGridView)
         {
             try
@@ -513,6 +557,10 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// DeleteRow() вызывается при удалении строки
+        /// </summary>
+        /// <param name="dataGridView"></param>
         private static void DeleteRow(DataGridView dataGridView)
         {
             try
@@ -600,6 +648,10 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// UpdateBase() вызывается при обновлении базы данных
+        /// </summary>
+        /// <param name="dataGridView"></param>
         private void UpdateBase(DataGridView dataGridView)
         {
             try
@@ -887,6 +939,10 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// Change() вызывается при изменении таблиц в базе данных
+        /// </summary>
+        /// <param name="dataGridView"></param>
         private void Change(DataGridView dataGridView)
         {
             try
@@ -1025,6 +1081,10 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ExportToWord() вызывается при экспорте в Word
+        /// </summary>
+        /// <param name="dataGridView"></param>
         private void ExportToWord(DataGridView dataGridView)
         {
             try
@@ -1092,6 +1152,10 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ExportToExcel() вызывается при экспорте в Excel
+        /// </summary>
+        /// <param name="dataGridView"></param>
         private void ExportToExcel(DataGridView dataGridView)
         {
             try
@@ -1166,6 +1230,10 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ExportToTXT() вызывается при экспорте в .txt
+        /// </summary>
+        /// <param name="dataGridView"></param>
         private static void ExportToTXT(DataGridView dataGridView)
         {
             string text = "";
@@ -1221,6 +1289,10 @@ namespace VetAutomate
             Process.Start(new ProcessStartInfo(filePath) { UseShellExecute = true });
         }
 
+        /// <summary>
+        /// Reports() вызывается при создании отчетов
+        /// </summary>
+        /// <param name="report"></param>
         private void Reports(string report)
         {
             dataBase.OpenConnection();
@@ -1348,6 +1420,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonRefresh_Click() вызывается при нажатии на кнопку обновления
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonRefresh_Click(object sender, EventArgs e)
         {
             try
@@ -1368,6 +1445,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonClear_Click() вызывается при нажатии на кнопку очистки
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonClear_Click(object sender, EventArgs e)
         {
             try
@@ -1380,6 +1462,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonNewClient_Click() вызывается при нажатии на кнопку "Создать запись" на вкладке "Клиенты"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonNewClient_Click(object sender, EventArgs e)
         {
             try
@@ -1394,6 +1481,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonNewPet_Click() вызывается при нажатии на кнопку "Создать запись" на вкладке "Питомцы"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonNewPet_Click(object sender, EventArgs e)
         {
             try
@@ -1408,6 +1500,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonNewVeterinarian_Click() вызывается при нажатии на кнопку "Создать запись" на вкладке "Ветеринары"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonNewVeterinarian_Click(object sender, EventArgs e)
         {
             try
@@ -1422,6 +1519,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonNewService_Click() вызывается при нажатии на кнопку "Создать запись" на вкладке "Услуги"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonNewService_Click(object sender, EventArgs e)
         {
             try
@@ -1436,6 +1538,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonNewInvoice_Click() вызывается при нажатии на кнопку "Создать запись" на вкладке "Чеки"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonNewInvoice_Click(object sender, EventArgs e)
         {
             try
@@ -1450,6 +1557,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonNewPayment_Click() вызывается при нажатии на кнопку "Создать запись" на вкладке "Оплаты"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonNewPayment_Click(object sender, EventArgs e)
         {
             try
@@ -1464,6 +1576,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonNewMedication_Click() вызывается при нажатии на кнопку "Создать запись" на вкладке "Лекарства"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonNewMedication_Click(object sender, EventArgs e)
         {
             try
@@ -1478,6 +1595,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonNewPrescription_Click() вызывается при нажатии на кнопку "Создать запись" на вкладке "Записи в книжке"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonNewPrescription_Click(object sender, EventArgs e)
         {
             try
@@ -1492,6 +1614,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonDeleteClient_Click() вызывается при нажатии на кнопку "Удалить" на вкладке "Клиенты"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonDeleteClient_Click(object sender, EventArgs e)
         {
             try
@@ -1505,6 +1632,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonDeletePet_Click() вызывается при нажатии на кнопку "Удалить" на вкладке "Питомцы"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonDeletePet_Click(object sender, EventArgs e)
         {
             try
@@ -1518,6 +1650,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonDeleteVeterinarian_Click() вызывается при нажатии на кнопку "Удалить" на вкладке "Ветеринары"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonDeleteVeterinarian_Click(object sender, EventArgs e)
         {
             try
@@ -1531,6 +1668,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonDeleteService_Click() вызывается при нажатии на кнопку "Удалить" на вкладке "Услуги"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonDeleteService_Click(object sender, EventArgs e)
         {
             try
@@ -1544,6 +1686,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonDeleteInvoice_Click() вызывается при нажатии на кнопку "Удалить" на вкладке "Чеки"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonDeleteInvoice_Click(object sender, EventArgs e)
         {
             try
@@ -1557,6 +1704,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonDeletePayment_Click() вызывается при нажатии на кнопку "Удалить" на вкладке "Оплаты"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonDeletePayment_Click(object sender, EventArgs e)
         {
             try
@@ -1570,6 +1722,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonDeleteMedication_Click() вызывается при нажатии на кнопку "Удалить" на вкладке "Лекарства"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonDeleteMedication_Click(object sender, EventArgs e)
         {
             try
@@ -1583,6 +1740,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonDeletePrescription_Click() вызывается при нажатии на кнопку "Удалить" на вкладке "Записи в книжке"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonDeletePrescription_Click(object sender, EventArgs e)
         {
             try
@@ -1596,6 +1758,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonChangeClient_Click() вызывается при нажатии на кнопку "Изменить" на вкладке "Клиенты"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonChangeClient_Click(object sender, EventArgs e)
         {
             try
@@ -1609,6 +1776,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonChangePet_Click() вызывается при нажатии на кнопку "Изменить" на вкладке "Питомцы"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonChangePet_Click(object sender, EventArgs e)
         {
             try
@@ -1622,6 +1794,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonChangeVeterinarian_Click() вызывается при нажатии на кнопку "Изменить" на вкладке "Ветеринары"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonChangeVeterinarian_Click(object sender, EventArgs e)
         {
             try
@@ -1635,6 +1812,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonChangeService_Click() вызывается при нажатии на кнопку "Изменить" на вкладке "Услуги"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonChangeService_Click(object sender, EventArgs e)
         {
             try
@@ -1648,6 +1830,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonChangeInvoice_Click() вызывается при нажатии на кнопку "Изменить" на вкладке "Чеки"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonChangeInvoice_Click(object sender, EventArgs e)
         {
             try
@@ -1661,6 +1848,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonChangePayment_Click() вызывается при нажатии на кнопку "Изменить" на вкладке "Оплаты"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonChangePayment_Click(object sender, EventArgs e)
         {
             try
@@ -1674,6 +1866,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonChangeMedication_Click() вызывается при нажатии на кнопку "Изменить" на вкладке "Лекарства"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonChangeMedication_Click(object sender, EventArgs e)
         {
             try
@@ -1687,6 +1884,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonChangePrescription_Click() вызывается при нажатии на кнопку "Изменить" на вкладке "Записи в книжке"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonChangePrescription_Click(object sender, EventArgs e)
         {
             try
@@ -1700,6 +1902,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonSaveClient_Click() вызывается при нажатии на кнопку "Сохранить" на вкладке "Клиенты"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonSaveClient_Click(object sender, EventArgs e)
         {
             try
@@ -1713,6 +1920,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonSavePet_Click() вызывается при нажатии на кнопку "Сохранить" на вкладке "Питомцы"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonSavePet_Click(object sender, EventArgs e)
         {
             try
@@ -1725,6 +1937,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonSaveVeterinarian_Click() вызывается при нажатии на кнопку "Сохранить" на вкладке "Ветеринары"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonSaveVeterinarian_Click(object sender, EventArgs e)
         {
             try
@@ -1744,6 +1961,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonSaveService_Click() вызывается при нажатии на кнопку "Сохранить" на вкладке "Услуги"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonSaveService_Click(object sender, EventArgs e)
         {
             try
@@ -1763,6 +1985,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonSaveInvoice_Click() вызывается при нажатии на кнопку "Сохранить" на вкладке "Чеки"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonSaveInvoice_Click(object sender, EventArgs e)
         {
             try
@@ -1775,6 +2002,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonSavePayment_Click() вызывается при нажатии на кнопку "Сохранить" на вкладке "Оплаты"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonSavePayment_Click(object sender, EventArgs e)
         {
             try
@@ -1787,6 +2019,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonSaveMedication_Click() вызывается при нажатии на кнопку "Сохранить" на вкладке "Лекарства"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonSaveMedication_Click(object sender, EventArgs e)
         {
             try
@@ -1799,6 +2036,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonSavePrescription_Click() вызывается при нажатии на кнопку "Сохранить" на вкладке "Записи в книжке"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonSavePrescription_Click(object sender, EventArgs e)
         {
             try
@@ -1811,6 +2053,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonWordClient_Click() вызывается при нажатии на кнопку "Вывод в Word" на вкладке "Клиенты"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonWordClient_Click(object sender, EventArgs e)
         {
             try
@@ -1823,6 +2070,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonWordPet_Click() вызывается при нажатии на кнопку "Вывод в Word" на вкладке "Питомцы"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonWordPet_Click(object sender, EventArgs e)
         {
             try
@@ -1835,6 +2087,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonWordVeterinarian_Click() вызывается при нажатии на кнопку "Вывод в Word" на вкладке "Ветеринары"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonWordVeterinarian_Click(object sender, EventArgs e)
         {
             try
@@ -1847,6 +2104,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonWordService_Click() вызывается при нажатии на кнопку "Вывод в Word" на вкладке "Услуги"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonWordService_Click(object sender, EventArgs e)
         {
             try
@@ -1859,6 +2121,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonWordInvoice_Click() вызывается при нажатии на кнопку "Вывод в Word" на вкладке "Чеки"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonWordInvoice_Click(object sender, EventArgs e)
         {
             try
@@ -1871,6 +2138,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonWordPayment_Click() вызывается при нажатии на кнопку "Вывод в Word" на вкладке "Оплаты"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonWordPayment_Click(object sender, EventArgs e)
         {
             try
@@ -1883,6 +2155,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonWordMedication_Click() вызывается при нажатии на кнопку "Вывод в Word" на вкладке "Лекарства"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonWordMedication_Click(object sender, EventArgs e)
         {
             try
@@ -1895,6 +2172,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonWordPrescription_Click() вызывается при нажатии на кнопку "Вывод в Word" на вкладке "Записи в книжке"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonWordPrescription_Click(object sender, EventArgs e)
         {
             try
@@ -1907,6 +2189,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonExcelClient_Click() вызывается при нажатии на кнопку "Вывод в Excel" на вкладке "Клиенты"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonExcelClient_Click(object sender, EventArgs e)
         {
             try
@@ -1919,6 +2206,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonExcelPet_Click() вызывается при нажатии на кнопку "Вывод в Excel" на вкладке "Питомцы"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonExcelPet_Click(object sender, EventArgs e)
         {
             try
@@ -1931,6 +2223,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonExcelVeterinarian_Click() вызывается при нажатии на кнопку "Вывод в Excel" на вкладке "Ветеринары"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonExcelVeterinarian_Click(object sender, EventArgs e)
         {
             try
@@ -1943,6 +2240,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonExcelService_Click() вызывается при нажатии на кнопку "Вывод в Excel" на вкладке "Услуги"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonExcelService_Click(object sender, EventArgs e)
         {
             try
@@ -1955,6 +2257,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonExcelInvoice_Click() вызывается при нажатии на кнопку "Вывод в Excel" на вкладке "Чеки"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonExcelInvoice_Click(object sender, EventArgs e)
         {
             try
@@ -1967,6 +2274,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonExcelPayment_Click() вызывается при нажатии на кнопку "Вывод в Excel" на вкладке "Оплаты"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonExcelPayment_Click(object sender, EventArgs e)
         {
             try
@@ -1979,6 +2291,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonExcelMedication_Click() вызывается при нажатии на кнопку "Вывод в Excel" на вкладке "Лекарства"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonExcelMedication_Click(object sender, EventArgs e)
         {
             try
@@ -1991,6 +2308,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonExcelPrescription_Click() вызывается при нажатии на кнопку "Вывод в Excel" на вкладке "Записи в книжке"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonExcelPrescription_Click(object sender, EventArgs e)
         {
             try
@@ -2003,6 +2325,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonTXTClient_Click() вызывается при нажатии на кнопку "Вывод в TXT" на вкладке "Клиенты"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonTXTClient_Click(object sender, EventArgs e)
         {
             try
@@ -2015,6 +2342,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonTXTPet_Click() вызывается при нажатии на кнопку "Вывод в TXT" на вкладке "Питомцы"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonTXTPet_Click(object sender, EventArgs e)
         {
             try
@@ -2027,6 +2359,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonTXTVeterinarian_Click() вызывается при нажатии на кнопку "Вывод в TXT" на вкладке "Ветеринары"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonTXTVeterinarian_Click(object sender, EventArgs e)
         {
             try
@@ -2039,6 +2376,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonTXTService_Click() вызывается при нажатии на кнопку "Вывод в TXT" на вкладке "Услуги"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonTXTService_Click(object sender, EventArgs e)
         {
             try
@@ -2051,6 +2393,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonTXTInvoice_Click() вызывается при нажатии на кнопку "Вывод в TXT" на вкладке "Чеки"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonTXTInvoice_Click(object sender, EventArgs e)
         {
             try
@@ -2063,6 +2410,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonTXTPayment_Click() вызывается при нажатии на кнопку "Вывод в TXT" на вкладке "Оплаты"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonTXTPayment_Click(object sender, EventArgs e)
         {
             try
@@ -2075,6 +2427,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonTXTMedication_Click() вызывается при нажатии на кнопку "Вывод в TXT" на вкладке "Лекарства"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonTXTMedication_Click(object sender, EventArgs e)
         {
             try
@@ -2087,6 +2444,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonTXTPrescription_Click() вызывается при нажатии на кнопку "Вывод в TXT" на вкладке "Записи в книжке"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonTXTPrescription_Click(object sender, EventArgs e)
         {
             try
@@ -2099,6 +2461,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// DataGridViewClients_CellClick() вызывается при нажатии на ячейку на вкладке "Клиенты"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DataGridViewClients_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -2115,6 +2482,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// DataGridViewPets_CellClick() вызывается при нажатии на ячейку на вкладке "Питомцы"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DataGridViewPets_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -2131,6 +2503,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// DataGridViewVeterinarians_CellClick() вызывается при нажатии на ячейку на вкладке "Ветеринары"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DataGridViewVeterinarians_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -2147,6 +2524,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// DataGridViewServices_CellClick() вызывается при нажатии на ячейку на вкладке "Услуги"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DataGridViewServices_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -2163,6 +2545,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// DataGridViewInvoices_CellClick() вызывается при нажатии на ячейку на вкладке "Чеки"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DataGridViewInvoices_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -2179,6 +2566,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// DataGridViewPayments_CellClick() вызывается при нажатии на ячейку на вкладке "Оплаты"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DataGridViewPayments_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -2195,6 +2587,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// DataGridViewMedications_CellClick() вызывается при нажатии на ячейку на вкладке "Лекарства"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DataGridViewMedications_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -2211,6 +2608,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// DataGridViewPrescriptions_CellClick() вызывается при нажатии на ячейку на вкладке "Записи в книжке"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DataGridViewPrescriptions_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -2227,6 +2629,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// TextBoxSearchClients_TextChanged() вызывается при изменении текста на вкладке "Клиенты"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TextBoxSearchClients_TextChanged(object sender, EventArgs e)
         {
             try
@@ -2239,6 +2646,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// TextBoxSearchPets_TextChanged() вызывается при изменении текста на вкладке "Питомцы"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TextBoxSearchPets_TextChanged(object sender, EventArgs e)
         {
             try
@@ -2251,6 +2663,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// TextBoxSearchVeterinarians_TextChanged() вызывается при изменении текста на вкладке "Ветеринары"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TextBoxSearchVeterinarians_TextChanged(object sender, EventArgs e)
         {
             try
@@ -2263,6 +2680,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// TextBoxSearchServices_TextChanged() вызывается при изменении текста на вкладке "Услуги"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TextBoxSearchServices_TextChanged(object sender, EventArgs e)
         {
             try
@@ -2275,6 +2697,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// TextBoxSearchInvoices_TextChanged() вызывается при изменении текста на вкладке "Чеки"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TextBoxSearchInvoices_TextChanged(object sender, EventArgs e)
         {
             try
@@ -2287,6 +2714,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// TextBoxSearchPayments_TextChanged() вызывается при изменении текста на вкладке "Оплаты"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TextBoxSearchPayments_TextChanged(object sender, EventArgs e)
         {
             try
@@ -2299,6 +2731,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// TextBoxSearchMedications_TextChanged() вызывается при изменении текста на вкладке "Лекарства"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TextBoxSearchMedications_TextChanged(object sender, EventArgs e)
         {
             try
@@ -2311,6 +2748,11 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// TextBoxSearchPrescriptions_TextChanged() вызывается при изменении текста на вкладке "Записи в книжке"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TextBoxSearchPrescriptions_TextChanged(object sender, EventArgs e)
         {
             try
@@ -2323,16 +2765,31 @@ namespace VetAutomate
             }
         }
 
+        /// <summary>
+        /// ButtonReportClients_Click() вызывается при нажатии на кнопку отчета на вкладке "Клиенты"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonReportClients_Click(object sender, EventArgs e)
         {
             Reports("Clients");
         }
 
+        /// <summary>
+        /// ButtonReportVeterinarians_Click() вызывается при нажатии на кнопку отчета на вкладке "Ветеринары"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonReportVeterinarians_Click(object sender, EventArgs e)
         {
             Reports("Veterinarians");
         }
 
+        /// <summary>
+        /// ButtonReportPayments_Click() вызывается при нажатии на кнопку отчета на вкладке "Оплаты"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ButtonReportPayments_Click(object sender, EventArgs e)
         {
             Reports("Payments");
