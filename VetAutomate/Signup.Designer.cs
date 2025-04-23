@@ -35,7 +35,6 @@
             labelRegister = new Label();
             labelPassword = new Label();
             labelLogin = new Label();
-            buttonClear = new Button();
             buttonShow = new Button();
             SuspendLayout();
             // 
@@ -108,19 +107,6 @@
             labelLogin.TabIndex = 6;
             labelLogin.Text = "Логин:";
             // 
-            // buttonClear
-            // 
-            buttonClear.BackColor = Color.Transparent;
-            buttonClear.BackgroundImage = (Image)resources.GetObject("buttonClear.BackgroundImage");
-            buttonClear.BackgroundImageLayout = ImageLayout.Stretch;
-            buttonClear.FlatStyle = FlatStyle.Flat;
-            buttonClear.Location = new Point(903, 12);
-            buttonClear.Name = "buttonClear";
-            buttonClear.Size = new Size(93, 93);
-            buttonClear.TabIndex = 3;
-            buttonClear.UseVisualStyleBackColor = false;
-            buttonClear.Click += ButtonClear_Click;
-            // 
             // buttonShow
             // 
             buttonShow.BackColor = Color.Transparent;
@@ -144,7 +130,6 @@
             Controls.Add(textBoxLogin);
             Controls.Add(textBoxPassword);
             Controls.Add(buttonEnter);
-            Controls.Add(buttonClear);
             Controls.Add(buttonShow);
             Controls.Add(labelRegister);
             Controls.Add(labelLogin);
@@ -166,7 +151,6 @@
         private Label labelRegister;
         private Label labelPassword;
         private Label labelLogin;
-        private Button buttonClear;
         private Button buttonShow;
     }
 }

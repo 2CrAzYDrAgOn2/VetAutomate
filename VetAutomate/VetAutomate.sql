@@ -22,7 +22,6 @@ CREATE TABLE Clients (
     Phone NVARCHAR(20),
     Email NVARCHAR(100),
     Address NVARCHAR(255),
-	INN NVARCHAR(10) DEFAULT '',
     RegistrationDate DATE DEFAULT GETDATE()
 );
 
@@ -111,9 +110,9 @@ INSERT INTO PaymentMethods (PaymentMethod) VALUES
 ('Наличными'),
 ('Картой');
 
-INSERT INTO Clients (FullName, Phone, Email, Address, INN) VALUES
-('Иванов Иван Иванович', '+7 900 123 4567', 'ivanov@mail.ru', 'г. Москва, ул. Ленина, 1', '1234567890'),
-('Петрова Ольга Васильевна', '+7 900 234 5678', 'petrova@mail.ru', 'г. Санкт-Петербург, ул. Пушкина, 2', '2345678901');
+INSERT INTO Clients (FullName, Phone, Email, Address) VALUES
+('Иванов Иван Иванович', '+7 900 123 4567', 'ivanov@mail.ru', 'г. Москва, ул. Ленина, 1'),
+('Петрова Ольга Васильевна', '+7 900 234 5678', 'petrova@mail.ru', 'г. Санкт-Петербург, ул. Пушкина, 2');
 
 INSERT INTO Pets (Name, Species, Breed, BirthDate, OwnerID) VALUES
 ('Барсик', 'Кошка', 'Мейн-кун', '1985-05-12', 1),

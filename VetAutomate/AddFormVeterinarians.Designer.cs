@@ -291,7 +291,6 @@
             comboBoxPost.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxPost.Font = new Font("Segoe UI", 14.25F);
             comboBoxPost.FormattingEnabled = true;
-            comboBoxPost.Items.AddRange(new object[] { "Ветеринар", "Ассистент ветеринара", "Менеджер по работе с клиентами", "Администратор" });
             comboBoxPost.Location = new Point(291, 681);
             comboBoxPost.Name = "comboBoxPost";
             comboBoxPost.Size = new Size(455, 33);
@@ -313,7 +312,6 @@
             comboBoxGender.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxGender.Font = new Font("Segoe UI", 14.25F);
             comboBoxGender.FormattingEnabled = true;
-            comboBoxGender.Items.AddRange(new object[] { "Мужской", "Женский" });
             comboBoxGender.Location = new Point(291, 719);
             comboBoxGender.Name = "comboBoxGender";
             comboBoxGender.Size = new Size(455, 33);

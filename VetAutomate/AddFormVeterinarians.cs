@@ -21,6 +21,25 @@ namespace VetAutomate
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
+            dataBase.OpenConnection();
+            comboBoxPost.Items.Clear();
+            var postsQuery = "SELECT Post FROM Posts ORDER BY Post";
+            var postsCommand = new SqlCommand(postsQuery, dataBase.GetConnection());
+            var postsReader = postsCommand.ExecuteReader();
+            while (postsReader.Read())
+            {
+                comboBoxPost.Items.Add(postsReader.GetString(0));
+            }
+            postsReader.Close();
+            comboBoxGender.Items.Clear();
+            var gendersQuery = "SELECT Gender FROM Genders ORDER BY Gender";
+            var gendersCommand = new SqlCommand(gendersQuery, dataBase.GetConnection());
+            var gendersReader = gendersCommand.ExecuteReader();
+            while (gendersReader.Read())
+            {
+                comboBoxGender.Items.Add(gendersReader.GetString(0));
+            }
+            gendersReader.Close();
         }
 
         /// <summary>

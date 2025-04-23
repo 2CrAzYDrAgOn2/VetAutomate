@@ -10,6 +10,16 @@ namespace VetAutomate
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
+            dataBase.OpenConnection();
+            comboBoxClientIDInvoices.Items.Clear();
+            var clientsQuery = "SELECT FullName FROM Clients ORDER BY FullName";
+            var clientsCommand = new SqlCommand(clientsQuery, dataBase.GetConnection());
+            var clientsReader = clientsCommand.ExecuteReader();
+            while (clientsReader.Read())
+            {
+                comboBoxClientIDInvoices.Items.Add(clientsReader.GetString(0));
+            }
+            clientsReader.Close();
         }
 
         /// <summary>
@@ -22,7 +32,7 @@ namespace VetAutomate
             try
             {
                 dataBase.OpenConnection();
-                var clientLogin = textBoxClientIDInvoices.Text;
+                var clientLogin = comboBoxClientIDInvoices.Text;
                 string queryClient = $"SELECT ClientID FROM Clients WHERE FullName = '{clientLogin}'";
                 SqlCommand commandClient = new(queryClient, dataBase.GetConnection());
                 dataBase.OpenConnection();

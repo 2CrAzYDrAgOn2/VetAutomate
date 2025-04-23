@@ -33,13 +33,13 @@
             label1 = new Label();
             buttonSave = new Button();
             labelClientIDInvoices = new Label();
-            textBoxClientIDInvoices = new TextBox();
             labelTotalAmount = new Label();
             textBoxTotalAmount = new TextBox();
             labelInvoiceDate = new Label();
             dateTimePickerInvoiceDate = new DateTimePicker();
             labelPaid = new Label();
             checkBoxPaid = new CheckBox();
+            comboBoxClientIDInvoices = new ComboBox();
             SuspendLayout();
             // 
             // labelTitle
@@ -92,15 +92,6 @@
             labelClientIDInvoices.Size = new Size(49, 15);
             labelClientIDInvoices.TabIndex = 16;
             labelClientIDInvoices.Text = "Клиент:";
-            // 
-            // textBoxClientIDInvoices
-            // 
-            textBoxClientIDInvoices.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            textBoxClientIDInvoices.Location = new Point(294, 461);
-            textBoxClientIDInvoices.Margin = new Padding(4, 3, 4, 3);
-            textBoxClientIDInvoices.Name = "textBoxClientIDInvoices";
-            textBoxClientIDInvoices.Size = new Size(455, 33);
-            textBoxClientIDInvoices.TabIndex = 12;
             // 
             // labelTotalAmount
             // 
@@ -163,6 +154,16 @@
             checkBoxPaid.Text = "Оплачен";
             checkBoxPaid.UseVisualStyleBackColor = true;
             // 
+            // comboBoxClientIDInvoices
+            // 
+            comboBoxClientIDInvoices.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxClientIDInvoices.Font = new Font("Segoe UI", 14.25F);
+            comboBoxClientIDInvoices.FormattingEnabled = true;
+            comboBoxClientIDInvoices.Location = new Point(294, 461);
+            comboBoxClientIDInvoices.Name = "comboBoxClientIDInvoices";
+            comboBoxClientIDInvoices.Size = new Size(455, 33);
+            comboBoxClientIDInvoices.TabIndex = 0;
+            // 
             // AddFormInvoices
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -172,7 +173,7 @@
             Controls.Add(labelTitle);
             Controls.Add(label1);
             Controls.Add(labelClientIDInvoices);
-            Controls.Add(textBoxClientIDInvoices);
+            Controls.Add(comboBoxClientIDInvoices);
             Controls.Add(labelTotalAmount);
             Controls.Add(textBoxTotalAmount);
             Controls.Add(labelInvoiceDate);
@@ -196,12 +197,12 @@
         private Label label1;
         private Button buttonSave;
         private Label labelClientIDInvoices;
-        private TextBox textBoxClientIDInvoices;
         private Label labelTotalAmount;
         private TextBox textBoxTotalAmount;
         private Label labelInvoiceDate;
         private DateTimePicker dateTimePickerInvoiceDate;
         private Label labelPaid;
         private CheckBox checkBoxPaid;
+        private ComboBox comboBoxClientIDInvoices;
     }
 }

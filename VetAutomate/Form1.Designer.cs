@@ -31,9 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             tabPageClients = new TabPage();
             panelTitleClients = new Panel();
-            buttonReportClients = new Button();
             labelTitleClients = new Label();
-            buttonClearClients = new Button();
             buttonRefreshClients = new Button();
             textBoxSearchClients = new TextBox();
             dataGridViewClients = new DataGridView();
@@ -49,8 +47,6 @@
             textBoxEmailClients = new TextBox();
             labelAddress = new Label();
             textBoxAddress = new TextBox();
-            labelINNClients = new Label();
-            textBoxINNClients = new TextBox();
             labelRegistrationDate = new Label();
             dateTimePickerRegistrationDate = new DateTimePicker();
             labelControlClients = new Label();
@@ -61,12 +57,10 @@
             buttonSaveClient = new Button();
             buttonWordClient = new Button();
             buttonExcelClient = new Button();
-            buttonTXTClient = new Button();
             tabControl1 = new TabControl();
             tabPagePets = new TabPage();
             panelTitlePets = new Panel();
             labelTitlePets = new Label();
-            buttonClearPets = new Button();
             buttonRefreshPets = new Button();
             textBoxSearchPets = new TextBox();
             dataGridViewPets = new DataGridView();
@@ -83,7 +77,7 @@
             labelBirthDatePets = new Label();
             dateTimePickerBirthDatePets = new DateTimePicker();
             labelOwnerID = new Label();
-            textBoxOwnerID = new TextBox();
+            comboBoxOwnerID = new ComboBox();
             labelControlPets = new Label();
             panelControlPets = new Panel();
             buttonNewPet = new Button();
@@ -92,12 +86,10 @@
             buttonSavePet = new Button();
             buttonWordPet = new Button();
             buttonExcelPet = new Button();
-            buttonTXTPet = new Button();
             tabPageVeterinars = new TabPage();
             panelTItleVeterinarians = new Panel();
             buttonReportVeterinarians = new Button();
             labelTitleVeterinarians = new Label();
-            buttonClearVeterinarians = new Button();
             buttonRefreshVeterinarians = new Button();
             textBoxSearchVeterinarians = new TextBox();
             dataGridViewVeterinarians = new DataGridView();
@@ -135,11 +127,9 @@
             buttonSaveVeterinarian = new Button();
             buttonWordVeterinarian = new Button();
             buttonExcelVeterinarian = new Button();
-            buttonTXTVeterinarian = new Button();
             tabPageServices = new TabPage();
             panelTitleServices = new Panel();
             labelTitleServices = new Label();
-            buttonClearServices = new Button();
             buttonRefreshServices = new Button();
             textBoxSearchServices = new TextBox();
             dataGridViewServices = new DataGridView();
@@ -159,11 +149,9 @@
             buttonSaveService = new Button();
             buttonWordService = new Button();
             buttonExcelService = new Button();
-            buttonTXTService = new Button();
             tabPageInvoices = new TabPage();
             panelTitleInvoices = new Panel();
             labelTitleInvoices = new Label();
-            buttonClearInvoices = new Button();
             buttonRefreshInvoices = new Button();
             textBoxSearchInvoices = new TextBox();
             dataGridViewInvoices = new DataGridView();
@@ -172,7 +160,7 @@
             labelInvoiceID = new Label();
             textBoxInvoiceID = new TextBox();
             labelClientIDInvoices = new Label();
-            textBoxClientIDInvoices = new TextBox();
+            comboBoxClientIDInvoices = new ComboBox();
             labelTotalAmount = new Label();
             textBoxTotalAmount = new TextBox();
             labelInvoiceDate = new Label();
@@ -187,12 +175,10 @@
             buttonSaveInvoice = new Button();
             buttonWordInvoice = new Button();
             buttonExcelInvoice = new Button();
-            buttonTXTInvoice = new Button();
             tabPagePayments = new TabPage();
             panelTitlePayments = new Panel();
             buttonReportPayments = new Button();
             labelTitlePayments = new Label();
-            buttonClearPayments = new Button();
             buttonRefreshPayments = new Button();
             textBoxSearchPayments = new TextBox();
             dataGridViewPayments = new DataGridView();
@@ -201,7 +187,7 @@
             labelPaymentID = new Label();
             textBoxPaymentID = new TextBox();
             labelInvoiceIDPayments = new Label();
-            textBoxInvoiceIDPayments = new TextBox();
+            comboBoxInvoiceIDPayments = new ComboBox();
             labelAmount = new Label();
             textBoxAmount = new TextBox();
             labelPaymentDate = new Label();
@@ -216,11 +202,9 @@
             buttonSavePayment = new Button();
             buttonWordPayment = new Button();
             buttonExcelPayment = new Button();
-            buttonTXTPayment = new Button();
             tabPageMedications = new TabPage();
             panelTitleMedications = new Panel();
             labelTitleMedications = new Label();
-            buttonClearMedications = new Button();
             buttonRefreshMedications = new Button();
             textBoxSearchMedications = new TextBox();
             dataGridViewMedications = new DataGridView();
@@ -242,11 +226,9 @@
             buttonSaveMedication = new Button();
             buttonWordMedication = new Button();
             buttonExcelMedication = new Button();
-            buttonTXTMedication = new Button();
             tabPagePrescriptions = new TabPage();
             panelTitlePrescriptions = new Panel();
             labelTitlePrescriptions = new Label();
-            buttonClearPrescriptions = new Button();
             buttonRefreshPrescriptions = new Button();
             textBoxSearchPrescriptions = new TextBox();
             dataGridViewPrescriptions = new DataGridView();
@@ -255,11 +237,11 @@
             labelPrescriptionID = new Label();
             textBoxPrescriptionID = new TextBox();
             labelPetIDPrescriptions = new Label();
-            textBoxPetIDPrescriptions = new TextBox();
+            comboBoxPetIDPrescriptions = new ComboBox();
             labelVetIDPrescriptions = new Label();
-            textBoxVetIDPrescriptions = new TextBox();
+            comboBoxVetIDPrescriptions = new ComboBox();
             labelMedicationIDPrescriptions = new Label();
-            textBoxMedicationIDPrescriptions = new TextBox();
+            comboBoxMedicationIDPrescriptions = new ComboBox();
             labelDosage = new Label();
             textBoxDosage = new TextBox();
             labelInstructions = new Label();
@@ -272,7 +254,6 @@
             buttonSavePrescription = new Button();
             buttonWordPrescription = new Button();
             buttonExcelPrescription = new Button();
-            buttonTXTPrescription = new Button();
             tabPageClients.SuspendLayout();
             panelTitleClients.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewClients).BeginInit();
@@ -335,9 +316,7 @@
             // 
             // panelTitleClients
             // 
-            panelTitleClients.Controls.Add(buttonReportClients);
             panelTitleClients.Controls.Add(labelTitleClients);
-            panelTitleClients.Controls.Add(buttonClearClients);
             panelTitleClients.Controls.Add(buttonRefreshClients);
             panelTitleClients.Controls.Add(textBoxSearchClients);
             panelTitleClients.Location = new Point(0, 0);
@@ -345,20 +324,6 @@
             panelTitleClients.Name = "panelTitleClients";
             panelTitleClients.Size = new Size(876, 84);
             panelTitleClients.TabIndex = 3;
-            // 
-            // buttonReportClients
-            // 
-            buttonReportClients.BackgroundImage = (Image)resources.GetObject("buttonReportClients.BackgroundImage");
-            buttonReportClients.BackgroundImageLayout = ImageLayout.Stretch;
-            buttonReportClients.FlatStyle = FlatStyle.Flat;
-            buttonReportClients.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonReportClients.Location = new Point(442, 3);
-            buttonReportClients.Margin = new Padding(4, 3, 4, 3);
-            buttonReportClients.Name = "buttonReportClients";
-            buttonReportClients.Size = new Size(78, 77);
-            buttonReportClients.TabIndex = 5;
-            buttonReportClients.UseVisualStyleBackColor = true;
-            buttonReportClients.Click += ButtonReportClients_Click;
             // 
             // labelTitleClients
             // 
@@ -371,20 +336,6 @@
             labelTitleClients.Size = new Size(216, 65);
             labelTitleClients.TabIndex = 4;
             labelTitleClients.Text = "Клиенты";
-            // 
-            // buttonClearClients
-            // 
-            buttonClearClients.BackgroundImage = (Image)resources.GetObject("buttonClearClients.BackgroundImage");
-            buttonClearClients.BackgroundImageLayout = ImageLayout.Stretch;
-            buttonClearClients.FlatStyle = FlatStyle.Flat;
-            buttonClearClients.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonClearClients.Location = new Point(528, 3);
-            buttonClearClients.Margin = new Padding(4, 3, 4, 3);
-            buttonClearClients.Name = "buttonClearClients";
-            buttonClearClients.Size = new Size(78, 77);
-            buttonClearClients.TabIndex = 0;
-            buttonClearClients.UseVisualStyleBackColor = true;
-            buttonClearClients.Click += ButtonClear_Click;
             // 
             // buttonRefreshClients
             // 
@@ -437,8 +388,6 @@
             panelRecordClients.Controls.Add(textBoxEmailClients);
             panelRecordClients.Controls.Add(labelAddress);
             panelRecordClients.Controls.Add(textBoxAddress);
-            panelRecordClients.Controls.Add(labelINNClients);
-            panelRecordClients.Controls.Add(textBoxINNClients);
             panelRecordClients.Controls.Add(labelRegistrationDate);
             panelRecordClients.Controls.Add(dateTimePickerRegistrationDate);
             panelRecordClients.Location = new Point(9, 450);
@@ -560,31 +509,11 @@
             textBoxAddress.Size = new Size(455, 33);
             textBoxAddress.TabIndex = 4;
             // 
-            // labelINNClients
-            // 
-            labelINNClients.AutoSize = true;
-            labelINNClients.ForeColor = Color.Black;
-            labelINNClients.Location = new Point(106, 303);
-            labelINNClients.Margin = new Padding(4, 0, 4, 0);
-            labelINNClients.Name = "labelINNClients";
-            labelINNClients.Size = new Size(37, 15);
-            labelINNClients.TabIndex = 13;
-            labelINNClients.Text = "ИНН:";
-            // 
-            // textBoxINNClients
-            // 
-            textBoxINNClients.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            textBoxINNClients.Location = new Point(152, 293);
-            textBoxINNClients.Margin = new Padding(4, 3, 4, 3);
-            textBoxINNClients.Name = "textBoxINNClients";
-            textBoxINNClients.Size = new Size(455, 33);
-            textBoxINNClients.TabIndex = 5;
-            // 
             // labelRegistrationDate
             // 
             labelRegistrationDate.AutoSize = true;
             labelRegistrationDate.ForeColor = Color.Black;
-            labelRegistrationDate.Location = new Point(35, 352);
+            labelRegistrationDate.Location = new Point(35, 301);
             labelRegistrationDate.Margin = new Padding(4, 0, 4, 0);
             labelRegistrationDate.Name = "labelRegistrationDate";
             labelRegistrationDate.Size = new Size(108, 15);
@@ -594,7 +523,7 @@
             // dateTimePickerRegistrationDate
             // 
             dateTimePickerRegistrationDate.Font = new Font("Segoe UI", 14.25F);
-            dateTimePickerRegistrationDate.Location = new Point(153, 338);
+            dateTimePickerRegistrationDate.Location = new Point(153, 287);
             dateTimePickerRegistrationDate.Name = "dateTimePickerRegistrationDate";
             dateTimePickerRegistrationDate.Size = new Size(455, 33);
             dateTimePickerRegistrationDate.TabIndex = 6;
@@ -619,11 +548,10 @@
             panelControlClients.Controls.Add(buttonSaveClient);
             panelControlClients.Controls.Add(buttonWordClient);
             panelControlClients.Controls.Add(buttonExcelClient);
-            panelControlClients.Controls.Add(buttonTXTClient);
             panelControlClients.Location = new Point(634, 482);
             panelControlClients.Margin = new Padding(4, 3, 4, 3);
             panelControlClients.Name = "panelControlClients";
-            panelControlClients.Size = new Size(243, 520);
+            panelControlClients.Size = new Size(243, 445);
             panelControlClients.TabIndex = 2;
             // 
             // buttonNewClient
@@ -704,19 +632,6 @@
             buttonExcelClient.UseVisualStyleBackColor = true;
             buttonExcelClient.Click += ButtonExcelClient_Click;
             // 
-            // buttonTXTClient
-            // 
-            buttonTXTClient.FlatStyle = FlatStyle.Flat;
-            buttonTXTClient.ForeColor = Color.Black;
-            buttonTXTClient.Location = new Point(4, 449);
-            buttonTXTClient.Margin = new Padding(4, 3, 4, 3);
-            buttonTXTClient.Name = "buttonTXTClient";
-            buttonTXTClient.Size = new Size(236, 67);
-            buttonTXTClient.TabIndex = 6;
-            buttonTXTClient.Text = "Вывод в TXT";
-            buttonTXTClient.UseVisualStyleBackColor = true;
-            buttonTXTClient.Click += ButtonTXTClient_Click;
-            // 
             // tabControl1
             // 
             tabControl1.Controls.Add(tabPageClients);
@@ -754,7 +669,6 @@
             // panelTitlePets
             // 
             panelTitlePets.Controls.Add(labelTitlePets);
-            panelTitlePets.Controls.Add(buttonClearPets);
             panelTitlePets.Controls.Add(buttonRefreshPets);
             panelTitlePets.Controls.Add(textBoxSearchPets);
             panelTitlePets.Location = new Point(0, 0);
@@ -774,20 +688,6 @@
             labelTitlePets.Size = new Size(235, 65);
             labelTitlePets.TabIndex = 4;
             labelTitlePets.Text = "Питомцы";
-            // 
-            // buttonClearPets
-            // 
-            buttonClearPets.BackgroundImage = (Image)resources.GetObject("buttonClearPets.BackgroundImage");
-            buttonClearPets.BackgroundImageLayout = ImageLayout.Stretch;
-            buttonClearPets.FlatStyle = FlatStyle.Flat;
-            buttonClearPets.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonClearPets.Location = new Point(528, 3);
-            buttonClearPets.Margin = new Padding(4, 3, 4, 3);
-            buttonClearPets.Name = "buttonClearPets";
-            buttonClearPets.Size = new Size(78, 77);
-            buttonClearPets.TabIndex = 0;
-            buttonClearPets.UseVisualStyleBackColor = true;
-            buttonClearPets.Click += ButtonClear_Click;
             // 
             // buttonRefreshPets
             // 
@@ -841,7 +741,7 @@
             panelRecordPets.Controls.Add(labelBirthDatePets);
             panelRecordPets.Controls.Add(dateTimePickerBirthDatePets);
             panelRecordPets.Controls.Add(labelOwnerID);
-            panelRecordPets.Controls.Add(textBoxOwnerID);
+            panelRecordPets.Controls.Add(comboBoxOwnerID);
             panelRecordPets.Location = new Point(9, 450);
             panelRecordPets.Margin = new Padding(4, 3, 4, 3);
             panelRecordPets.Name = "panelRecordPets";
@@ -970,14 +870,15 @@
             labelOwnerID.TabIndex = 12;
             labelOwnerID.Text = "Владелец:";
             // 
-            // textBoxOwnerID
+            // comboBoxOwnerID
             // 
-            textBoxOwnerID.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            textBoxOwnerID.Location = new Point(153, 294);
-            textBoxOwnerID.Margin = new Padding(4, 3, 4, 3);
-            textBoxOwnerID.Name = "textBoxOwnerID";
-            textBoxOwnerID.Size = new Size(455, 33);
-            textBoxOwnerID.TabIndex = 5;
+            comboBoxOwnerID.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxOwnerID.Font = new Font("Segoe UI", 14.25F);
+            comboBoxOwnerID.FormattingEnabled = true;
+            comboBoxOwnerID.Location = new Point(153, 293);
+            comboBoxOwnerID.Name = "comboBoxOwnerID";
+            comboBoxOwnerID.Size = new Size(455, 33);
+            comboBoxOwnerID.TabIndex = 5;
             // 
             // labelControlPets
             // 
@@ -1000,11 +901,10 @@
             panelControlPets.Controls.Add(buttonSavePet);
             panelControlPets.Controls.Add(buttonWordPet);
             panelControlPets.Controls.Add(buttonExcelPet);
-            panelControlPets.Controls.Add(buttonTXTPet);
             panelControlPets.Location = new Point(634, 482);
             panelControlPets.Margin = new Padding(4, 3, 4, 3);
             panelControlPets.Name = "panelControlPets";
-            panelControlPets.Size = new Size(243, 520);
+            panelControlPets.Size = new Size(243, 445);
             panelControlPets.TabIndex = 2;
             // 
             // buttonNewPet
@@ -1085,19 +985,6 @@
             buttonExcelPet.UseVisualStyleBackColor = true;
             buttonExcelPet.Click += ButtonExcelPet_Click;
             // 
-            // buttonTXTPet
-            // 
-            buttonTXTPet.FlatStyle = FlatStyle.Flat;
-            buttonTXTPet.ForeColor = Color.Black;
-            buttonTXTPet.Location = new Point(4, 449);
-            buttonTXTPet.Margin = new Padding(4, 3, 4, 3);
-            buttonTXTPet.Name = "buttonTXTPet";
-            buttonTXTPet.Size = new Size(236, 67);
-            buttonTXTPet.TabIndex = 6;
-            buttonTXTPet.Text = "Вывод в TXT";
-            buttonTXTPet.UseVisualStyleBackColor = true;
-            buttonTXTPet.Click += ButtonTXTPet_Click;
-            // 
             // tabPageVeterinars
             // 
             tabPageVeterinars.BackgroundImage = (Image)resources.GetObject("tabPageVeterinars.BackgroundImage");
@@ -1119,7 +1006,6 @@
             // 
             panelTItleVeterinarians.Controls.Add(buttonReportVeterinarians);
             panelTItleVeterinarians.Controls.Add(labelTitleVeterinarians);
-            panelTItleVeterinarians.Controls.Add(buttonClearVeterinarians);
             panelTItleVeterinarians.Controls.Add(buttonRefreshVeterinarians);
             panelTItleVeterinarians.Controls.Add(textBoxSearchVeterinarians);
             panelTItleVeterinarians.Location = new Point(0, 0);
@@ -1134,7 +1020,7 @@
             buttonReportVeterinarians.BackgroundImageLayout = ImageLayout.Stretch;
             buttonReportVeterinarians.FlatStyle = FlatStyle.Flat;
             buttonReportVeterinarians.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonReportVeterinarians.Location = new Point(442, 3);
+            buttonReportVeterinarians.Location = new Point(528, 3);
             buttonReportVeterinarians.Margin = new Padding(4, 3, 4, 3);
             buttonReportVeterinarians.Name = "buttonReportVeterinarians";
             buttonReportVeterinarians.Size = new Size(78, 77);
@@ -1153,20 +1039,6 @@
             labelTitleVeterinarians.Size = new Size(296, 65);
             labelTitleVeterinarians.TabIndex = 4;
             labelTitleVeterinarians.Text = "Ветеринары";
-            // 
-            // buttonClearVeterinarians
-            // 
-            buttonClearVeterinarians.BackgroundImage = (Image)resources.GetObject("buttonClearVeterinarians.BackgroundImage");
-            buttonClearVeterinarians.BackgroundImageLayout = ImageLayout.Stretch;
-            buttonClearVeterinarians.FlatStyle = FlatStyle.Flat;
-            buttonClearVeterinarians.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonClearVeterinarians.Location = new Point(528, 3);
-            buttonClearVeterinarians.Margin = new Padding(4, 3, 4, 3);
-            buttonClearVeterinarians.Name = "buttonClearVeterinarians";
-            buttonClearVeterinarians.Size = new Size(78, 77);
-            buttonClearVeterinarians.TabIndex = 0;
-            buttonClearVeterinarians.UseVisualStyleBackColor = true;
-            buttonClearVeterinarians.Click += ButtonClear_Click;
             // 
             // buttonRefreshVeterinarians
             // 
@@ -1466,7 +1338,6 @@
             comboBoxPost.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxPost.Font = new Font("Segoe UI", 14.25F);
             comboBoxPost.FormattingEnabled = true;
-            comboBoxPost.Items.AddRange(new object[] { "Ветеринар", "Ассистент ветеринара", "Менеджер по работе с клиентами", "Администратор" });
             comboBoxPost.Location = new Point(152, 458);
             comboBoxPost.Name = "comboBoxPost";
             comboBoxPost.Size = new Size(455, 33);
@@ -1488,7 +1359,6 @@
             comboBoxGender.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxGender.Font = new Font("Segoe UI", 14.25F);
             comboBoxGender.FormattingEnabled = true;
-            comboBoxGender.Items.AddRange(new object[] { "Мужской", "Женский" });
             comboBoxGender.Location = new Point(152, 496);
             comboBoxGender.Name = "comboBoxGender";
             comboBoxGender.Size = new Size(455, 33);
@@ -1515,11 +1385,10 @@
             panelControlVeterinarians.Controls.Add(buttonSaveVeterinarian);
             panelControlVeterinarians.Controls.Add(buttonWordVeterinarian);
             panelControlVeterinarians.Controls.Add(buttonExcelVeterinarian);
-            panelControlVeterinarians.Controls.Add(buttonTXTVeterinarian);
             panelControlVeterinarians.Location = new Point(634, 482);
             panelControlVeterinarians.Margin = new Padding(4, 3, 4, 3);
             panelControlVeterinarians.Name = "panelControlVeterinarians";
-            panelControlVeterinarians.Size = new Size(243, 520);
+            panelControlVeterinarians.Size = new Size(243, 452);
             panelControlVeterinarians.TabIndex = 2;
             // 
             // buttonNewVeterinarian
@@ -1600,19 +1469,6 @@
             buttonExcelVeterinarian.UseVisualStyleBackColor = true;
             buttonExcelVeterinarian.Click += ButtonExcelVeterinarian_Click;
             // 
-            // buttonTXTVeterinarian
-            // 
-            buttonTXTVeterinarian.FlatStyle = FlatStyle.Flat;
-            buttonTXTVeterinarian.ForeColor = Color.Black;
-            buttonTXTVeterinarian.Location = new Point(4, 449);
-            buttonTXTVeterinarian.Margin = new Padding(4, 3, 4, 3);
-            buttonTXTVeterinarian.Name = "buttonTXTVeterinarian";
-            buttonTXTVeterinarian.Size = new Size(236, 67);
-            buttonTXTVeterinarian.TabIndex = 6;
-            buttonTXTVeterinarian.Text = "Вывод в TXT";
-            buttonTXTVeterinarian.UseVisualStyleBackColor = true;
-            buttonTXTVeterinarian.Click += ButtonTXTVeterinarian_Click;
-            // 
             // tabPageServices
             // 
             tabPageServices.BackgroundImage = (Image)resources.GetObject("tabPageServices.BackgroundImage");
@@ -1633,7 +1489,6 @@
             // panelTitleServices
             // 
             panelTitleServices.Controls.Add(labelTitleServices);
-            panelTitleServices.Controls.Add(buttonClearServices);
             panelTitleServices.Controls.Add(buttonRefreshServices);
             panelTitleServices.Controls.Add(textBoxSearchServices);
             panelTitleServices.Location = new Point(0, 0);
@@ -1653,20 +1508,6 @@
             labelTitleServices.Size = new Size(171, 65);
             labelTitleServices.TabIndex = 4;
             labelTitleServices.Text = "Услуги";
-            // 
-            // buttonClearServices
-            // 
-            buttonClearServices.BackgroundImage = (Image)resources.GetObject("buttonClearServices.BackgroundImage");
-            buttonClearServices.BackgroundImageLayout = ImageLayout.Stretch;
-            buttonClearServices.FlatStyle = FlatStyle.Flat;
-            buttonClearServices.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonClearServices.Location = new Point(528, 3);
-            buttonClearServices.Margin = new Padding(4, 3, 4, 3);
-            buttonClearServices.Name = "buttonClearServices";
-            buttonClearServices.Size = new Size(78, 77);
-            buttonClearServices.TabIndex = 0;
-            buttonClearServices.UseVisualStyleBackColor = true;
-            buttonClearServices.Click += ButtonClear_Click;
             // 
             // buttonRefreshServices
             // 
@@ -1814,11 +1655,10 @@
             panelControlServices.Controls.Add(buttonSaveService);
             panelControlServices.Controls.Add(buttonWordService);
             panelControlServices.Controls.Add(buttonExcelService);
-            panelControlServices.Controls.Add(buttonTXTService);
             panelControlServices.Location = new Point(634, 482);
             panelControlServices.Margin = new Padding(4, 3, 4, 3);
             panelControlServices.Name = "panelControlServices";
-            panelControlServices.Size = new Size(243, 520);
+            panelControlServices.Size = new Size(243, 444);
             panelControlServices.TabIndex = 2;
             // 
             // buttonNewService
@@ -1899,19 +1739,6 @@
             buttonExcelService.UseVisualStyleBackColor = true;
             buttonExcelService.Click += ButtonExcelService_Click;
             // 
-            // buttonTXTService
-            // 
-            buttonTXTService.FlatStyle = FlatStyle.Flat;
-            buttonTXTService.ForeColor = Color.Black;
-            buttonTXTService.Location = new Point(4, 449);
-            buttonTXTService.Margin = new Padding(4, 3, 4, 3);
-            buttonTXTService.Name = "buttonTXTService";
-            buttonTXTService.Size = new Size(236, 67);
-            buttonTXTService.TabIndex = 6;
-            buttonTXTService.Text = "Вывод в TXT";
-            buttonTXTService.UseVisualStyleBackColor = true;
-            buttonTXTService.Click += ButtonTXTService_Click;
-            // 
             // tabPageInvoices
             // 
             tabPageInvoices.BackgroundImage = (Image)resources.GetObject("tabPageInvoices.BackgroundImage");
@@ -1932,7 +1759,6 @@
             // panelTitleInvoices
             // 
             panelTitleInvoices.Controls.Add(labelTitleInvoices);
-            panelTitleInvoices.Controls.Add(buttonClearInvoices);
             panelTitleInvoices.Controls.Add(buttonRefreshInvoices);
             panelTitleInvoices.Controls.Add(textBoxSearchInvoices);
             panelTitleInvoices.Location = new Point(0, 0);
@@ -1952,20 +1778,6 @@
             labelTitleInvoices.Size = new Size(137, 65);
             labelTitleInvoices.TabIndex = 4;
             labelTitleInvoices.Text = "Чеки";
-            // 
-            // buttonClearInvoices
-            // 
-            buttonClearInvoices.BackgroundImage = (Image)resources.GetObject("buttonClearInvoices.BackgroundImage");
-            buttonClearInvoices.BackgroundImageLayout = ImageLayout.Stretch;
-            buttonClearInvoices.FlatStyle = FlatStyle.Flat;
-            buttonClearInvoices.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonClearInvoices.Location = new Point(528, 3);
-            buttonClearInvoices.Margin = new Padding(4, 3, 4, 3);
-            buttonClearInvoices.Name = "buttonClearInvoices";
-            buttonClearInvoices.Size = new Size(78, 77);
-            buttonClearInvoices.TabIndex = 0;
-            buttonClearInvoices.UseVisualStyleBackColor = true;
-            buttonClearInvoices.Click += ButtonClear_Click;
             // 
             // buttonRefreshInvoices
             // 
@@ -2011,7 +1823,7 @@
             panelRecordInvoices.Controls.Add(labelInvoiceID);
             panelRecordInvoices.Controls.Add(textBoxInvoiceID);
             panelRecordInvoices.Controls.Add(labelClientIDInvoices);
-            panelRecordInvoices.Controls.Add(textBoxClientIDInvoices);
+            panelRecordInvoices.Controls.Add(comboBoxClientIDInvoices);
             panelRecordInvoices.Controls.Add(labelTotalAmount);
             panelRecordInvoices.Controls.Add(textBoxTotalAmount);
             panelRecordInvoices.Controls.Add(labelInvoiceDate);
@@ -2067,14 +1879,15 @@
             labelClientIDInvoices.TabIndex = 7;
             labelClientIDInvoices.Text = "Клиент:";
             // 
-            // textBoxClientIDInvoices
+            // comboBoxClientIDInvoices
             // 
-            textBoxClientIDInvoices.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            textBoxClientIDInvoices.Location = new Point(152, 113);
-            textBoxClientIDInvoices.Margin = new Padding(4, 3, 4, 3);
-            textBoxClientIDInvoices.Name = "textBoxClientIDInvoices";
-            textBoxClientIDInvoices.Size = new Size(455, 33);
-            textBoxClientIDInvoices.TabIndex = 1;
+            comboBoxClientIDInvoices.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxClientIDInvoices.Font = new Font("Segoe UI", 14.25F);
+            comboBoxClientIDInvoices.FormattingEnabled = true;
+            comboBoxClientIDInvoices.Location = new Point(152, 113);
+            comboBoxClientIDInvoices.Name = "comboBoxClientIDInvoices";
+            comboBoxClientIDInvoices.Size = new Size(455, 33);
+            comboBoxClientIDInvoices.TabIndex = 1;
             // 
             // labelTotalAmount
             // 
@@ -2158,11 +1971,10 @@
             panelControlInvoices.Controls.Add(buttonSaveInvoice);
             panelControlInvoices.Controls.Add(buttonWordInvoice);
             panelControlInvoices.Controls.Add(buttonExcelInvoice);
-            panelControlInvoices.Controls.Add(buttonTXTInvoice);
             panelControlInvoices.Location = new Point(634, 482);
             panelControlInvoices.Margin = new Padding(4, 3, 4, 3);
             panelControlInvoices.Name = "panelControlInvoices";
-            panelControlInvoices.Size = new Size(243, 520);
+            panelControlInvoices.Size = new Size(243, 445);
             panelControlInvoices.TabIndex = 2;
             // 
             // buttonNewInvoice
@@ -2243,19 +2055,6 @@
             buttonExcelInvoice.UseVisualStyleBackColor = true;
             buttonExcelInvoice.Click += ButtonExcelInvoice_Click;
             // 
-            // buttonTXTInvoice
-            // 
-            buttonTXTInvoice.FlatStyle = FlatStyle.Flat;
-            buttonTXTInvoice.ForeColor = Color.Black;
-            buttonTXTInvoice.Location = new Point(4, 449);
-            buttonTXTInvoice.Margin = new Padding(4, 3, 4, 3);
-            buttonTXTInvoice.Name = "buttonTXTInvoice";
-            buttonTXTInvoice.Size = new Size(236, 67);
-            buttonTXTInvoice.TabIndex = 6;
-            buttonTXTInvoice.Text = "Вывод в TXT";
-            buttonTXTInvoice.UseVisualStyleBackColor = true;
-            buttonTXTInvoice.Click += ButtonTXTInvoice_Click;
-            // 
             // tabPagePayments
             // 
             tabPagePayments.BackgroundImage = (Image)resources.GetObject("tabPagePayments.BackgroundImage");
@@ -2277,7 +2076,6 @@
             // 
             panelTitlePayments.Controls.Add(buttonReportPayments);
             panelTitlePayments.Controls.Add(labelTitlePayments);
-            panelTitlePayments.Controls.Add(buttonClearPayments);
             panelTitlePayments.Controls.Add(buttonRefreshPayments);
             panelTitlePayments.Controls.Add(textBoxSearchPayments);
             panelTitlePayments.Location = new Point(0, 0);
@@ -2292,7 +2090,7 @@
             buttonReportPayments.BackgroundImageLayout = ImageLayout.Stretch;
             buttonReportPayments.FlatStyle = FlatStyle.Flat;
             buttonReportPayments.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonReportPayments.Location = new Point(442, 3);
+            buttonReportPayments.Location = new Point(528, 3);
             buttonReportPayments.Margin = new Padding(4, 3, 4, 3);
             buttonReportPayments.Name = "buttonReportPayments";
             buttonReportPayments.Size = new Size(78, 77);
@@ -2311,20 +2109,6 @@
             labelTitlePayments.Size = new Size(195, 65);
             labelTitlePayments.TabIndex = 4;
             labelTitlePayments.Text = "Оплаты";
-            // 
-            // buttonClearPayments
-            // 
-            buttonClearPayments.BackgroundImage = (Image)resources.GetObject("buttonClearPayments.BackgroundImage");
-            buttonClearPayments.BackgroundImageLayout = ImageLayout.Stretch;
-            buttonClearPayments.FlatStyle = FlatStyle.Flat;
-            buttonClearPayments.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonClearPayments.Location = new Point(528, 3);
-            buttonClearPayments.Margin = new Padding(4, 3, 4, 3);
-            buttonClearPayments.Name = "buttonClearPayments";
-            buttonClearPayments.Size = new Size(78, 77);
-            buttonClearPayments.TabIndex = 0;
-            buttonClearPayments.UseVisualStyleBackColor = true;
-            buttonClearPayments.Click += ButtonClear_Click;
             // 
             // buttonRefreshPayments
             // 
@@ -2370,7 +2154,7 @@
             panelRecordPayments.Controls.Add(labelPaymentID);
             panelRecordPayments.Controls.Add(textBoxPaymentID);
             panelRecordPayments.Controls.Add(labelInvoiceIDPayments);
-            panelRecordPayments.Controls.Add(textBoxInvoiceIDPayments);
+            panelRecordPayments.Controls.Add(comboBoxInvoiceIDPayments);
             panelRecordPayments.Controls.Add(labelAmount);
             panelRecordPayments.Controls.Add(textBoxAmount);
             panelRecordPayments.Controls.Add(labelPaymentDate);
@@ -2426,14 +2210,15 @@
             labelInvoiceIDPayments.TabIndex = 7;
             labelInvoiceIDPayments.Text = "Номер чека:";
             // 
-            // textBoxInvoiceIDPayments
+            // comboBoxInvoiceIDPayments
             // 
-            textBoxInvoiceIDPayments.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            textBoxInvoiceIDPayments.Location = new Point(152, 113);
-            textBoxInvoiceIDPayments.Margin = new Padding(4, 3, 4, 3);
-            textBoxInvoiceIDPayments.Name = "textBoxInvoiceIDPayments";
-            textBoxInvoiceIDPayments.Size = new Size(455, 33);
-            textBoxInvoiceIDPayments.TabIndex = 1;
+            comboBoxInvoiceIDPayments.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxInvoiceIDPayments.Font = new Font("Segoe UI", 14.25F);
+            comboBoxInvoiceIDPayments.FormattingEnabled = true;
+            comboBoxInvoiceIDPayments.Location = new Point(152, 113);
+            comboBoxInvoiceIDPayments.Name = "comboBoxInvoiceIDPayments";
+            comboBoxInvoiceIDPayments.Size = new Size(455, 33);
+            comboBoxInvoiceIDPayments.TabIndex = 1;
             // 
             // labelAmount
             // 
@@ -2490,7 +2275,6 @@
             comboBoxPaymentMethod.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxPaymentMethod.Font = new Font("Segoe UI", 14.25F);
             comboBoxPaymentMethod.FormattingEnabled = true;
-            comboBoxPaymentMethod.Items.AddRange(new object[] { "Наличными", "Картой" });
             comboBoxPaymentMethod.Location = new Point(152, 248);
             comboBoxPaymentMethod.Name = "comboBoxPaymentMethod";
             comboBoxPaymentMethod.Size = new Size(455, 33);
@@ -2517,11 +2301,10 @@
             panelControlPayments.Controls.Add(buttonSavePayment);
             panelControlPayments.Controls.Add(buttonWordPayment);
             panelControlPayments.Controls.Add(buttonExcelPayment);
-            panelControlPayments.Controls.Add(buttonTXTPayment);
             panelControlPayments.Location = new Point(634, 482);
             panelControlPayments.Margin = new Padding(4, 3, 4, 3);
             panelControlPayments.Name = "panelControlPayments";
-            panelControlPayments.Size = new Size(243, 520);
+            panelControlPayments.Size = new Size(243, 445);
             panelControlPayments.TabIndex = 2;
             // 
             // buttonNewPayment
@@ -2602,19 +2385,6 @@
             buttonExcelPayment.UseVisualStyleBackColor = true;
             buttonExcelPayment.Click += ButtonExcelPayment_Click;
             // 
-            // buttonTXTPayment
-            // 
-            buttonTXTPayment.FlatStyle = FlatStyle.Flat;
-            buttonTXTPayment.ForeColor = Color.Black;
-            buttonTXTPayment.Location = new Point(4, 449);
-            buttonTXTPayment.Margin = new Padding(4, 3, 4, 3);
-            buttonTXTPayment.Name = "buttonTXTPayment";
-            buttonTXTPayment.Size = new Size(236, 67);
-            buttonTXTPayment.TabIndex = 6;
-            buttonTXTPayment.Text = "Вывод в TXT";
-            buttonTXTPayment.UseVisualStyleBackColor = true;
-            buttonTXTPayment.Click += ButtonTXTPayment_Click;
-            // 
             // tabPageMedications
             // 
             tabPageMedications.BackgroundImage = (Image)resources.GetObject("tabPageMedications.BackgroundImage");
@@ -2635,7 +2405,6 @@
             // panelTitleMedications
             // 
             panelTitleMedications.Controls.Add(labelTitleMedications);
-            panelTitleMedications.Controls.Add(buttonClearMedications);
             panelTitleMedications.Controls.Add(buttonRefreshMedications);
             panelTitleMedications.Controls.Add(textBoxSearchMedications);
             panelTitleMedications.Location = new Point(0, 0);
@@ -2655,20 +2424,6 @@
             labelTitleMedications.Size = new Size(252, 65);
             labelTitleMedications.TabIndex = 4;
             labelTitleMedications.Text = "Лекарства";
-            // 
-            // buttonClearMedications
-            // 
-            buttonClearMedications.BackgroundImage = (Image)resources.GetObject("buttonClearMedications.BackgroundImage");
-            buttonClearMedications.BackgroundImageLayout = ImageLayout.Stretch;
-            buttonClearMedications.FlatStyle = FlatStyle.Flat;
-            buttonClearMedications.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonClearMedications.Location = new Point(528, 3);
-            buttonClearMedications.Margin = new Padding(4, 3, 4, 3);
-            buttonClearMedications.Name = "buttonClearMedications";
-            buttonClearMedications.Size = new Size(78, 77);
-            buttonClearMedications.TabIndex = 0;
-            buttonClearMedications.UseVisualStyleBackColor = true;
-            buttonClearMedications.Click += ButtonClear_Click;
             // 
             // buttonRefreshMedications
             // 
@@ -2838,11 +2593,10 @@
             panelControlMedications.Controls.Add(buttonSaveMedication);
             panelControlMedications.Controls.Add(buttonWordMedication);
             panelControlMedications.Controls.Add(buttonExcelMedication);
-            panelControlMedications.Controls.Add(buttonTXTMedication);
             panelControlMedications.Location = new Point(634, 482);
             panelControlMedications.Margin = new Padding(4, 3, 4, 3);
             panelControlMedications.Name = "panelControlMedications";
-            panelControlMedications.Size = new Size(243, 520);
+            panelControlMedications.Size = new Size(243, 445);
             panelControlMedications.TabIndex = 2;
             // 
             // buttonNewMedication
@@ -2923,19 +2677,6 @@
             buttonExcelMedication.UseVisualStyleBackColor = true;
             buttonExcelMedication.Click += ButtonExcelMedication_Click;
             // 
-            // buttonTXTMedication
-            // 
-            buttonTXTMedication.FlatStyle = FlatStyle.Flat;
-            buttonTXTMedication.ForeColor = Color.Black;
-            buttonTXTMedication.Location = new Point(4, 449);
-            buttonTXTMedication.Margin = new Padding(4, 3, 4, 3);
-            buttonTXTMedication.Name = "buttonTXTMedication";
-            buttonTXTMedication.Size = new Size(236, 67);
-            buttonTXTMedication.TabIndex = 6;
-            buttonTXTMedication.Text = "Вывод в TXT";
-            buttonTXTMedication.UseVisualStyleBackColor = true;
-            buttonTXTMedication.Click += ButtonTXTMedication_Click;
-            // 
             // tabPagePrescriptions
             // 
             tabPagePrescriptions.BackgroundImage = (Image)resources.GetObject("tabPagePrescriptions.BackgroundImage");
@@ -2956,7 +2697,6 @@
             // panelTitlePrescriptions
             // 
             panelTitlePrescriptions.Controls.Add(labelTitlePrescriptions);
-            panelTitlePrescriptions.Controls.Add(buttonClearPrescriptions);
             panelTitlePrescriptions.Controls.Add(buttonRefreshPrescriptions);
             panelTitlePrescriptions.Controls.Add(textBoxSearchPrescriptions);
             panelTitlePrescriptions.Location = new Point(0, 0);
@@ -2976,20 +2716,6 @@
             labelTitlePrescriptions.Size = new Size(400, 65);
             labelTitlePrescriptions.TabIndex = 4;
             labelTitlePrescriptions.Text = "Записи в книжке";
-            // 
-            // buttonClearPrescriptions
-            // 
-            buttonClearPrescriptions.BackgroundImage = (Image)resources.GetObject("buttonClearPrescriptions.BackgroundImage");
-            buttonClearPrescriptions.BackgroundImageLayout = ImageLayout.Stretch;
-            buttonClearPrescriptions.FlatStyle = FlatStyle.Flat;
-            buttonClearPrescriptions.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            buttonClearPrescriptions.Location = new Point(528, 3);
-            buttonClearPrescriptions.Margin = new Padding(4, 3, 4, 3);
-            buttonClearPrescriptions.Name = "buttonClearPrescriptions";
-            buttonClearPrescriptions.Size = new Size(78, 77);
-            buttonClearPrescriptions.TabIndex = 0;
-            buttonClearPrescriptions.UseVisualStyleBackColor = true;
-            buttonClearPrescriptions.Click += ButtonClear_Click;
             // 
             // buttonRefreshPrescriptions
             // 
@@ -3035,11 +2761,11 @@
             panelRecordPrescriptions.Controls.Add(labelPrescriptionID);
             panelRecordPrescriptions.Controls.Add(textBoxPrescriptionID);
             panelRecordPrescriptions.Controls.Add(labelPetIDPrescriptions);
-            panelRecordPrescriptions.Controls.Add(textBoxPetIDPrescriptions);
+            panelRecordPrescriptions.Controls.Add(comboBoxPetIDPrescriptions);
             panelRecordPrescriptions.Controls.Add(labelVetIDPrescriptions);
-            panelRecordPrescriptions.Controls.Add(textBoxVetIDPrescriptions);
+            panelRecordPrescriptions.Controls.Add(comboBoxVetIDPrescriptions);
             panelRecordPrescriptions.Controls.Add(labelMedicationIDPrescriptions);
-            panelRecordPrescriptions.Controls.Add(textBoxMedicationIDPrescriptions);
+            panelRecordPrescriptions.Controls.Add(comboBoxMedicationIDPrescriptions);
             panelRecordPrescriptions.Controls.Add(labelDosage);
             panelRecordPrescriptions.Controls.Add(textBoxDosage);
             panelRecordPrescriptions.Controls.Add(labelInstructions);
@@ -3093,14 +2819,15 @@
             labelPetIDPrescriptions.TabIndex = 8;
             labelPetIDPrescriptions.Text = "Питомец:";
             // 
-            // textBoxPetIDPrescriptions
+            // comboBoxPetIDPrescriptions
             // 
-            textBoxPetIDPrescriptions.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            textBoxPetIDPrescriptions.Location = new Point(152, 113);
-            textBoxPetIDPrescriptions.Margin = new Padding(4, 3, 4, 3);
-            textBoxPetIDPrescriptions.Name = "textBoxPetIDPrescriptions";
-            textBoxPetIDPrescriptions.Size = new Size(455, 33);
-            textBoxPetIDPrescriptions.TabIndex = 1;
+            comboBoxPetIDPrescriptions.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxPetIDPrescriptions.Font = new Font("Segoe UI", 14.25F);
+            comboBoxPetIDPrescriptions.FormattingEnabled = true;
+            comboBoxPetIDPrescriptions.Location = new Point(152, 113);
+            comboBoxPetIDPrescriptions.Name = "comboBoxPetIDPrescriptions";
+            comboBoxPetIDPrescriptions.Size = new Size(455, 33);
+            comboBoxPetIDPrescriptions.TabIndex = 1;
             // 
             // labelVetIDPrescriptions
             // 
@@ -3113,14 +2840,15 @@
             labelVetIDPrescriptions.TabIndex = 9;
             labelVetIDPrescriptions.Text = "Ветеринар:";
             // 
-            // textBoxVetIDPrescriptions
+            // comboBoxVetIDPrescriptions
             // 
-            textBoxVetIDPrescriptions.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            textBoxVetIDPrescriptions.Location = new Point(152, 158);
-            textBoxVetIDPrescriptions.Margin = new Padding(4, 3, 4, 3);
-            textBoxVetIDPrescriptions.Name = "textBoxVetIDPrescriptions";
-            textBoxVetIDPrescriptions.Size = new Size(455, 33);
-            textBoxVetIDPrescriptions.TabIndex = 2;
+            comboBoxVetIDPrescriptions.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxVetIDPrescriptions.Font = new Font("Segoe UI", 14.25F);
+            comboBoxVetIDPrescriptions.FormattingEnabled = true;
+            comboBoxVetIDPrescriptions.Location = new Point(152, 158);
+            comboBoxVetIDPrescriptions.Name = "comboBoxVetIDPrescriptions";
+            comboBoxVetIDPrescriptions.Size = new Size(455, 33);
+            comboBoxVetIDPrescriptions.TabIndex = 2;
             // 
             // labelMedicationIDPrescriptions
             // 
@@ -3133,14 +2861,15 @@
             labelMedicationIDPrescriptions.TabIndex = 10;
             labelMedicationIDPrescriptions.Text = "Лекарство:";
             // 
-            // textBoxMedicationIDPrescriptions
+            // comboBoxMedicationIDPrescriptions
             // 
-            textBoxMedicationIDPrescriptions.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            textBoxMedicationIDPrescriptions.Location = new Point(152, 206);
-            textBoxMedicationIDPrescriptions.Margin = new Padding(4, 3, 4, 3);
-            textBoxMedicationIDPrescriptions.Name = "textBoxMedicationIDPrescriptions";
-            textBoxMedicationIDPrescriptions.Size = new Size(455, 33);
-            textBoxMedicationIDPrescriptions.TabIndex = 3;
+            comboBoxMedicationIDPrescriptions.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxMedicationIDPrescriptions.Font = new Font("Segoe UI", 14.25F);
+            comboBoxMedicationIDPrescriptions.FormattingEnabled = true;
+            comboBoxMedicationIDPrescriptions.Location = new Point(152, 206);
+            comboBoxMedicationIDPrescriptions.Name = "comboBoxMedicationIDPrescriptions";
+            comboBoxMedicationIDPrescriptions.Size = new Size(455, 33);
+            comboBoxMedicationIDPrescriptions.TabIndex = 3;
             // 
             // labelDosage
             // 
@@ -3203,11 +2932,10 @@
             panelControlPrescriptions.Controls.Add(buttonSavePrescription);
             panelControlPrescriptions.Controls.Add(buttonWordPrescription);
             panelControlPrescriptions.Controls.Add(buttonExcelPrescription);
-            panelControlPrescriptions.Controls.Add(buttonTXTPrescription);
             panelControlPrescriptions.Location = new Point(634, 482);
             panelControlPrescriptions.Margin = new Padding(4, 3, 4, 3);
             panelControlPrescriptions.Name = "panelControlPrescriptions";
-            panelControlPrescriptions.Size = new Size(243, 520);
+            panelControlPrescriptions.Size = new Size(243, 445);
             panelControlPrescriptions.TabIndex = 2;
             // 
             // buttonNewPrescription
@@ -3287,19 +3015,6 @@
             buttonExcelPrescription.Text = "Вывод в Excel";
             buttonExcelPrescription.UseVisualStyleBackColor = true;
             buttonExcelPrescription.Click += ButtonExcelPrescription_Click;
-            // 
-            // buttonTXTPrescription
-            // 
-            buttonTXTPrescription.FlatStyle = FlatStyle.Flat;
-            buttonTXTPrescription.ForeColor = Color.Black;
-            buttonTXTPrescription.Location = new Point(4, 449);
-            buttonTXTPrescription.Margin = new Padding(4, 3, 4, 3);
-            buttonTXTPrescription.Name = "buttonTXTPrescription";
-            buttonTXTPrescription.Size = new Size(236, 67);
-            buttonTXTPrescription.TabIndex = 6;
-            buttonTXTPrescription.Text = "Вывод в TXT";
-            buttonTXTPrescription.UseVisualStyleBackColor = true;
-            buttonTXTPrescription.Click += ButtonTXTPrescription_Click;
             // 
             // Form1
             // 
@@ -3388,7 +3103,6 @@
         private TextBox textBoxClientID;
         private Label labelClientID;
         private Panel panelControlClients;
-        private Button buttonTXTClient;
         private Button buttonSaveClient;
         private Button buttonExcelClient;
         private Button buttonChangeClient;
@@ -3397,8 +3111,6 @@
         private Button buttonNewClient;
         private Label labelControlClients;
         private Panel panelRecordClients;
-        private Label labelINNClients;
-        private TextBox textBoxINNClients;
         private Label labelEmailClients;
         private Label labelAddress;
         private Label labelPhoneClients;
@@ -3407,7 +3119,6 @@
         private Label labelRecordClients;
         private DataGridView dataGridViewClients;
         private Panel panelTitleClients;
-        private Button buttonClearClients;
         private Button buttonRefreshClients;
         private TextBox textBoxSearchClients;
         private Label labelTitleClients;
@@ -3416,7 +3127,6 @@
         private TabPage tabPagePrescriptions;
         private Panel panelTitlePrescriptions;
         private Label labelTitlePrescriptions;
-        private Button buttonClearPrescriptions;
         private Button buttonRefreshPrescriptions;
         private TextBox textBoxSearchPrescriptions;
         private DataGridView dataGridViewPrescriptions;
@@ -3425,9 +3135,7 @@
         private Label labelPrescriptionID;
         private TextBox textBoxPrescriptionID;
         private Label labelPetIDPrescriptions;
-        private TextBox textBoxPetIDPrescriptions;
         private Label labelVetIDPrescriptions;
-        private TextBox textBoxVetIDPrescriptions;
         private Label labelMedicationIDPrescriptions;
         private Label labelDosage;
         private Label labelInstructions;
@@ -3439,13 +3147,11 @@
         private Button buttonSavePrescription;
         private Button buttonWordPrescription;
         private Button buttonExcelPrescription;
-        private Button buttonTXTPrescription;
         private TextBox textBoxAddress;
         private TextBox textBoxEmailClients;
         private TabPage tabPagePets;
         private Panel panelTitlePets;
         private Label labelTitlePets;
-        private Button buttonClearPets;
         private Button buttonRefresh;
         private TextBox textBoxSearchPets;
         private DataGridView dataGridViewPets;
@@ -3468,11 +3174,9 @@
         private Button buttonSavePet;
         private Button buttonWordPet;
         private Button buttonExcelPet;
-        private Button buttonTXTPet;
         private TabPage tabPageVeterinars;
         private Panel panelTItleVeterinarians;
         private Label labelTitleVeterinarians;
-        private Button buttonClearVeterinarians;
         private Button buttonRefreshVeterinarians;
         private TextBox textBoxSearchVeterinarians;
         private DataGridView dataGridViewVeterinarians;
@@ -3496,11 +3200,9 @@
         private Button buttonSaveVeterinarian;
         private Button buttonWordVeterinarian;
         private Button buttonExcelVeterinarian;
-        private Button buttonTXTVeterinarian;
         private TabPage tabPageServices;
         private Panel panelTitleServices;
         private Label labelTitleServices;
-        private Button buttonClearServices;
         private Button buttonRefreshServices;
         private TextBox textBoxSearchServices;
         private DataGridView dataGridViewServices;
@@ -3520,11 +3222,9 @@
         private Button buttonSaveService;
         private Button buttonWordService;
         private Button buttonExcelService;
-        private Button buttonTXTService;
         private TabPage tabPageInvoices;
         private Panel panelTitleInvoices;
         private Label labelTitleInvoices;
-        private Button buttonClearInvoices;
         private Button buttonRefreshInvoices;
         private TextBox textBoxSearchInvoices;
         private DataGridView dataGridViewInvoices;
@@ -3533,7 +3233,6 @@
         private Label labelInvoiceID;
         private TextBox textBoxInvoiceID;
         private Label labelClientIDInvoices;
-        private TextBox textBoxClientIDInvoices;
         private Label labelTotalAmount;
         private TextBox textBoxTotalAmount;
         private Label labelInvoiceDate;
@@ -3547,11 +3246,9 @@
         private Button buttonSaveInvoice;
         private Button buttonWordInvoice;
         private Button buttonExcelInvoice;
-        private Button buttonTXTInvoice;
         private TabPage tabPagePayments;
         private Panel panelTitlePayments;
         private Label labelTitlePayments;
-        private Button buttonClearPayments;
         private Button buttonRefreshPayments;
         private TextBox textBoxSearchPayments;
         private DataGridView dataGridViewPayments;
@@ -3560,7 +3257,6 @@
         private Label labelPaymentID;
         private TextBox textBoxPaymentID;
         private Label labelInvoiceIDPayments;
-        private TextBox textBoxInvoiceIDPayments;
         private Label labelAmount;
         private TextBox textBoxAmount;
         private Label labelPaymentDate;
@@ -3574,11 +3270,9 @@
         private Button buttonSavePayment;
         private Button buttonWordPayment;
         private Button buttonExcelPayment;
-        private Button buttonTXTPayment;
         private TabPage tabPageMedications;
         private Panel panelTitleMedications;
         private Label labelTitleMedications;
-        private Button buttonClearMedications;
         private Button buttonRefreshMedications;
         private TextBox textBoxSearchMedications;
         private DataGridView dataGridViewMedications;
@@ -3599,13 +3293,11 @@
         private Button buttonSaveMedication;
         private Button buttonWordMedication;
         private Button buttonExcelMedication;
-        private Button buttonTXTMedication;
         private Button buttonRefreshPets;
         private DateTimePicker dateTimePickerRegistrationDate;
         private DateTimePicker dateTimePickerBirthDatePets;
         private MaskedTextBox maskedTextBoxPhoneClients;
         private TextBox textBoxBreed;
-        private TextBox textBoxOwnerID;
         private Label labelGender;
         private Label labelPost;
         private Label labelDateOfEmployment;
@@ -3625,9 +3317,13 @@
         private TextBox textBoxPriceMedications;
         private TextBox textBoxInstructions;
         private TextBox textBoxDosage;
-        private TextBox textBoxMedicationIDPrescriptions;
-        private Button buttonReportClients;
         private Button buttonReportVeterinarians;
         private Button buttonReportPayments;
+        private ComboBox comboBoxOwnerID;
+        private ComboBox comboBoxClientIDInvoices;
+        private ComboBox comboBoxInvoiceIDPayments;
+        private ComboBox comboBoxPetIDPrescriptions;
+        private ComboBox comboBoxVetIDPrescriptions;
+        private ComboBox comboBoxMedicationIDPrescriptions;
     }
 }

@@ -20,6 +20,25 @@ namespace VetAutomate
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
+            dataBase.OpenConnection();
+            comboBoxInvoiceIDPayments.Items.Clear();
+            var invoicesQuery = "SELECT InvoiceID FROM Invoices ORDER BY InvoiceID";
+            var invoicesCommand = new SqlCommand(invoicesQuery, dataBase.GetConnection());
+            var invoicesReader = invoicesCommand.ExecuteReader();
+            while (invoicesReader.Read())
+            {
+                comboBoxInvoiceIDPayments.Items.Add(invoicesReader.GetInt32(0));
+            }
+            invoicesReader.Close();
+            comboBoxPaymentMethod.Items.Clear();
+            var paymentMethodsQuery = "SELECT PaymentMethod FROM PaymentMethods ORDER BY PaymentMethod";
+            var paymentMethodsCommand = new SqlCommand(paymentMethodsQuery, dataBase.GetConnection());
+            var paymentMethodsReader = paymentMethodsCommand.ExecuteReader();
+            while (paymentMethodsReader.Read())
+            {
+                comboBoxPaymentMethod.Items.Add(paymentMethodsReader.GetString(0));
+            }
+            paymentMethodsReader.Close();
         }
 
         /// <summary>
@@ -32,7 +51,7 @@ namespace VetAutomate
             try
             {
                 dataBase.OpenConnection();
-                var invoiceID = textBoxInvoiceIDPayments.Text;
+                var invoiceID = comboBoxInvoiceIDPayments.Text;
                 var amount = textBoxAmount.Text;
                 var paymentDate = dateTimePickerPaymentDate.Value;
                 var paymentMethodName = comboBoxPaymentMethod.Text;

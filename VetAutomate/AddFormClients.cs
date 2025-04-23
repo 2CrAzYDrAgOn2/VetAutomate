@@ -26,9 +26,8 @@ namespace VetAutomate
                 var phone = maskedTextBoxPhoneClients.Text;
                 var email = textBoxEmailClients.Text;
                 var address = textBoxAddress.Text;
-                var inn = textBoxINNClients.Text;
                 var registrationDate = dateTimePickerRegistrationDate.Value;
-                var insertQuery = $"INSERT INTO Clients (FullName, Phone, Email, Address, INN, RegistrationDate) VALUES ('{fullName}', '{phone}', '{email}', '{address}', '{inn}', '{registrationDate}')";
+                var insertQuery = $"INSERT INTO Clients (FullName, Phone, Email, Address, RegistrationDate) VALUES ('{fullName}', '{phone}', '{email}', '{address}', '{registrationDate}')";
                 var sqlCommand = new SqlCommand(insertQuery, dataBase.GetConnection());
                 sqlCommand.ExecuteNonQuery();
                 MessageBox.Show("Запись успешно создана!", "Успех!", MessageBoxButtons.OK, MessageBoxIcon.Information);

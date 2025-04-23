@@ -33,15 +33,15 @@
             label1 = new Label();
             buttonSave = new Button();
             labelPetIDPrescriptions = new Label();
-            textBoxPetIDPrescriptions = new TextBox();
             labelVetIDPrescriptions = new Label();
-            textBoxVetIDPrescriptions = new TextBox();
             labelMedicationIDPrescriptions = new Label();
-            textBoxMedicationIDPrescriptions = new TextBox();
             labelDosage = new Label();
             textBoxDosage = new TextBox();
             labelInstructions = new Label();
             textBoxInstructions = new TextBox();
+            comboBoxPetIDPrescriptions = new ComboBox();
+            comboBoxVetIDPrescriptions = new ComboBox();
+            comboBoxMedicationIDPrescriptions = new ComboBox();
             SuspendLayout();
             // 
             // labelTitle
@@ -95,15 +95,6 @@
             labelPetIDPrescriptions.TabIndex = 32;
             labelPetIDPrescriptions.Text = "Питомец:";
             // 
-            // textBoxPetIDPrescriptions
-            // 
-            textBoxPetIDPrescriptions.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            textBoxPetIDPrescriptions.Location = new Point(288, 447);
-            textBoxPetIDPrescriptions.Margin = new Padding(4, 3, 4, 3);
-            textBoxPetIDPrescriptions.Name = "textBoxPetIDPrescriptions";
-            textBoxPetIDPrescriptions.Size = new Size(455, 33);
-            textBoxPetIDPrescriptions.TabIndex = 27;
-            // 
             // labelVetIDPrescriptions
             // 
             labelVetIDPrescriptions.AutoSize = true;
@@ -115,15 +106,6 @@
             labelVetIDPrescriptions.TabIndex = 33;
             labelVetIDPrescriptions.Text = "Ветеринар:";
             // 
-            // textBoxVetIDPrescriptions
-            // 
-            textBoxVetIDPrescriptions.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            textBoxVetIDPrescriptions.Location = new Point(288, 492);
-            textBoxVetIDPrescriptions.Margin = new Padding(4, 3, 4, 3);
-            textBoxVetIDPrescriptions.Name = "textBoxVetIDPrescriptions";
-            textBoxVetIDPrescriptions.Size = new Size(455, 33);
-            textBoxVetIDPrescriptions.TabIndex = 28;
-            // 
             // labelMedicationIDPrescriptions
             // 
             labelMedicationIDPrescriptions.AutoSize = true;
@@ -134,15 +116,6 @@
             labelMedicationIDPrescriptions.Size = new Size(67, 15);
             labelMedicationIDPrescriptions.TabIndex = 34;
             labelMedicationIDPrescriptions.Text = "Лекарство:";
-            // 
-            // textBoxMedicationIDPrescriptions
-            // 
-            textBoxMedicationIDPrescriptions.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            textBoxMedicationIDPrescriptions.Location = new Point(288, 540);
-            textBoxMedicationIDPrescriptions.Margin = new Padding(4, 3, 4, 3);
-            textBoxMedicationIDPrescriptions.Name = "textBoxMedicationIDPrescriptions";
-            textBoxMedicationIDPrescriptions.Size = new Size(455, 33);
-            textBoxMedicationIDPrescriptions.TabIndex = 29;
             // 
             // labelDosage
             // 
@@ -184,6 +157,36 @@
             textBoxInstructions.Size = new Size(455, 33);
             textBoxInstructions.TabIndex = 31;
             // 
+            // comboBoxPetIDPrescriptions
+            // 
+            comboBoxPetIDPrescriptions.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxPetIDPrescriptions.Font = new Font("Segoe UI", 14.25F);
+            comboBoxPetIDPrescriptions.FormattingEnabled = true;
+            comboBoxPetIDPrescriptions.Location = new Point(288, 447);
+            comboBoxPetIDPrescriptions.Name = "comboBoxPetIDPrescriptions";
+            comboBoxPetIDPrescriptions.Size = new Size(455, 33);
+            comboBoxPetIDPrescriptions.TabIndex = 0;
+            // 
+            // comboBoxVetIDPrescriptions
+            // 
+            comboBoxVetIDPrescriptions.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxVetIDPrescriptions.Font = new Font("Segoe UI", 14.25F);
+            comboBoxVetIDPrescriptions.FormattingEnabled = true;
+            comboBoxVetIDPrescriptions.Location = new Point(288, 492);
+            comboBoxVetIDPrescriptions.Name = "comboBoxVetIDPrescriptions";
+            comboBoxVetIDPrescriptions.Size = new Size(455, 33);
+            comboBoxVetIDPrescriptions.TabIndex = 1;
+            // 
+            // comboBoxMedicationIDPrescriptions
+            // 
+            comboBoxMedicationIDPrescriptions.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxMedicationIDPrescriptions.Font = new Font("Segoe UI", 14.25F);
+            comboBoxMedicationIDPrescriptions.FormattingEnabled = true;
+            comboBoxMedicationIDPrescriptions.Location = new Point(288, 540);
+            comboBoxMedicationIDPrescriptions.Name = "comboBoxMedicationIDPrescriptions";
+            comboBoxMedicationIDPrescriptions.Size = new Size(455, 33);
+            comboBoxMedicationIDPrescriptions.TabIndex = 2;
+            // 
             // AddFormPrescriptions
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -193,11 +196,11 @@
             Controls.Add(labelTitle);
             Controls.Add(label1);
             Controls.Add(labelPetIDPrescriptions);
-            Controls.Add(textBoxPetIDPrescriptions);
+            Controls.Add(comboBoxPetIDPrescriptions);
             Controls.Add(labelVetIDPrescriptions);
-            Controls.Add(textBoxVetIDPrescriptions);
+            Controls.Add(comboBoxVetIDPrescriptions);
             Controls.Add(labelMedicationIDPrescriptions);
-            Controls.Add(textBoxMedicationIDPrescriptions);
+            Controls.Add(comboBoxMedicationIDPrescriptions);
             Controls.Add(labelDosage);
             Controls.Add(textBoxDosage);
             Controls.Add(labelInstructions);
@@ -219,14 +222,14 @@
         private Label label1;
         private Button buttonSave;
         private Label labelPetIDPrescriptions;
-        private TextBox textBoxPetIDPrescriptions;
         private Label labelVetIDPrescriptions;
-        private TextBox textBoxVetIDPrescriptions;
         private Label labelMedicationIDPrescriptions;
-        private TextBox textBoxMedicationIDPrescriptions;
         private Label labelDosage;
         private TextBox textBoxDosage;
         private Label labelInstructions;
         private TextBox textBoxInstructions;
+        private ComboBox comboBoxPetIDPrescriptions;
+        private ComboBox comboBoxVetIDPrescriptions;
+        private ComboBox comboBoxMedicationIDPrescriptions;
     }
 }

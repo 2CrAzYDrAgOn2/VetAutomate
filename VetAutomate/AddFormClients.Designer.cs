@@ -40,8 +40,6 @@
             textBoxEmailClients = new TextBox();
             labelAddress = new Label();
             textBoxAddress = new TextBox();
-            labelINNClients = new Label();
-            textBoxINNClients = new TextBox();
             labelRegistrationDate = new Label();
             dateTimePickerRegistrationDate = new DateTimePicker();
             SuspendLayout();
@@ -167,31 +165,11 @@
             textBoxAddress.Size = new Size(455, 33);
             textBoxAddress.TabIndex = 18;
             // 
-            // labelINNClients
-            // 
-            labelINNClients.AutoSize = true;
-            labelINNClients.ForeColor = Color.Black;
-            labelINNClients.Location = new Point(246, 638);
-            labelINNClients.Margin = new Padding(4, 0, 4, 0);
-            labelINNClients.Name = "labelINNClients";
-            labelINNClients.Size = new Size(37, 15);
-            labelINNClients.TabIndex = 25;
-            labelINNClients.Text = "ИНН:";
-            // 
-            // textBoxINNClients
-            // 
-            textBoxINNClients.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            textBoxINNClients.Location = new Point(292, 628);
-            textBoxINNClients.Margin = new Padding(4, 3, 4, 3);
-            textBoxINNClients.Name = "textBoxINNClients";
-            textBoxINNClients.Size = new Size(455, 33);
-            textBoxINNClients.TabIndex = 19;
-            // 
             // labelRegistrationDate
             // 
             labelRegistrationDate.AutoSize = true;
             labelRegistrationDate.ForeColor = Color.Black;
-            labelRegistrationDate.Location = new Point(175, 687);
+            labelRegistrationDate.Location = new Point(174, 636);
             labelRegistrationDate.Margin = new Padding(4, 0, 4, 0);
             labelRegistrationDate.Name = "labelRegistrationDate";
             labelRegistrationDate.Size = new Size(108, 15);
@@ -201,7 +179,7 @@
             // dateTimePickerRegistrationDate
             // 
             dateTimePickerRegistrationDate.Font = new Font("Segoe UI", 14.25F);
-            dateTimePickerRegistrationDate.Location = new Point(293, 673);
+            dateTimePickerRegistrationDate.Location = new Point(292, 622);
             dateTimePickerRegistrationDate.Name = "dateTimePickerRegistrationDate";
             dateTimePickerRegistrationDate.Size = new Size(455, 33);
             dateTimePickerRegistrationDate.TabIndex = 20;
@@ -222,8 +200,6 @@
             Controls.Add(textBoxEmailClients);
             Controls.Add(labelAddress);
             Controls.Add(textBoxAddress);
-            Controls.Add(labelINNClients);
-            Controls.Add(textBoxINNClients);
             Controls.Add(labelRegistrationDate);
             Controls.Add(dateTimePickerRegistrationDate);
             Controls.Add(buttonSave);
@@ -251,8 +227,6 @@
         private TextBox textBoxEmailClients;
         private Label labelAddress;
         private TextBox textBoxAddress;
-        private Label labelINNClients;
-        private TextBox textBoxINNClients;
         private Label labelRegistrationDate;
         private DateTimePicker dateTimePickerRegistrationDate;
     }

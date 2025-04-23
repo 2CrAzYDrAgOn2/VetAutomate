@@ -11,6 +11,16 @@ namespace VetAutomate
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
+            dataBase.OpenConnection();
+            comboBoxOwnerID.Items.Clear();
+            var ownersQuery = "SELECT FullName FROM Clients ORDER BY FullName";
+            var ownersCommand = new SqlCommand(ownersQuery, dataBase.GetConnection());
+            var ownersReader = ownersCommand.ExecuteReader();
+            while (ownersReader.Read())
+            {
+                comboBoxOwnerID.Items.Add(ownersReader.GetString(0));
+            }
+            ownersReader.Close();
         }
 
         /// <summary>
@@ -27,7 +37,7 @@ namespace VetAutomate
                 var species = textBoxSpecies.Text;
                 var breed = textBoxBreed.Text;
                 var birthDate = dateTimePickerBirthDatePets.Value;
-                var ownerLogin = textBoxOwnerID.Text;
+                var ownerLogin = comboBoxOwnerID.Text;
                 string queryOwner = $"SELECT ClientID FROM Clients WHERE FullName = '{ownerLogin}'";
                 SqlCommand commandOwner = new(queryOwner, dataBase.GetConnection());
                 dataBase.OpenConnection();

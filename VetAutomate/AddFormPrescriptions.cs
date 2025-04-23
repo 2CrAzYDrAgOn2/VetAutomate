@@ -21,6 +21,34 @@ namespace VetAutomate
         {
             InitializeComponent();
             StartPosition = FormStartPosition.CenterScreen;
+            dataBase.OpenConnection();
+            comboBoxPetIDPrescriptions.Items.Clear();
+            var petsQuery = "SELECT Name FROM Pets ORDER BY Name";
+            var petsCommand = new SqlCommand(petsQuery, dataBase.GetConnection());
+            var petsReader = petsCommand.ExecuteReader();
+            while (petsReader.Read())
+            {
+                comboBoxPetIDPrescriptions.Items.Add(petsReader.GetString(0));
+            }
+            petsReader.Close();
+            comboBoxVetIDPrescriptions.Items.Clear();
+            var vetsQuery = "SELECT FullName FROM Veterinarians ORDER BY FullName";
+            var vetsCommand = new SqlCommand(vetsQuery, dataBase.GetConnection());
+            var vetsReader = vetsCommand.ExecuteReader();
+            while (vetsReader.Read())
+            {
+                comboBoxVetIDPrescriptions.Items.Add(vetsReader.GetString(0));
+            }
+            vetsReader.Close();
+            comboBoxMedicationIDPrescriptions.Items.Clear();
+            var medicationsQuery = "SELECT Name FROM Medications ORDER BY Name";
+            var medicationsCommand = new SqlCommand(medicationsQuery, dataBase.GetConnection());
+            var medicationsReader = medicationsCommand.ExecuteReader();
+            while (medicationsReader.Read())
+            {
+                comboBoxMedicationIDPrescriptions.Items.Add(medicationsReader.GetString(0));
+            }
+            medicationsReader.Close();
         }
 
         /// <summary>
@@ -33,18 +61,18 @@ namespace VetAutomate
             try
             {
                 dataBase.OpenConnection();
-                var petName = textBoxPetIDPrescriptions.Text;
+                var petName = comboBoxPetIDPrescriptions.Text;
                 string queryPet = $"SELECT PetID FROM Pets WHERE Name = '{petName}'";
                 SqlCommand commandPet = new(queryPet, dataBase.GetConnection());
                 dataBase.OpenConnection();
                 object resultPet = commandPet.ExecuteScalar();
                 var petID = resultPet?.ToString() ?? "0";
-                var vetName = textBoxVetIDPrescriptions.Text;
+                var vetName = comboBoxVetIDPrescriptions.Text;
                 string queryVet = $"SELECT VetID FROM Veterinarians WHERE FullName = '{vetName}'";
                 SqlCommand commandVet = new(queryVet, dataBase.GetConnection());
                 object resultVet = commandVet.ExecuteScalar();
                 var vetID = resultVet?.ToString() ?? "0";
-                var medName = textBoxMedicationIDPrescriptions.Text;
+                var medName = comboBoxMedicationIDPrescriptions.Text;
                 string queryMed = $"SELECT MedicationID FROM Medications WHERE Name = '{medName}'";
                 SqlCommand commandMed = new(queryMed, dataBase.GetConnection());
                 object resultMed = commandMed.ExecuteScalar();

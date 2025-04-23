@@ -33,13 +33,13 @@
             label1 = new Label();
             buttonSave = new Button();
             labelInvoiceIDPayments = new Label();
-            textBoxInvoiceIDPayments = new TextBox();
             labelAmount = new Label();
             textBoxAmount = new TextBox();
             labelPaymentDate = new Label();
             dateTimePickerPaymentDate = new DateTimePicker();
             labelPaymentMethod = new Label();
             comboBoxPaymentMethod = new ComboBox();
+            comboBoxInvoiceIDPayments = new ComboBox();
             SuspendLayout();
             // 
             // labelTitle
@@ -92,15 +92,6 @@
             labelInvoiceIDPayments.Size = new Size(76, 15);
             labelInvoiceIDPayments.TabIndex = 16;
             labelInvoiceIDPayments.Text = "Номер чека:";
-            // 
-            // textBoxInvoiceIDPayments
-            // 
-            textBoxInvoiceIDPayments.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            textBoxInvoiceIDPayments.Location = new Point(291, 449);
-            textBoxInvoiceIDPayments.Margin = new Padding(4, 3, 4, 3);
-            textBoxInvoiceIDPayments.Name = "textBoxInvoiceIDPayments";
-            textBoxInvoiceIDPayments.Size = new Size(455, 33);
-            textBoxInvoiceIDPayments.TabIndex = 12;
             // 
             // labelAmount
             // 
@@ -164,6 +155,16 @@
             comboBoxPaymentMethod.Size = new Size(455, 33);
             comboBoxPaymentMethod.TabIndex = 15;
             // 
+            // comboBoxInvoiceIDPayments
+            // 
+            comboBoxInvoiceIDPayments.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxInvoiceIDPayments.Font = new Font("Segoe UI", 14.25F);
+            comboBoxInvoiceIDPayments.FormattingEnabled = true;
+            comboBoxInvoiceIDPayments.Location = new Point(291, 449);
+            comboBoxInvoiceIDPayments.Name = "comboBoxInvoiceIDPayments";
+            comboBoxInvoiceIDPayments.Size = new Size(455, 33);
+            comboBoxInvoiceIDPayments.TabIndex = 0;
+            // 
             // AddFormPayments
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -173,7 +174,7 @@
             Controls.Add(labelTitle);
             Controls.Add(label1);
             Controls.Add(labelInvoiceIDPayments);
-            Controls.Add(textBoxInvoiceIDPayments);
+            Controls.Add(comboBoxInvoiceIDPayments);
             Controls.Add(labelAmount);
             Controls.Add(textBoxAmount);
             Controls.Add(labelPaymentDate);
@@ -197,12 +198,12 @@
         private Label label1;
         private Button buttonSave;
         private Label labelInvoiceIDPayments;
-        private TextBox textBoxInvoiceIDPayments;
         private Label labelAmount;
         private TextBox textBoxAmount;
         private Label labelPaymentDate;
         private DateTimePicker dateTimePickerPaymentDate;
         private Label labelPaymentMethod;
         private ComboBox comboBoxPaymentMethod;
+        private ComboBox comboBoxInvoiceIDPayments;
     }
 }

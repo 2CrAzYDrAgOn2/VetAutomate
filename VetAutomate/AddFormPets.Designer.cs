@@ -41,7 +41,7 @@
             labelBirthDatePets = new Label();
             dateTimePickerBirthDatePets = new DateTimePicker();
             labelOwnerID = new Label();
-            textBoxOwnerID = new TextBox();
+            comboBoxOwnerID = new ComboBox();
             SuspendLayout();
             // 
             // buttonSave
@@ -174,14 +174,15 @@
             labelOwnerID.TabIndex = 22;
             labelOwnerID.Text = "Владелец:";
             // 
-            // textBoxOwnerID
+            // comboBoxOwnerID
             // 
-            textBoxOwnerID.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            textBoxOwnerID.Location = new Point(293, 629);
-            textBoxOwnerID.Margin = new Padding(4, 3, 4, 3);
-            textBoxOwnerID.Name = "textBoxOwnerID";
-            textBoxOwnerID.Size = new Size(455, 33);
-            textBoxOwnerID.TabIndex = 17;
+            comboBoxOwnerID.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxOwnerID.Font = new Font("Segoe UI", 14.25F);
+            comboBoxOwnerID.FormattingEnabled = true;
+            comboBoxOwnerID.Location = new Point(293, 628);
+            comboBoxOwnerID.Name = "comboBoxOwnerID";
+            comboBoxOwnerID.Size = new Size(455, 33);
+            comboBoxOwnerID.TabIndex = 4;
             // 
             // AddFormPets
             // 
@@ -200,7 +201,7 @@
             Controls.Add(labelBirthDatePets);
             Controls.Add(dateTimePickerBirthDatePets);
             Controls.Add(labelOwnerID);
-            Controls.Add(textBoxOwnerID);
+            Controls.Add(comboBoxOwnerID);
             Controls.Add(buttonSave);
             DoubleBuffered = true;
             FormBorderStyle = FormBorderStyle.FixedSingle;
@@ -227,6 +228,6 @@
         private Label labelBirthDatePets;
         private DateTimePicker dateTimePickerBirthDatePets;
         private Label labelOwnerID;
-        private TextBox textBoxOwnerID;
+        private ComboBox comboBoxOwnerID;
     }
 }
