@@ -404,6 +404,7 @@ namespace VetAutomate
                         textBoxEmailClients.Text = dataGridViewRow.Cells[3].Value.ToString();
                         textBoxAddress.Text = dataGridViewRow.Cells[4].Value.ToString();
                         dateTimePickerRegistrationDate.Text = dataGridViewRow.Cells[5].Value.ToString();
+                        panelRecordClients.Visible = true;
                         break;
 
                     case "dataGridViewPets":
@@ -413,6 +414,7 @@ namespace VetAutomate
                         textBoxBreed.Text = dataGridViewRow.Cells[3].Value.ToString();
                         dateTimePickerBirthDatePets.Text = dataGridViewRow.Cells[4].Value.ToString();
                         comboBoxOwnerID.Text = dataGridViewRow.Cells[5].Value.ToString();
+                        panelRecordPets.Visible = true;
                         break;
 
                     case "dataGridViewVeterinarians":
@@ -428,13 +430,14 @@ namespace VetAutomate
                         dateTimePickerDateOfEmployment.Text = dataGridViewRow.Cells[9].Value.ToString();
                         comboBoxPost.Text = dataGridViewRow.Cells[10].Value.ToString();
                         comboBoxGender.Text = dataGridViewRow.Cells[11].Value.ToString();
-                        dataBase.CloseConnection();
+                        panelRecordVeterinarians.Visible = true;
                         break;
 
                     case "dataGridViewServices":
                         textBoxServiceID.Text = dataGridViewRow.Cells[0].Value.ToString();
                         textBoxServiceName.Text = dataGridViewRow.Cells[1].Value.ToString();
                         textBoxPriceServices.Text = dataGridViewRow.Cells[2].Value.ToString();
+                        panelRecordServices.Visible = true;
                         break;
 
                     case "dataGridViewInvoices":
@@ -443,6 +446,7 @@ namespace VetAutomate
                         textBoxTotalAmount.Text = dataGridViewRow.Cells[2].Value.ToString();
                         dateTimePickerInvoiceDate.Text = dataGridViewRow.Cells[3].Value.ToString();
                         checkBoxPaid.Checked = Convert.ToBoolean(dataGridViewRow.Cells[4].Value);
+                        panelRecordInvoices.Visible = true;
                         break;
 
                     case "dataGridViewPayments":
@@ -451,6 +455,7 @@ namespace VetAutomate
                         textBoxAmount.Text = dataGridViewRow.Cells[2].Value.ToString();
                         dateTimePickerPaymentDate.Text = dataGridViewRow.Cells[3].Value.ToString();
                         comboBoxPaymentMethod.Text = dataGridViewRow.Cells[4].Value.ToString();
+                        panelRecordPayments.Visible = true;
                         break;
 
                     case "dataGridViewMedications":
@@ -458,6 +463,7 @@ namespace VetAutomate
                         textBoxNameMedications.Text = dataGridViewRow.Cells[1].Value.ToString();
                         textBoxDescription.Text = dataGridViewRow.Cells[2].Value.ToString();
                         textBoxPriceMedications.Text = dataGridViewRow.Cells[3].Value.ToString();
+                        panelRecordMedications.Visible = true;
                         break;
 
                     case "dataGridViewPrescriptions":
@@ -467,6 +473,7 @@ namespace VetAutomate
                         comboBoxMedicationIDPrescriptions.Text = dataGridViewRow.Cells[3].Value.ToString();
                         textBoxDosage.Text = dataGridViewRow.Cells[4].Value.ToString();
                         textBoxInstructions.Text = dataGridViewRow.Cells[5].Value.ToString();
+                        panelRecordPrescriptions.Visible = true;
                         break;
                 }
             }
@@ -598,6 +605,15 @@ namespace VetAutomate
         {
             try
             {
+                DialogResult result = MessageBox.Show(
+            "Вы уверены, что хотите удалить эту запись?",
+            "Подтверждение удаления",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Question);
+                if (result != DialogResult.Yes)
+                {
+                    return;
+                }
                 int index = dataGridView.CurrentCell.RowIndex;
                 dataGridView.Rows[index].Visible = false;
                 switch (dataGridView.Name)

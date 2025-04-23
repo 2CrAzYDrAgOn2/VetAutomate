@@ -395,6 +395,7 @@
             panelRecordClients.Name = "panelRecordClients";
             panelRecordClients.Size = new Size(611, 552);
             panelRecordClients.TabIndex = 1;
+            panelRecordClients.Visible = false;
             // 
             // labelRecordClients
             // 
@@ -747,6 +748,7 @@
             panelRecordPets.Name = "panelRecordPets";
             panelRecordPets.Size = new Size(611, 552);
             panelRecordPets.TabIndex = 1;
+            panelRecordPets.Visible = false;
             // 
             // labelRecordPets
             // 
@@ -1110,6 +1112,7 @@
             panelRecordVeterinarians.Name = "panelRecordVeterinarians";
             panelRecordVeterinarians.Size = new Size(611, 552);
             panelRecordVeterinarians.TabIndex = 1;
+            panelRecordVeterinarians.Visible = false;
             // 
             // labelRecordVeterinarians
             // 
@@ -1561,6 +1564,7 @@
             panelRecordServices.Name = "panelRecordServices";
             panelRecordServices.Size = new Size(611, 552);
             panelRecordServices.TabIndex = 0;
+            panelRecordServices.Visible = false;
             // 
             // labelRecordServices
             // 
@@ -1835,6 +1839,7 @@
             panelRecordInvoices.Name = "panelRecordInvoices";
             panelRecordInvoices.Size = new Size(611, 552);
             panelRecordInvoices.TabIndex = 1;
+            panelRecordInvoices.Visible = false;
             // 
             // labelRecordInvoices
             // 
@@ -2166,6 +2171,7 @@
             panelRecordPayments.Name = "panelRecordPayments";
             panelRecordPayments.Size = new Size(611, 552);
             panelRecordPayments.TabIndex = 0;
+            panelRecordPayments.Visible = false;
             // 
             // labelRecordPayments
             // 
@@ -2479,6 +2485,7 @@
             panelRecordMedications.Name = "panelRecordMedications";
             panelRecordMedications.Size = new Size(611, 552);
             panelRecordMedications.TabIndex = 1;
+            panelRecordMedications.Visible = false;
             // 
             // labelRecordMedications
             // 
@@ -2775,6 +2782,7 @@
             panelRecordPrescriptions.Name = "panelRecordPrescriptions";
             panelRecordPrescriptions.Size = new Size(611, 552);
             panelRecordPrescriptions.TabIndex = 1;
+            panelRecordPrescriptions.Visible = false;
             // 
             // labelRecordPrescriptions
             // 
