@@ -34,8 +34,6 @@
             buttonSave = new Button();
             labelServiceName = new Label();
             textBoxServiceName = new TextBox();
-            labelPriceServices = new Label();
-            textBoxPriceServices = new TextBox();
             SuspendLayout();
             // 
             // labelTitle
@@ -98,26 +96,6 @@
             textBoxServiceName.Size = new Size(455, 33);
             textBoxServiceName.TabIndex = 27;
             // 
-            // labelPriceServices
-            // 
-            labelPriceServices.AutoSize = true;
-            labelPriceServices.ForeColor = Color.Black;
-            labelPriceServices.Location = new Point(240, 503);
-            labelPriceServices.Margin = new Padding(4, 0, 4, 0);
-            labelPriceServices.Name = "labelPriceServices";
-            labelPriceServices.Size = new Size(38, 15);
-            labelPriceServices.TabIndex = 30;
-            labelPriceServices.Text = "Цена:";
-            // 
-            // textBoxPriceServices
-            // 
-            textBoxPriceServices.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            textBoxPriceServices.Location = new Point(289, 492);
-            textBoxPriceServices.Margin = new Padding(4, 3, 4, 3);
-            textBoxPriceServices.Name = "textBoxPriceServices";
-            textBoxPriceServices.Size = new Size(455, 33);
-            textBoxPriceServices.TabIndex = 28;
-            // 
             // AddFormServices
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -128,8 +106,6 @@
             Controls.Add(label1);
             Controls.Add(labelServiceName);
             Controls.Add(textBoxServiceName);
-            Controls.Add(labelPriceServices);
-            Controls.Add(textBoxPriceServices);
             Controls.Add(buttonSave);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -148,7 +124,5 @@
         private Button buttonSave;
         private Label labelServiceName;
         private TextBox textBoxServiceName;
-        private Label labelPriceServices;
-        private TextBox textBoxPriceServices;
     }
 }

@@ -35,7 +35,7 @@ namespace VetAutomate
                 dataBase.OpenConnection();
                 var name = textBoxNameMedications.Text;
                 var description = textBoxDescription.Text;
-                var price = textBoxPrice.Text;
+                var price = textBoxQuantinityInStock.Text;
                 var insertQuery = $"INSERT INTO Medications (Name, Description, Price) VALUES ('{name}', '{description}', '{price}')";
                 var sqlCommand = new SqlCommand(insertQuery, dataBase.GetConnection());
                 sqlCommand.ExecuteNonQuery();

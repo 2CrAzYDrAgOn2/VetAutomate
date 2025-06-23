@@ -86,7 +86,27 @@ namespace VetAutomate
                 dataGridViewMedications.Columns.Add("Номер", "Номер");
                 dataGridViewMedications.Columns.Add("Название", "Название");
                 dataGridViewMedications.Columns.Add("Описание", "Описание");
+                dataGridViewMedications.Columns.Add("Количество в наличии", "Количество в наличии");
                 dataGridViewMedications.Columns.Add("IsNew", String.Empty);
+                dataGridViewMedicationSupplies.Columns.Add("Номер поставки", "Номер поставки");
+                dataGridViewMedicationSupplies.Columns.Add("Препарат", "Препарат");
+                dataGridViewMedicationSupplies.Columns.Add("Дата поставки", "Дата поставки");
+                dataGridViewMedicationSupplies.Columns.Add("Количество", "Количество");
+                dataGridViewMedicationSupplies.Columns.Add("Поставщик", "Поставщик");
+                dataGridViewMedicationSupplies.Columns.Add("IsNew", String.Empty);
+                dataGridViewMedicationUsages.Columns.Add("Номер использования", "Номер использования");
+                dataGridViewMedicationUsages.Columns.Add("Питомец", "Питомец");
+                dataGridViewMedicationUsages.Columns.Add("Ветеринар", "Ветеринар");
+                dataGridViewMedicationUsages.Columns.Add("Препарат", "Препарат");
+                dataGridViewMedicationUsages.Columns.Add("Количество", "Количество");
+                dataGridViewMedicationUsages.Columns.Add("Цель применения", "Цель применения");
+                dataGridViewMedicationUsages.Columns.Add("IsNew", String.Empty);
+                dataGridViewServiceUsages.Columns.Add("Номер услуги", "Номер услуги");
+                dataGridViewServiceUsages.Columns.Add("Питомец", "Питомец");
+                dataGridViewServiceUsages.Columns.Add("Ветеринар", "Ветеринар");
+                dataGridViewServiceUsages.Columns.Add("Услуга", "Услуга");
+                dataGridViewServiceUsages.Columns.Add("Цель", "Цель");
+                dataGridViewServiceUsages.Columns.Add("IsNew", String.Empty);
                 HideIsNewColumns();
             }
             catch (Exception ex)
@@ -105,6 +125,9 @@ namespace VetAutomate
             dataGridViewVeterinarians.Columns["IsNew"].Visible = false;
             dataGridViewServices.Columns["IsNew"].Visible = false;
             dataGridViewMedications.Columns["IsNew"].Visible = false;
+            dataGridViewMedicationSupplies.Columns["IsNew"].Visible = false;
+            dataGridViewMedicationUsages.Columns["IsNew"].Visible = false;
+            dataGridViewServiceUsages.Columns["IsNew"].Visible = false;
         }
 
         /// <summary>
@@ -138,6 +161,16 @@ namespace VetAutomate
                 textBoxDescription.Text = "";
                 textBoxQuantityInStock.Text = "";
                 textBoxVetID.Text = "";
+                textBoxSupplyID.Text = "";
+                textBoxSupplyID.Text = "";
+                textBoxQuantitySupplied.Text = "";
+                textBoxSupplierName.Text = "";
+                dateTimePickerSupplyDate.Value = DateTime.Now;
+                textBoxMedicationUsageID.Text = "";
+                textBoxQuantityUsed.Text = "";
+                textBoxPurposeMedicationUsages.Text = "";
+                textBoxServiceUsageID.Text = "";
+                textBoxPurposeServiceUsages.Text = "";
             }
             catch (Exception ex)
             {
@@ -172,20 +205,20 @@ namespace VetAutomate
                         dataGridView.Rows.Add(iDataRecord.GetInt32(0), iDataRecord.GetString(1), RowState.Modified);
                         break;
 
-                    case "dataGridViewInvoices":
-                        dataGridView.Rows.Add(iDataRecord.GetInt32(0), iDataRecord.GetString(1), iDataRecord.GetDouble(2), iDataRecord.GetDateTime(3).ToString("yyyy-MM-dd HH:mm:ss"), iDataRecord.GetBoolean(4), RowState.Modified);
-                        break;
-
-                    case "dataGridViewPayments":
-                        dataGridView.Rows.Add(iDataRecord.GetInt32(0), iDataRecord.GetInt32(1), iDataRecord.GetDouble(2), iDataRecord.GetDateTime(3).ToString("yyyy-MM-dd HH:mm:ss"), iDataRecord.GetString(4), RowState.Modified);
-                        break;
-
                     case "dataGridViewMedications":
-                        dataGridView.Rows.Add(iDataRecord.GetInt32(0), iDataRecord.GetString(1), iDataRecord.GetString(2), RowState.Modified);
+                        dataGridView.Rows.Add(iDataRecord.GetInt32(0), iDataRecord.GetString(1), iDataRecord.GetString(2), iDataRecord.GetInt32(3), RowState.Modified);
                         break;
 
-                    case "dataGridViewPrescriptions":
-                        dataGridView.Rows.Add(iDataRecord.GetInt32(0), iDataRecord.GetString(1), iDataRecord.GetString(2), iDataRecord.GetString(3), iDataRecord.GetString(4), iDataRecord.GetString(5), RowState.Modified);
+                    case "dataGridViewMedicationSupplies":
+                        dataGridView.Rows.Add(iDataRecord.GetInt32(0), iDataRecord.GetString(1), iDataRecord.GetDateTime(2).ToString("yyyy-MM-dd"), iDataRecord.GetInt32(3), iDataRecord.GetString(4), RowState.Modified);
+                        break;
+
+                    case "dataGridViewMedicationUsages":
+                        dataGridView.Rows.Add(iDataRecord.GetInt32(0), iDataRecord.GetString(1), iDataRecord.GetString(2), iDataRecord.GetString(3), iDataRecord.GetInt32(4), iDataRecord.GetString(5), RowState.Modified);
+                        break;
+
+                    case "dataGridViewServiceUsages":
+                        dataGridView.Rows.Add(iDataRecord.GetInt32(0), iDataRecord.GetString(1), iDataRecord.GetString(2), iDataRecord.GetString(3), iDataRecord.GetString(4), RowState.Modified);
                         break;
                 }
             }
@@ -207,65 +240,41 @@ namespace VetAutomate
                 dataGridView.Rows.Clear();
                 string queryString = "";
 
-                switch (tableName)
+                queryString = tableName switch
                 {
-                    case "Clients":
-                        queryString = "SELECT * FROM Clients";
-                        break;
-
-                    case "Pets":
-                        queryString = @"SELECT p.PetID, p.Name, p.Species, p.Breed, p.BirthDate,
+                    "Clients" => "SELECT * FROM Clients",
+                    "Pets" => @"SELECT p.PetID, p.Name, p.Species, p.Breed, p.BirthDate,
                       c.FullName AS OwnerName
                       FROM Pets p
-                      LEFT JOIN Clients c ON p.OwnerID = c.ClientID";
-                        break;
-
-                    case "Veterinarians":
-                        queryString = @"SELECT v.VetID, v.FullName, v.BirthDate, v.BirthPlace,
+                      LEFT JOIN Clients c ON p.OwnerID = c.ClientID",
+                    "Veterinarians" => @"SELECT v.VetID, v.FullName, v.BirthDate, v.BirthPlace,
                       v.PassportSeries, v.PassportNumber, v.Phone, v.Email, v.INN,
                       v.DateOfEmployment, p.Post, g.Gender
                       FROM Veterinarians v
                       LEFT JOIN Posts p ON v.PostID = p.PostID
-                      LEFT JOIN Genders g ON v.GenderID = g.GenderID";
-                        break;
-
-                    case "Services":
-                        queryString = "SELECT * FROM Services";
-                        break;
-
-                    case "Invoices":
-                        queryString = @"SELECT i.InvoiceID, c.FullName AS ClientName,
-                      i.TotalAmount, i.InvoiceDate, i.Paid
-                      FROM Invoices i
-                      LEFT JOIN Clients c ON i.ClientID = c.ClientID";
-                        break;
-
-                    case "Payments":
-                        queryString = @"SELECT p.PaymentID, i.InvoiceID, p.Amount,
-                      p.PaymentDate, pm.PaymentMethod
-                      FROM Payments p
-                      LEFT JOIN Invoices i ON p.InvoiceID = i.InvoiceID
-                      LEFT JOIN PaymentMethods pm ON p.PaymentMethod = pm.PaymentMethodID";
-                        break;
-
-                    case "Medications":
-                        queryString = "SELECT * FROM Medications";
-                        break;
-
-                    case "Prescriptions":
-                        queryString = @"SELECT pr.PrescriptionID, pe.Name AS PetName,
-                      v.FullName AS VetName, m.Name AS MedicationName,
-                      pr.Dosage, pr.Instructions
-                      FROM Prescriptions pr
-                      LEFT JOIN Pets pe ON pr.PetID = pe.PetID
-                      LEFT JOIN Veterinarians v ON pr.VetID = v.VetID
-                      LEFT JOIN Medications m ON pr.MedicationID = m.MedicationID";
-                        break;
-
-                    default:
-                        queryString = $"SELECT * FROM {tableName}";
-                        break;
-                }
+                      LEFT JOIN Genders g ON v.GenderID = g.GenderID",
+                    "Services" => "SELECT * FROM Services",
+                    "Medications" => "SELECT * FROM Medications",
+                    "MedicationSupplies" => @"SELECT ms.SupplyID, m.Name AS MedicationName,
+                      ms.SupplyDate, ms.QuantitySupplied, ms.SupplierName
+                      FROM MedicationSupplies ms
+                      LEFT JOIN Medications m ON ms.MedicationID = m.MedicationID",
+                    "MedicationUsages" => @"SELECT mu.MedicationUsageID, p.Name AS PetName,
+                      v.FullName AS VeterinarianName, m.Name AS MedicationName,
+                      mu.QuantityUsed, mu.Purpose
+                      FROM MedicationUsages mu
+                      LEFT JOIN Pets p ON mu.PetID = p.PetID
+                      LEFT JOIN Veterinarians v ON mu.VetID = v.VetID
+                      LEFT JOIN Medications m ON mu.MedicationID = m.MedicationID",
+                    "ServiceUsages" => @"SELECT su.ServiceUsageID, p.Name AS PetName,
+                      v.FullName AS VeterinarianName, s.ServiceName,
+                      su.Purpose
+                      FROM ServiceUsages su
+                      LEFT JOIN Pets p ON su.PetID = p.PetID
+                      LEFT JOIN Veterinarians v ON su.VetID = v.VetID
+                      LEFT JOIN Services s ON su.ServiceID = s.ServiceID",
+                    _ => $"SELECT * FROM {tableName}",
+                };
                 SqlCommand sqlCommand = new(queryString, dataBase.GetConnection());
                 dataBase.OpenConnection();
                 SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
@@ -342,6 +351,9 @@ namespace VetAutomate
                 RefreshDataGrid(dataGridViewVeterinarians, "Veterinarians");
                 RefreshDataGrid(dataGridViewServices, "Services");
                 RefreshDataGrid(dataGridViewMedications, "Medications");
+                RefreshDataGrid(dataGridViewMedicationSupplies, "MedicationSupplies");
+                RefreshDataGrid(dataGridViewMedicationUsages, "MedicationUsages");
+                RefreshDataGrid(dataGridViewServiceUsages, "ServiceUsages");
             }
             catch (Exception ex)
             {
@@ -409,6 +421,34 @@ namespace VetAutomate
                         textBoxDescription.Text = dataGridViewRow.Cells[2].Value.ToString();
                         textBoxQuantityInStock.Text = dataGridViewRow.Cells[3].Value.ToString();
                         panelRecordMedications.Visible = true;
+                        break;
+
+                    case "dataGridViewMedicationSupplies":
+                        textBoxSupplyID.Text = dataGridViewRow.Cells[0].Value.ToString();
+                        comboBoxMedicationIDMedicationSuppplies.Text = dataGridViewRow.Cells[1].Value.ToString();
+                        dateTimePickerSupplyDate.Text = dataGridViewRow.Cells[2].Value.ToString();
+                        textBoxQuantitySupplied.Text = dataGridViewRow.Cells[3].Value.ToString();
+                        textBoxSupplierName.Text = dataGridViewRow.Cells[4].Value.ToString();
+                        panelRecordMedicationSupplies.Visible = true;
+                        break;
+
+                    case "dataGridViewMedicationUsages":
+                        textBoxMedicationUsageID.Text = dataGridViewRow.Cells[0].Value.ToString();
+                        comboBoxPetIDMedicationUsages.Text = dataGridViewRow.Cells[1].Value.ToString();
+                        comboBoxVetIDMedicationUsages.Text = dataGridViewRow.Cells[2].Value.ToString();
+                        comboBoxMedicationIDMedicationUsages.Text = dataGridViewRow.Cells[3].Value.ToString();
+                        textBoxQuantityUsed.Text = dataGridViewRow.Cells[4].Value.ToString();
+                        textBoxPurposeMedicationUsages.Text = dataGridViewRow.Cells[5].Value.ToString();
+                        panelRecordMedicationUsages.Visible = true;
+                        break;
+
+                    case "dataGridViewServiceUsages":
+                        textBoxServiceUsageID.Text = dataGridViewRow.Cells[0].Value.ToString();
+                        comboBoxPetIDServiceUsages.Text = dataGridViewRow.Cells[1].Value.ToString();
+                        comboBoxVetIDServiceUsages.Text = dataGridViewRow.Cells[2].Value.ToString();
+                        comboBoxServiceIDServiceUsages.Text = dataGridViewRow.Cells[3].Value.ToString();
+                        textBoxPurposeServiceUsages.Text = dataGridViewRow.Cells[4].Value.ToString();
+                        panelRecordServiceUsages.Visible = true;
                         break;
                 }
             }
@@ -478,7 +518,7 @@ namespace VetAutomate
                         break;
 
                     case "dataGridViewMedications":
-                        string queryMeds = $"SELECT * FROM Medications WHERE CONCAT(MedicationID, Name, Description) LIKE '%{textBoxSearchClients.Text}%'";
+                        string queryMeds = $"SELECT * FROM Medications WHERE CONCAT(MedicationID, Name, Description, QuantityInStock) LIKE '%{textBoxSearchClients.Text}%'";
                         SqlCommand cmdMeds = new(queryMeds, dataBase.GetConnection());
                         dataBase.OpenConnection();
                         SqlDataReader readerMeds = cmdMeds.ExecuteReader();
@@ -487,6 +527,42 @@ namespace VetAutomate
                             ReadSingleRow(dataGridView, readerMeds);
                         }
                         readerMeds.Close();
+                        break;
+
+                    case "dataGridViewMedicationSupplies":
+                        string querySupplies = $"SELECT * FROM MedicationSupplies WHERE CONCAT(SupplyID, MedicationID, SupplyDate, QuantitySupplied, SupplierName) LIKE '%{textBoxSearchClients.Text}%'";
+                        SqlCommand cmdSupplies = new(querySupplies, dataBase.GetConnection());
+                        dataBase.OpenConnection();
+                        SqlDataReader readerSupplies = cmdSupplies.ExecuteReader();
+                        while (readerSupplies.Read())
+                        {
+                            ReadSingleRow(dataGridView, readerSupplies);
+                        }
+                        readerSupplies.Close();
+                        break;
+
+                    case "dataGridViewMedicationUsages":
+                        string queryMedUsages = $"SELECT * FROM MedicationUsages WHERE CONCAT(MedicationUsageID, PetID, VetID, MedicationID, QuantityUsed, Purpose) LIKE '%{textBoxSearchClients.Text}%'";
+                        SqlCommand cmdMedUsages = new(queryMedUsages, dataBase.GetConnection());
+                        dataBase.OpenConnection();
+                        SqlDataReader readerMedUsages = cmdMedUsages.ExecuteReader();
+                        while (readerMedUsages.Read())
+                        {
+                            ReadSingleRow(dataGridView, readerMedUsages);
+                        }
+                        readerMedUsages.Close();
+                        break;
+
+                    case "dataGridViewServiceUsages":
+                        string queryServiceUsages = $"SELECT * FROM ServiceUsages WHERE CONCAT(ServiceUsageID, PetID, VetID, ServiceID, Purpose) LIKE '%{textBoxSearchClients.Text}%'";
+                        SqlCommand cmdServiceUsages = new(queryServiceUsages, dataBase.GetConnection());
+                        dataBase.OpenConnection();
+                        SqlDataReader readerServiceUsages = cmdServiceUsages.ExecuteReader();
+                        while (readerServiceUsages.Read())
+                        {
+                            ReadSingleRow(dataGridView, readerServiceUsages);
+                        }
+                        readerServiceUsages.Close();
                         break;
                 }
             }
@@ -556,10 +632,37 @@ namespace VetAutomate
                     case "dataGridViewMedications":
                         if (dataGridView.Rows[index].Cells[0].Value.ToString() == string.Empty)
                         {
-                            dataGridView.Rows[index].Cells[3].Value = RowState.Deleted;
+                            dataGridView.Rows[index].Cells[4].Value = RowState.Deleted;
                             return;
                         }
-                        dataGridView.Rows[index].Cells[3].Value = RowState.Deleted;
+                        dataGridView.Rows[index].Cells[4].Value = RowState.Deleted;
+                        break;
+
+                    case "dataGridViewMedicationSupplies":
+                        if (dataGridView.Rows[index].Cells[0].Value.ToString() == string.Empty)
+                        {
+                            dataGridView.Rows[index].Cells[5].Value = RowState.Deleted;
+                            return;
+                        }
+                        dataGridView.Rows[index].Cells[5].Value = RowState.Deleted;
+                        break;
+
+                    case "dataGridViewMedicationUsages":
+                        if (dataGridView.Rows[index].Cells[0].Value.ToString() == string.Empty)
+                        {
+                            dataGridView.Rows[index].Cells[6].Value = RowState.Deleted;
+                            return;
+                        }
+                        dataGridView.Rows[index].Cells[6].Value = RowState.Deleted;
+                        break;
+
+                    case "dataGridViewServiceUsages":
+                        if (dataGridView.Rows[index].Cells[0].Value.ToString() == string.Empty)
+                        {
+                            dataGridView.Rows[index].Cells[5].Value = RowState.Deleted;
+                            return;
+                        }
+                        dataGridView.Rows[index].Cells[5].Value = RowState.Deleted;
                         break;
                 }
             }
@@ -795,7 +898,7 @@ namespace VetAutomate
                             break;
 
                         case "dataGridViewMedications":
-                            var rowStateMedications = (RowState)dataGridView.Rows[index].Cells[3].Value;
+                            var rowStateMedications = (RowState)dataGridView.Rows[index].Cells[4].Value;
                             if (rowStateMedications == RowState.Existed)
                                 continue;
                             if (rowStateMedications == RowState.Deleted)
@@ -810,7 +913,8 @@ namespace VetAutomate
                                 var medicationID = dataGridView.Rows[index].Cells[0].Value.ToString();
                                 var name = dataGridView.Rows[index].Cells[1].Value.ToString();
                                 var description = dataGridView.Rows[index].Cells[2].Value.ToString();
-                                var updateQuery = $"UPDATE Medications SET Name = '{name}', Description = '{description}' WHERE MedicationID = '{medicationID}'";
+                                var quantinityInStock = dataGridView.Rows[index].Cells[3].Value.ToString();
+                                var updateQuery = $"UPDATE Medications SET Name = '{name}', Description = '{description}', QuantityInStock = '{quantinityInStock}' WHERE MedicationID = '{medicationID}'";
                                 new SqlCommand(updateQuery, dataBase.GetConnection()).ExecuteNonQuery();
                                 FillAllComboBoxes();
                             }
@@ -818,9 +922,261 @@ namespace VetAutomate
                             {
                                 var name = dataGridView.Rows[index].Cells[1].Value.ToString();
                                 var description = dataGridView.Rows[index].Cells[2].Value.ToString();
-                                var insertQuery = $"INSERT INTO Medications (Name, Description) VALUES ('{name}', '{description}')";
+                                var quantinityInStock = dataGridView.Rows[index].Cells[3].Value.ToString();
+                                var insertQuery = $"INSERT INTO Medications (Name, Description, QuantinityInStock) VALUES ('{name}', '{description}', '{quantinityInStock}')";
                                 new SqlCommand(insertQuery, dataBase.GetConnection()).ExecuteNonQuery();
                                 FillAllComboBoxes();
+                            }
+                            break;
+
+                        case "dataGridViewMedicationSupplies":
+                            var rowStateSupplies = (RowState)dataGridView.Rows[index].Cells[5].Value;
+                            if (rowStateSupplies == RowState.Existed)
+                                continue;
+                            if (rowStateSupplies == RowState.Deleted)
+                            {
+                                var supplyID = Convert.ToInt32(dataGridView.Rows[index].Cells[0].Value);
+                                var deleteQuery = $"DELETE FROM MedicationSupplies WHERE SupplyID = '{supplyID}'";
+                                new SqlCommand(deleteQuery, dataBase.GetConnection()).ExecuteNonQuery();
+                            }
+                            if (rowStateSupplies == RowState.Modified)
+                            {
+                                var supplyID = dataGridView.Rows[index].Cells[0].Value.ToString();
+                                var medicationName = dataGridView.Rows[index].Cells[1].Value?.ToString();
+                                var oldQuantity = Convert.ToInt32(dataGridView.Rows[index].Cells[3].Value);
+                                var newQuantity = Convert.ToInt32(dataGridView.Rows[index].Cells[3].Value);
+                                var supplierName = dataGridView.Rows[index].Cells[4].Value?.ToString();
+                                int? medicationID = null;
+                                if (!string.IsNullOrEmpty(medicationName))
+                                {
+                                    var getMedIdQuery = $"SELECT MedicationID FROM Medications WHERE Name = '{medicationName}'";
+                                    var medIdCommand = new SqlCommand(getMedIdQuery, dataBase.GetConnection());
+                                    var result = medIdCommand.ExecuteScalar();
+                                    if (result != null)
+                                    {
+                                        medicationID = Convert.ToInt32(result);
+                                    }
+                                }
+                                var updateQuery = $"UPDATE MedicationSupplies SET MedicationID = '{medicationID}', QuantitySupplied = '{newQuantity}', SupplierName = '{supplierName}' WHERE SupplyID = '{supplyID}'";
+                                new SqlCommand(updateQuery, dataBase.GetConnection()).ExecuteNonQuery();
+                            }
+                            if (rowStateSupplies == RowState.New)
+                            {
+                                var medicationName = dataGridView.Rows[index].Cells[1].Value?.ToString();
+                                var quantitySupplied = Convert.ToInt32(dataGridView.Rows[index].Cells[3].Value);
+                                var supplierName = dataGridView.Rows[index].Cells[4].Value?.ToString();
+                                int? medicationID = null;
+                                if (!string.IsNullOrEmpty(medicationName))
+                                {
+                                    var getMedIdQuery = $"SELECT MedicationID FROM Medications WHERE Name = '{medicationName}'";
+                                    var medIdCommand = new SqlCommand(getMedIdQuery, dataBase.GetConnection());
+                                    var result = medIdCommand.ExecuteScalar();
+                                    if (result != null)
+                                    {
+                                        medicationID = Convert.ToInt32(result);
+                                    }
+                                }
+                                var insertQuery = $"INSERT INTO MedicationSupplies (MedicationID, QuantitySupplied, SupplierName) VALUES ('{medicationID}', '{quantitySupplied}', '{supplierName}')";
+                                new SqlCommand(insertQuery, dataBase.GetConnection()).ExecuteNonQuery();
+                            }
+                            break;
+
+                        case "dataGridViewMedicationUsages":
+                            var rowStateMedUsages = (RowState)dataGridView.Rows[index].Cells[6].Value;
+                            if (rowStateMedUsages == RowState.Existed)
+                                continue;
+                            if (rowStateMedUsages == RowState.Deleted)
+                            {
+                                var usageID = Convert.ToInt32(dataGridView.Rows[index].Cells[0].Value);
+                                var medicationName = dataGridView.Rows[index].Cells[3].Value?.ToString();
+                                var quantityUsed = Convert.ToInt32(dataGridView.Rows[index].Cells[4].Value);
+                                var deleteQuery = $"DELETE FROM MedicationUsages WHERE MedicationUsageID = '{usageID}'";
+                                new SqlCommand(deleteQuery, dataBase.GetConnection()).ExecuteNonQuery();
+                            }
+                            if (rowStateMedUsages == RowState.Modified)
+                            {
+                                var usageID = dataGridView.Rows[index].Cells[0].Value.ToString();
+                                var petName = dataGridView.Rows[index].Cells[1].Value?.ToString();
+                                var vetName = dataGridView.Rows[index].Cells[2].Value?.ToString();
+                                var medicationName = dataGridView.Rows[index].Cells[3].Value?.ToString();
+                                var oldQuantity = Convert.ToInt32(dataGridView.Rows[index].Cells[4].Value);
+                                var newQuantity = Convert.ToInt32(dataGridView.Rows[index].Cells[4].Value);
+                                var purpose = dataGridView.Rows[index].Cells[5].Value?.ToString();
+                                int? petID = null;
+                                if (!string.IsNullOrEmpty(petName))
+                                {
+                                    var getPetIdQuery = $"SELECT PetID FROM Pets WHERE Name = '{petName}'";
+                                    var petIdCommand = new SqlCommand(getPetIdQuery, dataBase.GetConnection());
+                                    var result = petIdCommand.ExecuteScalar();
+                                    if (result != null)
+                                    {
+                                        petID = Convert.ToInt32(result);
+                                    }
+                                }
+                                int? vetID = null;
+                                if (!string.IsNullOrEmpty(vetName))
+                                {
+                                    var getVetIdQuery = $"SELECT VetID FROM Veterinarians WHERE FullName = '{vetName}'";
+                                    var vetIdCommand = new SqlCommand(getVetIdQuery, dataBase.GetConnection());
+                                    var result = vetIdCommand.ExecuteScalar();
+                                    if (result != null)
+                                    {
+                                        vetID = Convert.ToInt32(result);
+                                    }
+                                }
+                                int? medicationID = null;
+                                if (!string.IsNullOrEmpty(medicationName))
+                                {
+                                    var getMedIdQuery = $"SELECT MedicationID FROM Medications WHERE Name = '{medicationName}'";
+                                    var medIdCommand = new SqlCommand(getMedIdQuery, dataBase.GetConnection());
+                                    var result = medIdCommand.ExecuteScalar();
+                                    if (result != null)
+                                    {
+                                        medicationID = Convert.ToInt32(result);
+                                    }
+                                }
+                                var updateQuery = $"UPDATE MedicationUsages SET PetID = '{petID}', VetID = '{vetID}', MedicationID = '{medicationID}', QuantityUsed = '{newQuantity}', Purpose = '{purpose}' WHERE MedicationUsageID = '{usageID}'";
+                                new SqlCommand(updateQuery, dataBase.GetConnection()).ExecuteNonQuery();
+                            }
+                            if (rowStateMedUsages == RowState.New)
+                            {
+                                var petName = dataGridView.Rows[index].Cells[1].Value?.ToString();
+                                var vetName = dataGridView.Rows[index].Cells[2].Value?.ToString();
+                                var medicationName = dataGridView.Rows[index].Cells[3].Value?.ToString();
+                                var quantityUsed = Convert.ToInt32(dataGridView.Rows[index].Cells[4].Value);
+                                var purpose = dataGridView.Rows[index].Cells[5].Value?.ToString();
+                                int? petID = null;
+                                if (!string.IsNullOrEmpty(petName))
+                                {
+                                    var getPetIdQuery = $"SELECT PetID FROM Pets WHERE Name = '{petName}'";
+                                    var petIdCommand = new SqlCommand(getPetIdQuery, dataBase.GetConnection());
+                                    var result = petIdCommand.ExecuteScalar();
+                                    if (result != null)
+                                    {
+                                        petID = Convert.ToInt32(result);
+                                    }
+                                }
+                                int? vetID = null;
+                                if (!string.IsNullOrEmpty(vetName))
+                                {
+                                    var getVetIdQuery = $"SELECT VetID FROM Veterinarians WHERE FullName = '{vetName}'";
+                                    var vetIdCommand = new SqlCommand(getVetIdQuery, dataBase.GetConnection());
+                                    var result = vetIdCommand.ExecuteScalar();
+                                    if (result != null)
+                                    {
+                                        vetID = Convert.ToInt32(result);
+                                    }
+                                }
+                                int? medicationID = null;
+                                if (!string.IsNullOrEmpty(medicationName))
+                                {
+                                    var getMedIdQuery = $"SELECT MedicationID FROM Medications WHERE Name = '{medicationName}'";
+                                    var medIdCommand = new SqlCommand(getMedIdQuery, dataBase.GetConnection());
+                                    var result = medIdCommand.ExecuteScalar();
+                                    if (result != null)
+                                    {
+                                        medicationID = Convert.ToInt32(result);
+                                    }
+                                }
+                                var insertQuery = $"INSERT INTO MedicationUsages (PetID, VetID, MedicationID, QuantityUsed, Purpose) VALUES ('{petID}', '{vetID}', '{medicationID}', '{quantityUsed}', '{purpose}')";
+                                new SqlCommand(insertQuery, dataBase.GetConnection()).ExecuteNonQuery();
+                            }
+                            break;
+
+                        case "dataGridViewServiceUsages":
+                            var rowStateServiceUsages = (RowState)dataGridView.Rows[index].Cells[5].Value;
+                            if (rowStateServiceUsages == RowState.Existed)
+                                continue;
+                            if (rowStateServiceUsages == RowState.Deleted)
+                            {
+                                var serviceUsageID = Convert.ToInt32(dataGridView.Rows[index].Cells[0].Value);
+                                var deleteQuery = $"DELETE FROM ServiceUsages WHERE ServiceUsageID = '{serviceUsageID}'";
+                                new SqlCommand(deleteQuery, dataBase.GetConnection()).ExecuteNonQuery();
+                            }
+                            if (rowStateServiceUsages == RowState.Modified)
+                            {
+                                var serviceUsageID = dataGridView.Rows[index].Cells[0].Value.ToString();
+                                var petName = dataGridView.Rows[index].Cells[1].Value?.ToString();
+                                var vetName = dataGridView.Rows[index].Cells[2].Value?.ToString();
+                                var serviceName = dataGridView.Rows[index].Cells[3].Value?.ToString();
+                                var purpose = dataGridView.Rows[index].Cells[4].Value?.ToString();
+                                int? petID = null;
+                                if (!string.IsNullOrEmpty(petName))
+                                {
+                                    var getPetIdQuery = $"SELECT PetID FROM Pets WHERE Name = '{petName}'";
+                                    var petIdCommand = new SqlCommand(getPetIdQuery, dataBase.GetConnection());
+                                    var result = petIdCommand.ExecuteScalar();
+                                    if (result != null)
+                                    {
+                                        petID = Convert.ToInt32(result);
+                                    }
+                                }
+                                int? vetID = null;
+                                if (!string.IsNullOrEmpty(vetName))
+                                {
+                                    var getVetIdQuery = $"SELECT VetID FROM Veterinarians WHERE FullName = '{vetName}'";
+                                    var vetIdCommand = new SqlCommand(getVetIdQuery, dataBase.GetConnection());
+                                    var result = vetIdCommand.ExecuteScalar();
+                                    if (result != null)
+                                    {
+                                        vetID = Convert.ToInt32(result);
+                                    }
+                                }
+                                int? serviceID = null;
+                                if (!string.IsNullOrEmpty(serviceName))
+                                {
+                                    var getServiceIdQuery = $"SELECT ServiceID FROM Services WHERE ServiceName = '{serviceName}'";
+                                    var serviceIdCommand = new SqlCommand(getServiceIdQuery, dataBase.GetConnection());
+                                    var result = serviceIdCommand.ExecuteScalar();
+                                    if (result != null)
+                                    {
+                                        serviceID = Convert.ToInt32(result);
+                                    }
+                                }
+                                var updateQuery = $"UPDATE ServiceUsages SET PetID = '{petID}', VetID = '{vetID}', ServiceID = '{serviceID}', Purpose = '{purpose}' WHERE ServiceUsageID = '{serviceUsageID}'";
+                                new SqlCommand(updateQuery, dataBase.GetConnection()).ExecuteNonQuery();
+                            }
+                            if (rowStateServiceUsages == RowState.New)
+                            {
+                                var petName = dataGridView.Rows[index].Cells[1].Value?.ToString();
+                                var vetName = dataGridView.Rows[index].Cells[2].Value?.ToString();
+                                var serviceName = dataGridView.Rows[index].Cells[3].Value?.ToString();
+                                var purpose = dataGridView.Rows[index].Cells[4].Value?.ToString();
+                                int? petID = null;
+                                if (!string.IsNullOrEmpty(petName))
+                                {
+                                    var getPetIdQuery = $"SELECT PetID FROM Pets WHERE Name = '{petName}'";
+                                    var petIdCommand = new SqlCommand(getPetIdQuery, dataBase.GetConnection());
+                                    var result = petIdCommand.ExecuteScalar();
+                                    if (result != null)
+                                    {
+                                        petID = Convert.ToInt32(result);
+                                    }
+                                }
+                                int? vetID = null;
+                                if (!string.IsNullOrEmpty(vetName))
+                                {
+                                    var getVetIdQuery = $"SELECT VetID FROM Veterinarians WHERE FullName = '{vetName}'";
+                                    var vetIdCommand = new SqlCommand(getVetIdQuery, dataBase.GetConnection());
+                                    var result = vetIdCommand.ExecuteScalar();
+                                    if (result != null)
+                                    {
+                                        vetID = Convert.ToInt32(result);
+                                    }
+                                }
+                                int? serviceID = null;
+                                if (!string.IsNullOrEmpty(serviceName))
+                                {
+                                    var getServiceIdQuery = $"SELECT ServiceID FROM Services WHERE ServiceName = '{serviceName}'";
+                                    var serviceIdCommand = new SqlCommand(getServiceIdQuery, dataBase.GetConnection());
+                                    var result = serviceIdCommand.ExecuteScalar();
+                                    if (result != null)
+                                    {
+                                        serviceID = Convert.ToInt32(result);
+                                    }
+                                }
+                                var insertQuery = $"INSERT INTO ServiceUsages (PetID, VetID, ServiceID, Purpose) VALUES ('{petID}', '{vetID}', '{serviceID}', '{purpose}')";
+                                new SqlCommand(insertQuery, dataBase.GetConnection()).ExecuteNonQuery();
                             }
                             break;
                     }
@@ -829,10 +1185,6 @@ namespace VetAutomate
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                dataBase.CloseConnection();
             }
         }
 
@@ -899,7 +1251,38 @@ namespace VetAutomate
                         var description = textBoxDescription.Text;
                         var priceMed = textBoxQuantityInStock.Text;
                         dataGridView.Rows[selectedRowIndex].SetValues(medicationID, nameMed, description, priceMed);
-                        dataGridView.Rows[selectedRowIndex].Cells[3].Value = RowState.Modified;
+                        dataGridView.Rows[selectedRowIndex].Cells[4].Value = RowState.Modified;
+                        break;
+
+                    case "dataGridViewMedicationSupplies":
+                        var supplyID = textBoxSupplyID.Text;
+                        var medicationIDSupply = comboBoxMedicationIDMedicationSuppplies.Text;
+                        var supplyDate = dateTimePickerSupplyDate.Value;
+                        var quantitySupplied = textBoxQuantitySupplied.Text;
+                        var supplierName = textBoxSupplierName.Text;
+                        dataGridView.Rows[selectedRowIndex].SetValues(supplyID, medicationIDSupply, supplyDate, quantitySupplied, supplierName);
+                        dataGridView.Rows[selectedRowIndex].Cells[5].Value = RowState.Modified;
+                        break;
+
+                    case "dataGridViewMedicationUsages":
+                        var medicationUsageID = textBoxMedicationUsageID.Text;
+                        var petIDUsage = comboBoxPetIDMedicationUsages.Text;
+                        var vetIDUsage = comboBoxVetIDMedicationUsages.Text;
+                        var medicationIDUsage = comboBoxMedicationIDMedicationUsages.Text;
+                        var quantityUsed = textBoxQuantityUsed.Text;
+                        var purposeUsage = textBoxPurposeMedicationUsages.Text;
+                        dataGridView.Rows[selectedRowIndex].SetValues(medicationUsageID, petIDUsage, vetIDUsage, medicationIDUsage, quantityUsed, purposeUsage);
+                        dataGridView.Rows[selectedRowIndex].Cells[6].Value = RowState.Modified;
+                        break;
+
+                    case "dataGridViewServiceUsages":
+                        var serviceUsageID = textBoxServiceUsageID.Text;
+                        var petIDService = comboBoxPetIDServiceUsages.Text;
+                        var vetIDService = comboBoxVetIDServiceUsages.Text;
+                        var serviceIDUsage = comboBoxServiceIDServiceUsages.Text;
+                        var purposeService = textBoxPurposeServiceUsages.Text;
+                        dataGridView.Rows[selectedRowIndex].SetValues(serviceUsageID, petIDService, vetIDService, serviceIDUsage, purposeService);
+                        dataGridView.Rows[selectedRowIndex].Cells[5].Value = RowState.Modified;
                         break;
                 }
             }
@@ -943,6 +1326,18 @@ namespace VetAutomate
 
                     case "dataGridViewMedications":
                         title.Range.Text = "Данные лекарств";
+                        break;
+
+                    case "dataGridViewMedicationSupplies":
+                        title.Range.Text = "Данные поставок лекарств";
+                        break;
+
+                    case "dataGridViewMedicationUsages":
+                        title.Range.Text = "Данные использования лекарств";
+                        break;
+
+                    case "dataGridViewServiceUsages":
+                        title.Range.Text = "Данные оказания услуг";
                         break;
                 }
                 title.Range.Font.Bold = 1;
@@ -1004,6 +1399,18 @@ namespace VetAutomate
                     case "dataGridViewMedications":
                         title = "Данные лекарств";
                         break;
+
+                    case "dataGridViewMedicationSupplies":
+                        title = "Данные поставок лекарств";
+                        break;
+
+                    case "dataGridViewMedicationUsages":
+                        title = "Данные использования лекарств";
+                        break;
+
+                    case "dataGridViewServiceUsages":
+                        title = "Данные оказания услуг";
+                        break;
                 }
                 Excel.Range titleRange = worksheet.Range[worksheet.Cells[1, 1], worksheet.Cells[1, dataGridView.ColumnCount - 1]];
                 titleRange.Merge();
@@ -1032,53 +1439,6 @@ namespace VetAutomate
             {
                 MessageBox.Show(ex.Message);
             }
-        }
-
-        /// <summary>
-        /// ExportToTXT() вызывается при экспорте в .txt
-        /// </summary>
-        /// <param name="dataGridView"></param>
-        private static void ExportToTXT(DataGridView dataGridView)
-        {
-            string text = "";
-            switch (dataGridView.Name)
-            {
-                case "dataGridViewClients":
-                    text += "Данные клиентов\n\n";
-                    break;
-
-                case "dataGridViewPets":
-                    text += "Данные питомцев\n\n";
-                    break;
-
-                case "dataGridViewVeterinarians":
-                    text += "Данные ветеринаров\n\n";
-                    break;
-
-                case "dataGridViewServices":
-                    text += "Данные услуг\n\n";
-                    break;
-
-                case "dataGridViewMedications":
-                    text += "Данные лекарств\n\n";
-                    break;
-            }
-            for (int col = 0; col < dataGridView.ColumnCount; col++)
-            {
-                text += dataGridView.Columns[col].HeaderText + "\t";
-            }
-            text += "\n";
-            for (int row = 0; row < dataGridView.RowCount; row++)
-            {
-                for (int col = 0; col < dataGridView.ColumnCount - 1; col++)
-                {
-                    text += dataGridView[col, row].Value?.ToString() + "\t";
-                }
-                text += "\n";
-            }
-            string filePath = "данные.txt";
-            File.WriteAllText(filePath, text);
-            Process.Start(new ProcessStartInfo(filePath) { UseShellExecute = true });
         }
 
         /// <summary>
@@ -1158,7 +1518,6 @@ namespace VetAutomate
             SqlDataAdapter adapter = new(command);
             System.Data.DataTable dataTable = new();
             adapter.Fill(dataTable);
-            dataBase.CloseConnection();
             title.Range.Font.Bold = 1;
             title.Range.Font.Size = 14;
             title.Alignment = WdParagraphAlignment.wdAlignParagraphCenter;
@@ -1213,14 +1572,61 @@ namespace VetAutomate
                     comboBoxGender.Items.Add(gendersReader.GetString(0));
                 }
                 gendersReader.Close();
+                comboBoxMedicationIDMedicationSuppplies.Items.Clear();
+                comboBoxMedicationIDMedicationUsages.Items.Clear();
+                using (var cmd = new SqlCommand("SELECT MedicationID, Name FROM Medications ORDER BY Name", dataBase.GetConnection()))
+                {
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            comboBoxMedicationIDMedicationSuppplies.Items.Add(reader.GetString(1));
+                            comboBoxMedicationIDMedicationUsages.Items.Add(reader.GetString(1));
+                        }
+                    }
+                }
+                comboBoxPetIDMedicationUsages.Items.Clear();
+                comboBoxPetIDServiceUsages.Items.Clear();
+                using (var cmd = new SqlCommand("SELECT PetID, Name FROM Pets ORDER BY Name", dataBase.GetConnection()))
+                {
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            comboBoxPetIDMedicationUsages.Items.Add(reader.GetString(1));
+                            comboBoxPetIDServiceUsages.Items.Add(reader.GetString(1));
+                        }
+                    }
+                }
+                comboBoxVetIDServiceUsages.Items.Clear();
+                comboBoxVetIDMedicationUsages.Items.Clear();
+                using (var cmd = new SqlCommand("SELECT VetID, FullName FROM Veterinarians ORDER BY FullName", dataBase.GetConnection()))
+                {
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            comboBoxVetIDServiceUsages.Items.Add(reader.GetString(1));
+                            comboBoxVetIDMedicationUsages.Items.Add(reader.GetString(1));
+                        }
+                    }
+                }
+                comboBoxServiceIDServiceUsages.Items.Clear();
+                using (var cmd = new SqlCommand("SELECT ServiceID, ServiceName FROM Services ORDER BY ServiceName", dataBase.GetConnection()))
+                {
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            comboBoxServiceIDServiceUsages.Items.Add(
+                                reader.GetString(1));
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Ошибка при загрузке данных в комбобоксы: {ex.Message}");
-            }
-            finally
-            {
-                dataBase.CloseConnection();
             }
         }
 
@@ -1238,6 +1644,9 @@ namespace VetAutomate
                 RefreshDataGrid(dataGridViewVeterinarians, "Veterinarians");
                 RefreshDataGrid(dataGridViewServices, "Services");
                 RefreshDataGrid(dataGridViewMedications, "Medications");
+                RefreshDataGrid(dataGridViewMedicationSupplies, "MedicationSupplies");
+                RefreshDataGrid(dataGridViewMedicationUsages, "MedicationUsages");
+                RefreshDataGrid(dataGridViewServiceUsages, "ServiceUsages");
                 ClearFields();
             }
             catch (Exception ex)
@@ -1340,6 +1749,7 @@ namespace VetAutomate
                 MessageBox.Show(ex.Message);
             }
         }
+
         /// <summary>
         /// ButtonNewMedicationSupplie_Click() вызывается при нажатии на кнопку "Создать запись" на вкладке "Поставки лекарств"
         /// </summary>
@@ -1347,8 +1757,18 @@ namespace VetAutomate
         /// <param name="e"></param>
         private void ButtonNewMedicationSupplie_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                AddFormMedicationSupplies addForm = new();
+                addForm.Show();
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
         /// <summary>
         /// ButtonNewMedicationUsage_Click() вызывается при нажатии на кнопку "Создать запись" на вкладке "Использование лекарств"
         /// </summary>
@@ -1356,8 +1776,18 @@ namespace VetAutomate
         /// <param name="e"></param>
         private void ButtonNewMedicationUsage_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                AddFormMedicationSupplies addForm = new();
+                addForm.Show();
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
         /// <summary>
         /// ButtonNewServiceUsage_Click() вызывается при нажатии на кнопку "Создать запись" на вкладке "Оказание услуг"
         /// </summary>
@@ -1365,7 +1795,16 @@ namespace VetAutomate
         /// <param name="e"></param>
         private void ButtonNewServiceUsage_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                AddFormServiceUsages addForm = new();
+                addForm.Show();
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         /// <summary>
@@ -1457,6 +1896,7 @@ namespace VetAutomate
                 MessageBox.Show(ex.Message);
             }
         }
+
         /// <summary>
         /// ButtonDeleteMedicationSupplie_Click() вызывается при нажатии на кнопку "Удалить" на вкладке "Поставки лекарств"
         /// </summary>
@@ -1464,8 +1904,17 @@ namespace VetAutomate
         /// <param name="e"></param>
         private void ButtonDeleteMedicationSupplie_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                DeleteRow(dataGridViewMedicationSupplies);
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
         /// <summary>
         /// ButtonDeleteMedicationUsage_Click() вызывается при нажатии на кнопку "Удалить" на вкладке "Использование лекарств"
         /// </summary>
@@ -1473,8 +1922,17 @@ namespace VetAutomate
         /// <param name="e"></param>
         private void ButtonDeleteMedicationUsage_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                DeleteRow(dataGridViewMedicationUsages);
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
         /// <summary>
         /// ButtonDeleteServiceUsage_Click() вызывается при нажатии на кнопку "Удалить" на вкладке "Оказание услуг"
         /// </summary>
@@ -1482,7 +1940,15 @@ namespace VetAutomate
         /// <param name="e"></param>
         private void ButtonDeleteServiceUsage_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                DeleteRow(dataGridViewServiceUsages);
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         /// <summary>
@@ -1574,6 +2040,7 @@ namespace VetAutomate
                 MessageBox.Show(ex.Message);
             }
         }
+
         /// <summary>
         /// ButtonChangeMedicationSupplie_Click() вызывается при нажатии на кнопку "Изменить" на вкладке "Поставки лекарств"
         /// </summary>
@@ -1581,8 +2048,17 @@ namespace VetAutomate
         /// <param name="e"></param>
         private void ButtonChangeMedicationSupplie_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                Change(dataGridViewMedicationSupplies);
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
         /// <summary>
         /// ButtonChangeMedicationUsage_Click() вызывается при нажатии на кнопку "Изменить" на вкладке "Использование лекарств"
         /// </summary>
@@ -1590,8 +2066,17 @@ namespace VetAutomate
         /// <param name="e"></param>
         private void ButtonChangeMedicationUsage_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                Change(dataGridViewMedicationUsages);
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
         /// <summary>
         /// ButtonChangeServiceUsage_Click() вызывается при нажатии на кнопку "Изменить" на вкладке "Оказание услуг"
         /// </summary>
@@ -1599,7 +2084,15 @@ namespace VetAutomate
         /// <param name="e"></param>
         private void ButtonChangeServiceUsage_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                Change(dataGridViewServiceUsages);
+                ClearFields();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         /// <summary>
@@ -1701,6 +2194,7 @@ namespace VetAutomate
                 MessageBox.Show(ex.Message);
             }
         }
+
         /// <summary>
         /// ButtonSaveMedicationSupplie_Click() вызывается при нажатии на кнопку "Сохранить" на вкладке "Поставки лекарств"
         /// </summary>
@@ -1708,8 +2202,16 @@ namespace VetAutomate
         /// <param name="e"></param>
         private void ButtonSaveMedicationSupplie_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                UpdateBase(dataGridViewMedicationSupplies);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
         /// <summary>
         /// ButtonSaveMedicationUsage_Click() вызывается при нажатии на кнопку "Сохранить" на вкладке "Использование лекарств"
         /// </summary>
@@ -1717,8 +2219,16 @@ namespace VetAutomate
         /// <param name="e"></param>
         private void ButtonSaveMedicationUsage_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                UpdateBase(dataGridViewMedicationUsages);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
         /// <summary>
         /// ButtonSaveServiceUsage_Click() вызывается при нажатии на кнопку "Сохранить" на вкладке "Оказание услуг"
         /// </summary>
@@ -1726,7 +2236,14 @@ namespace VetAutomate
         /// <param name="e"></param>
         private void ButtonSaveServiceUsage_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                UpdateBase(dataGridViewServiceUsages);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         /// <summary>
@@ -1813,6 +2330,7 @@ namespace VetAutomate
                 MessageBox.Show(ex.Message);
             }
         }
+
         /// <summary>
         /// ButtonWordMedicationSupplie_Click() вызывается при нажатии на кнопку "Вывод в Word" на вкладке "Поставки лекарств"
         /// </summary>
@@ -1820,8 +2338,16 @@ namespace VetAutomate
         /// <param name="e"></param>
         private void ButtonWordMedicationSupplie_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                ExportToWord(dataGridViewMedicationSupplies);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
         /// <summary>
         /// ButtonWordMedicationUsage_Click() вызывается при нажатии на кнопку "Вывод в Word" на вкладке "Использование лекарств"
         /// </summary>
@@ -1829,8 +2355,16 @@ namespace VetAutomate
         /// <param name="e"></param>
         private void ButtonWordMedicationUsage_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                ExportToWord(dataGridViewMedicationUsages);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
         /// <summary>
         /// ButtonWordServiceUsage_Click() вызывается при нажатии на кнопку "Вывод в Word" на вкладке "Оказание услуг"
         /// </summary>
@@ -1838,7 +2372,14 @@ namespace VetAutomate
         /// <param name="e"></param>
         private void ButtonWordServiceUsage_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                ExportToWord(dataGridViewServiceUsages);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         /// <summary>
@@ -1925,6 +2466,7 @@ namespace VetAutomate
                 MessageBox.Show(ex.Message);
             }
         }
+
         /// <summary>
         /// ButtonExcelMedicationSupplie_Click() вызывается при нажатии на кнопку "Вывод в Excel" на вкладке "Поставки лекарств"
         /// </summary>
@@ -1932,8 +2474,16 @@ namespace VetAutomate
         /// <param name="e"></param>
         private void ButtonExcelMedicationSupplie_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                ExportToExcel(dataGridViewMedicationSupplies);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
         /// <summary>
         /// ButtonExcelMedicationUsage_Click() вызывается при нажатии на кнопку "Вывод в Excel" на вкладке "Использование лекарств"
         /// </summary>
@@ -1941,8 +2491,16 @@ namespace VetAutomate
         /// <param name="e"></param>
         private void ButtonExcelMedicationUsage_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                ExportToExcel(dataGridViewMedicationUsages);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
         /// <summary>
         /// ButtonExcelServiceUsage_Click() вызывается при нажатии на кнопку "Вывод в Excel" на вкладке "Оказание услуг"
         /// </summary>
@@ -1950,7 +2508,14 @@ namespace VetAutomate
         /// <param name="e"></param>
         private void ButtonExcelServiceUsage_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                ExportToExcel(dataGridViewServiceUsages);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         /// <summary>
@@ -2057,6 +2622,7 @@ namespace VetAutomate
                 MessageBox.Show(ex.Message);
             }
         }
+
         /// <summary>
         /// DataGridViewMedicationSupplies_CellClick() вызывается при нажатии на ячейку на вкладке "Поставки лекарств"
         /// </summary>
@@ -2064,8 +2630,20 @@ namespace VetAutomate
         /// <param name="e"></param>
         private void DataGridViewMedicationSupplies_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            try
+            {
+                selectedRow = e.RowIndex;
+                if (e.RowIndex >= 0)
+                {
+                    DataGridView_CellClick(dataGridViewMedicationSupplies, selectedRow);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
         /// <summary>
         /// DataGridViewMedicationUsages_CellClick() вызывается при нажатии на ячейку на вкладке "Использование лекарств"
         /// </summary>
@@ -2073,8 +2651,20 @@ namespace VetAutomate
         /// <param name="e"></param>
         private void DataGridViewMedicationUsages_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            try
+            {
+                selectedRow = e.RowIndex;
+                if (e.RowIndex >= 0)
+                {
+                    DataGridView_CellClick(dataGridViewMedicationUsages, selectedRow);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
         /// <summary>
         /// DataGridViewServiceUsages_CellClick() вызывается при нажатии на ячейку на вкладке "Оказание услуг"
         /// </summary>
@@ -2082,7 +2672,18 @@ namespace VetAutomate
         /// <param name="e"></param>
         private void DataGridViewServiceUsages_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            try
+            {
+                selectedRow = e.RowIndex;
+                if (e.RowIndex >= 0)
+                {
+                    DataGridView_CellClick(dataGridViewServiceUsages, selectedRow);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         /// <summary>
@@ -2169,6 +2770,7 @@ namespace VetAutomate
                 MessageBox.Show(ex.Message);
             }
         }
+
         /// <summary>
         /// TextBoxSearchMedicationSupplies_TextChanged() вызывается при изменении текста на вкладке "Поставки лекарств"
         /// </summary>
@@ -2176,8 +2778,16 @@ namespace VetAutomate
         /// <param name="e"></param>
         private void TextBoxSearchMedicationSupplies_TextChanged(object sender, EventArgs e)
         {
-
+            try
+            {
+                Search(dataGridViewMedicationSupplies);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
         /// <summary>
         /// TextBoxSearchMedicationUsages_TextChanged() вызывается при изменении текста на вкладке "Использование лекарств"
         /// </summary>
@@ -2185,8 +2795,16 @@ namespace VetAutomate
         /// <param name="e"></param>
         private void TextBoxSearchMedicationUsages_TextChanged(object sender, EventArgs e)
         {
-
+            try
+            {
+                Search(dataGridViewMedicationUsages);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
+
         /// <summary>
         /// TextBoxSearchServiceUsages_TextChanged() вызывается при изменении текста на вкладке "Оказание услуг"
         /// </summary>
@@ -2194,7 +2812,14 @@ namespace VetAutomate
         /// <param name="e"></param>
         private void TextBoxSearchServiceUsages_TextChanged(object sender, EventArgs e)
         {
-
+            try
+            {
+                Search(dataGridViewServiceUsages);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         /// <summary>

@@ -33,8 +33,7 @@ namespace VetAutomate
             {
                 dataBase.OpenConnection();
                 var serviceName = textBoxServiceName.Text;
-                var price = textBoxPriceServices.Text;
-                var insertQuery = $"INSERT INTO Services (ServiceName, Price) VALUES ('{serviceName}', '{price}')";
+                var insertQuery = $"INSERT INTO Services (ServiceName, Price) VALUES ('{serviceName}')";
                 var sqlCommand = new SqlCommand(insertQuery, dataBase.GetConnection());
                 sqlCommand.ExecuteNonQuery();
                 MessageBox.Show("Запись успешно создана!", "Успех!", MessageBoxButtons.OK, MessageBoxIcon.Information);

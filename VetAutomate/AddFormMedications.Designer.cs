@@ -36,8 +36,8 @@
             textBoxNameMedications = new TextBox();
             labelDescription = new Label();
             textBoxDescription = new TextBox();
-            labelPrice = new Label();
-            textBoxPrice = new TextBox();
+            labelQuantinityInStock = new Label();
+            textBoxQuantinityInStock = new TextBox();
             SuspendLayout();
             // 
             // labelTitle
@@ -120,25 +120,25 @@
             textBoxDescription.Size = new Size(455, 33);
             textBoxDescription.TabIndex = 13;
             // 
-            // labelPrice
+            // labelQuantinityInStock
             // 
-            labelPrice.AutoSize = true;
-            labelPrice.ForeColor = Color.Black;
-            labelPrice.Location = new Point(246, 573);
-            labelPrice.Margin = new Padding(4, 0, 4, 0);
-            labelPrice.Name = "labelPrice";
-            labelPrice.Size = new Size(38, 15);
-            labelPrice.TabIndex = 17;
-            labelPrice.Text = "Цена:";
+            labelQuantinityInStock.AutoSize = true;
+            labelQuantinityInStock.ForeColor = Color.Black;
+            labelQuantinityInStock.Location = new Point(246, 573);
+            labelQuantinityInStock.Margin = new Padding(4, 0, 4, 0);
+            labelQuantinityInStock.Name = "labelQuantinityInStock";
+            labelQuantinityInStock.Size = new Size(38, 15);
+            labelQuantinityInStock.TabIndex = 17;
+            labelQuantinityInStock.Text = "Цена:";
             // 
-            // textBoxPrice
+            // textBoxQuantinityInStock
             // 
-            textBoxPrice.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            textBoxPrice.Location = new Point(292, 562);
-            textBoxPrice.Margin = new Padding(4, 3, 4, 3);
-            textBoxPrice.Name = "textBoxPrice";
-            textBoxPrice.Size = new Size(455, 33);
-            textBoxPrice.TabIndex = 14;
+            textBoxQuantinityInStock.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            textBoxQuantinityInStock.Location = new Point(292, 562);
+            textBoxQuantinityInStock.Margin = new Padding(4, 3, 4, 3);
+            textBoxQuantinityInStock.Name = "textBoxQuantinityInStock";
+            textBoxQuantinityInStock.Size = new Size(455, 33);
+            textBoxQuantinityInStock.TabIndex = 14;
             // 
             // AddFormMedications
             // 
@@ -152,8 +152,8 @@
             Controls.Add(textBoxNameMedications);
             Controls.Add(labelDescription);
             Controls.Add(textBoxDescription);
-            Controls.Add(labelPrice);
-            Controls.Add(textBoxPrice);
+            Controls.Add(labelQuantinityInStock);
+            Controls.Add(textBoxQuantinityInStock);
             Controls.Add(buttonSave);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -174,7 +174,7 @@
         private TextBox textBoxNameMedications;
         private Label labelDescription;
         private TextBox textBoxDescription;
-        private Label labelPrice;
-        private TextBox textBoxPrice;
+        private Label labelQuantinityInStock;
+        private TextBox textBoxQuantinityInStock;
     }
 }
