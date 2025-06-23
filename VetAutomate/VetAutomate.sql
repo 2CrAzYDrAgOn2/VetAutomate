@@ -63,8 +63,7 @@ CREATE TABLE MedicationSupplies (
     MedicationID INT FOREIGN KEY REFERENCES Medications(MedicationID),
     SupplyDate DATE DEFAULT GETDATE(),
     QuantitySupplied INT NOT NULL,
-    SupplierName NVARCHAR(100),
-    FOREIGN KEY (MedicationID) REFERENCES Medications(MedicationID)
+    SupplierName NVARCHAR(100)
 );
 
 CREATE TABLE MedicationUsages (
