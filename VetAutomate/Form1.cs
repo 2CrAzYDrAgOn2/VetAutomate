@@ -82,32 +82,11 @@ namespace VetAutomate
                 dataGridViewVeterinarians.Columns.Add("IsNew", String.Empty);
                 dataGridViewServices.Columns.Add("Номер", "Номер");
                 dataGridViewServices.Columns.Add("Услуга", "Услуга");
-                dataGridViewServices.Columns.Add("Цена", "Цена");
                 dataGridViewServices.Columns.Add("IsNew", String.Empty);
-                dataGridViewInvoices.Columns.Add("Номер", "Номер");
-                dataGridViewInvoices.Columns.Add("ID клиента", "ID клиента");
-                dataGridViewInvoices.Columns.Add("Сумма", "Сумма");
-                dataGridViewInvoices.Columns.Add("Дата счета", "Дата счета");
-                dataGridViewInvoices.Columns.Add("Оплачено", "Оплачено");
-                dataGridViewInvoices.Columns.Add("IsNew", String.Empty);
-                dataGridViewPayments.Columns.Add("Номер", "Номер");
-                dataGridViewPayments.Columns.Add("ID счета", "ID счета");
-                dataGridViewPayments.Columns.Add("Сумма", "Сумма");
-                dataGridViewPayments.Columns.Add("Дата оплаты", "Дата оплаты");
-                dataGridViewPayments.Columns.Add("Способ оплаты", "Способ оплаты");
-                dataGridViewPayments.Columns.Add("IsNew", String.Empty);
                 dataGridViewMedications.Columns.Add("Номер", "Номер");
                 dataGridViewMedications.Columns.Add("Название", "Название");
                 dataGridViewMedications.Columns.Add("Описание", "Описание");
-                dataGridViewMedications.Columns.Add("Цена", "Цена");
                 dataGridViewMedications.Columns.Add("IsNew", String.Empty);
-                dataGridViewPrescriptions.Columns.Add("Номер", "Номер");
-                dataGridViewPrescriptions.Columns.Add("ID питомца", "ID питомца");
-                dataGridViewPrescriptions.Columns.Add("ID ветеринара", "ID ветеринара");
-                dataGridViewPrescriptions.Columns.Add("ID лекарства", "ID лекарства");
-                dataGridViewPrescriptions.Columns.Add("Дозировка", "Дозировка");
-                dataGridViewPrescriptions.Columns.Add("Инструкции", "Инструкции");
-                dataGridViewPrescriptions.Columns.Add("IsNew", String.Empty);
                 HideIsNewColumns();
             }
             catch (Exception ex)
@@ -125,10 +104,7 @@ namespace VetAutomate
             dataGridViewPets.Columns["IsNew"].Visible = false;
             dataGridViewVeterinarians.Columns["IsNew"].Visible = false;
             dataGridViewServices.Columns["IsNew"].Visible = false;
-            dataGridViewInvoices.Columns["IsNew"].Visible = false;
-            dataGridViewPayments.Columns["IsNew"].Visible = false;
             dataGridViewMedications.Columns["IsNew"].Visible = false;
-            dataGridViewPrescriptions.Columns["IsNew"].Visible = false;
         }
 
         /// <summary>
@@ -157,20 +133,11 @@ namespace VetAutomate
                 textBoxINNVeterinarians.Text = "";
                 textBoxServiceID.Text = "";
                 textBoxServiceName.Text = "";
-                textBoxPriceServices.Text = "";
-                textBoxInvoiceID.Text = "";
-                textBoxTotalAmount.Text = "";
-                checkBoxPaid.Checked = false;
-                textBoxPaymentID.Text = "";
-                textBoxAmount.Text = "";
                 textBoxMedicationID.Text = "";
                 textBoxNameMedications.Text = "";
                 textBoxDescription.Text = "";
-                textBoxPriceMedications.Text = "";
-                textBoxPrescriptionID.Text = "";
+                textBoxQuantityInStock.Text = "";
                 textBoxVetID.Text = "";
-                textBoxDosage.Text = "";
-                textBoxInstructions.Text = "";
             }
             catch (Exception ex)
             {
@@ -202,7 +169,7 @@ namespace VetAutomate
                         break;
 
                     case "dataGridViewServices":
-                        dataGridView.Rows.Add(iDataRecord.GetInt32(0), iDataRecord.GetString(1), iDataRecord.GetDouble(2), RowState.Modified);
+                        dataGridView.Rows.Add(iDataRecord.GetInt32(0), iDataRecord.GetString(1), RowState.Modified);
                         break;
 
                     case "dataGridViewInvoices":
@@ -214,7 +181,7 @@ namespace VetAutomate
                         break;
 
                     case "dataGridViewMedications":
-                        dataGridView.Rows.Add(iDataRecord.GetInt32(0), iDataRecord.GetString(1), iDataRecord.GetString(2), iDataRecord.GetDouble(3), RowState.Modified);
+                        dataGridView.Rows.Add(iDataRecord.GetInt32(0), iDataRecord.GetString(1), iDataRecord.GetString(2), RowState.Modified);
                         break;
 
                     case "dataGridViewPrescriptions":
@@ -374,10 +341,7 @@ namespace VetAutomate
                 RefreshDataGrid(dataGridViewPets, "Pets");
                 RefreshDataGrid(dataGridViewVeterinarians, "Veterinarians");
                 RefreshDataGrid(dataGridViewServices, "Services");
-                RefreshDataGrid(dataGridViewInvoices, "Invoices");
-                RefreshDataGrid(dataGridViewPayments, "Payments");
                 RefreshDataGrid(dataGridViewMedications, "Medications");
-                RefreshDataGrid(dataGridViewPrescriptions, "Prescriptions");
             }
             catch (Exception ex)
             {
@@ -436,44 +400,15 @@ namespace VetAutomate
                     case "dataGridViewServices":
                         textBoxServiceID.Text = dataGridViewRow.Cells[0].Value.ToString();
                         textBoxServiceName.Text = dataGridViewRow.Cells[1].Value.ToString();
-                        textBoxPriceServices.Text = dataGridViewRow.Cells[2].Value.ToString();
                         panelRecordServices.Visible = true;
-                        break;
-
-                    case "dataGridViewInvoices":
-                        textBoxInvoiceID.Text = dataGridViewRow.Cells[0].Value.ToString();
-                        comboBoxClientIDInvoices.Text = dataGridViewRow.Cells[1].Value.ToString();
-                        textBoxTotalAmount.Text = dataGridViewRow.Cells[2].Value.ToString();
-                        dateTimePickerInvoiceDate.Text = dataGridViewRow.Cells[3].Value.ToString();
-                        checkBoxPaid.Checked = Convert.ToBoolean(dataGridViewRow.Cells[4].Value);
-                        panelRecordInvoices.Visible = true;
-                        break;
-
-                    case "dataGridViewPayments":
-                        textBoxPaymentID.Text = dataGridViewRow.Cells[0].Value.ToString();
-                        comboBoxInvoiceIDPayments.Text = dataGridViewRow.Cells[1].Value.ToString();
-                        textBoxAmount.Text = dataGridViewRow.Cells[2].Value.ToString();
-                        dateTimePickerPaymentDate.Text = dataGridViewRow.Cells[3].Value.ToString();
-                        comboBoxPaymentMethod.Text = dataGridViewRow.Cells[4].Value.ToString();
-                        panelRecordPayments.Visible = true;
                         break;
 
                     case "dataGridViewMedications":
                         textBoxMedicationID.Text = dataGridViewRow.Cells[0].Value.ToString();
                         textBoxNameMedications.Text = dataGridViewRow.Cells[1].Value.ToString();
                         textBoxDescription.Text = dataGridViewRow.Cells[2].Value.ToString();
-                        textBoxPriceMedications.Text = dataGridViewRow.Cells[3].Value.ToString();
+                        textBoxQuantityInStock.Text = dataGridViewRow.Cells[3].Value.ToString();
                         panelRecordMedications.Visible = true;
-                        break;
-
-                    case "dataGridViewPrescriptions":
-                        textBoxPrescriptionID.Text = dataGridViewRow.Cells[0].Value.ToString();
-                        comboBoxPetIDPrescriptions.Text = dataGridViewRow.Cells[1].Value.ToString();
-                        comboBoxVetIDPrescriptions.Text = dataGridViewRow.Cells[2].Value.ToString();
-                        comboBoxMedicationIDPrescriptions.Text = dataGridViewRow.Cells[3].Value.ToString();
-                        textBoxDosage.Text = dataGridViewRow.Cells[4].Value.ToString();
-                        textBoxInstructions.Text = dataGridViewRow.Cells[5].Value.ToString();
-                        panelRecordPrescriptions.Visible = true;
                         break;
                 }
             }
@@ -531,7 +466,7 @@ namespace VetAutomate
                         break;
 
                     case "dataGridViewServices":
-                        string queryServices = $"SELECT * FROM Services WHERE CONCAT(ServiceID, Name, Price) LIKE '%{textBoxSearchClients.Text}%'";
+                        string queryServices = $"SELECT * FROM Services WHERE CONCAT(ServiceID, Name) LIKE '%{textBoxSearchClients.Text}%'";
                         SqlCommand cmdServices = new(queryServices, dataBase.GetConnection());
                         dataBase.OpenConnection();
                         SqlDataReader readerServices = cmdServices.ExecuteReader();
@@ -542,32 +477,8 @@ namespace VetAutomate
                         readerServices.Close();
                         break;
 
-                    case "dataGridViewInvoices":
-                        string queryInvoices = $"SELECT * FROM Invoices WHERE CONCAT(InvoiceID, ClientID, TotalAmount, InvoiceDate, Paid) LIKE '%{textBoxSearchClients.Text}%'";
-                        SqlCommand cmdInvoices = new(queryInvoices, dataBase.GetConnection());
-                        dataBase.OpenConnection();
-                        SqlDataReader readerInvoices = cmdInvoices.ExecuteReader();
-                        while (readerInvoices.Read())
-                        {
-                            ReadSingleRow(dataGridView, readerInvoices);
-                        }
-                        readerInvoices.Close();
-                        break;
-
-                    case "dataGridViewPayments":
-                        string queryPayments = $"SELECT * FROM Payments WHERE CONCAT(PaymentID, InvoiceID, Amount, PaymentDate, PaymentMethod) LIKE '%{textBoxSearchClients.Text}%'";
-                        SqlCommand cmdPayments = new(queryPayments, dataBase.GetConnection());
-                        dataBase.OpenConnection();
-                        SqlDataReader readerPayments = cmdPayments.ExecuteReader();
-                        while (readerPayments.Read())
-                        {
-                            ReadSingleRow(dataGridView, readerPayments);
-                        }
-                        readerPayments.Close();
-                        break;
-
                     case "dataGridViewMedications":
-                        string queryMeds = $"SELECT * FROM Medications WHERE CONCAT(MedicationID, Name, Description, Price) LIKE '%{textBoxSearchClients.Text}%'";
+                        string queryMeds = $"SELECT * FROM Medications WHERE CONCAT(MedicationID, Name, Description) LIKE '%{textBoxSearchClients.Text}%'";
                         SqlCommand cmdMeds = new(queryMeds, dataBase.GetConnection());
                         dataBase.OpenConnection();
                         SqlDataReader readerMeds = cmdMeds.ExecuteReader();
@@ -576,18 +487,6 @@ namespace VetAutomate
                             ReadSingleRow(dataGridView, readerMeds);
                         }
                         readerMeds.Close();
-                        break;
-
-                    case "dataGridViewPrescriptions":
-                        string queryPrescriptions = $"SELECT * FROM Prescriptions WHERE CONCAT(PrescriptionID, PetID, VetID, MedicationID, Dosage, Instructions) LIKE '%{textBoxSearchClients.Text}%'";
-                        SqlCommand cmdPrescriptions = new(queryPrescriptions, dataBase.GetConnection());
-                        dataBase.OpenConnection();
-                        SqlDataReader readerPrescriptions = cmdPrescriptions.ExecuteReader();
-                        while (readerPrescriptions.Read())
-                        {
-                            ReadSingleRow(dataGridView, readerPrescriptions);
-                        }
-                        readerPrescriptions.Close();
                         break;
                 }
             }
@@ -648,46 +547,19 @@ namespace VetAutomate
                     case "dataGridViewServices":
                         if (dataGridView.Rows[index].Cells[0].Value.ToString() == string.Empty)
                         {
-                            dataGridView.Rows[index].Cells[3].Value = RowState.Deleted;
+                            dataGridView.Rows[index].Cells[2].Value = RowState.Deleted;
                             return;
                         }
-                        dataGridView.Rows[index].Cells[3].Value = RowState.Deleted;
-                        break;
-
-                    case "dataGridViewInvoices":
-                        if (dataGridView.Rows[index].Cells[0].Value.ToString() == string.Empty)
-                        {
-                            dataGridView.Rows[index].Cells[5].Value = RowState.Deleted;
-                            return;
-                        }
-                        dataGridView.Rows[index].Cells[5].Value = RowState.Deleted;
-                        break;
-
-                    case "dataGridViewPayments":
-                        if (dataGridView.Rows[index].Cells[0].Value.ToString() == string.Empty)
-                        {
-                            dataGridView.Rows[index].Cells[5].Value = RowState.Deleted;
-                            return;
-                        }
-                        dataGridView.Rows[index].Cells[5].Value = RowState.Deleted;
+                        dataGridView.Rows[index].Cells[2].Value = RowState.Deleted;
                         break;
 
                     case "dataGridViewMedications":
                         if (dataGridView.Rows[index].Cells[0].Value.ToString() == string.Empty)
                         {
-                            dataGridView.Rows[index].Cells[4].Value = RowState.Deleted;
+                            dataGridView.Rows[index].Cells[3].Value = RowState.Deleted;
                             return;
                         }
-                        dataGridView.Rows[index].Cells[4].Value = RowState.Deleted;
-                        break;
-
-                    case "dataGridViewPrescriptions":
-                        if (dataGridView.Rows[index].Cells[0].Value.ToString() == string.Empty)
-                        {
-                            dataGridView.Rows[index].Cells[6].Value = RowState.Deleted;
-                            return;
-                        }
-                        dataGridView.Rows[index].Cells[6].Value = RowState.Deleted;
+                        dataGridView.Rows[index].Cells[3].Value = RowState.Deleted;
                         break;
                 }
             }
@@ -898,7 +770,7 @@ namespace VetAutomate
                             break;
 
                         case "dataGridViewServices":
-                            var rowStateServices = (RowState)dataGridView.Rows[index].Cells[3].Value;
+                            var rowStateServices = (RowState)dataGridView.Rows[index].Cells[2].Value;
                             if (rowStateServices == RowState.Existed)
                                 continue;
                             if (rowStateServices == RowState.Deleted)
@@ -911,130 +783,19 @@ namespace VetAutomate
                             {
                                 var serviceID = dataGridView.Rows[index].Cells[0].Value.ToString();
                                 var serviceName = dataGridView.Rows[index].Cells[1].Value.ToString();
-                                var price = dataGridView.Rows[index].Cells[2].Value.ToString();
-                                var updateQuery = $"UPDATE Services SET ServiceName = '{serviceName}', Price = '{price}' WHERE ServiceID = '{serviceID}'";
+                                var updateQuery = $"UPDATE Services SET ServiceName = '{serviceName}' WHERE ServiceID = '{serviceID}'";
                                 new SqlCommand(updateQuery, dataBase.GetConnection()).ExecuteNonQuery();
                             }
                             if (rowStateServices == RowState.New)
                             {
                                 var serviceName = dataGridView.Rows[index].Cells[1].Value.ToString();
-                                var price = dataGridView.Rows[index].Cells[2].Value.ToString();
-                                var insertQuery = $"INSERT INTO Services (ServiceName, Price) VALUES ('{serviceName}', '{price}')";
-                                new SqlCommand(insertQuery, dataBase.GetConnection()).ExecuteNonQuery();
-                            }
-                            break;
-
-                        case "dataGridViewInvoices":
-                            var rowStateInvoices = (RowState)dataGridView.Rows[index].Cells[5].Value;
-                            if (rowStateInvoices == RowState.Existed)
-                                continue;
-                            if (rowStateInvoices == RowState.Deleted)
-                            {
-                                var invoiceID = Convert.ToInt32(dataGridView.Rows[index].Cells[0].Value);
-                                var deleteQuery = $"DELETE FROM Invoices WHERE InvoiceID = '{invoiceID}'";
-                                new SqlCommand(deleteQuery, dataBase.GetConnection()).ExecuteNonQuery();
-                                FillAllComboBoxes();
-                            }
-                            if (rowStateInvoices == RowState.Modified)
-                            {
-                                var invoiceID = dataGridView.Rows[index].Cells[0].Value.ToString();
-                                var clientName = dataGridView.Rows[index].Cells[1].Value?.ToString();
-                                int? clientID = null;
-                                if (!string.IsNullOrEmpty(clientName))
-                                {
-                                    var getClientIdQuery = $"SELECT ClientID FROM Clients WHERE FullName = '{clientName}'";
-                                    var clientIdCommand = new SqlCommand(getClientIdQuery, dataBase.GetConnection());
-                                    var result = clientIdCommand.ExecuteScalar();
-                                    if (result != null)
-                                    {
-                                        clientID = Convert.ToInt32(result);
-                                    }
-                                }
-                                var totalAmount = dataGridView.Rows[index].Cells[2].Value.ToString();
-                                var invoiceDate = dataGridView.Rows[index].Cells[3].Value.ToString();
-                                var paid = Convert.ToBoolean(dataGridView.Rows[index].Cells[4].Value) ? 1 : 0;
-                                var updateQuery = $"UPDATE Invoices SET ClientID = '{clientID}', TotalAmount = '{totalAmount}', InvoiceDate = '{invoiceDate}', Paid = '{paid}' WHERE InvoiceID = '{invoiceID}'";
-                                new SqlCommand(updateQuery, dataBase.GetConnection()).ExecuteNonQuery();
-                                FillAllComboBoxes();
-                            }
-                            if (rowStateInvoices == RowState.New)
-                            {
-                                var clientName = dataGridView.Rows[index].Cells[1].Value?.ToString();
-                                int? clientID = null;
-                                if (!string.IsNullOrEmpty(clientName))
-                                {
-                                    var getClientIdQuery = $"SELECT ClientID FROM Clients WHERE FullName = '{clientName}'";
-                                    var clientIdCommand = new SqlCommand(getClientIdQuery, dataBase.GetConnection());
-                                    var result = clientIdCommand.ExecuteScalar();
-                                    if (result != null)
-                                    {
-                                        clientID = Convert.ToInt32(result);
-                                    }
-                                }
-                                var totalAmount = dataGridView.Rows[index].Cells[2].Value.ToString();
-                                var invoiceDate = dataGridView.Rows[index].Cells[3].Value.ToString();
-                                var paid = Convert.ToBoolean(dataGridView.Rows[index].Cells[4].Value) ? 1 : 0;
-                                var insertQuery = $"INSERT INTO Invoices (ClientID, TotalAmount, InvoiceDate, Paid) VALUES ('{clientID}', '{totalAmount}', '{invoiceDate}' '{paid}')";
-                                new SqlCommand(insertQuery, dataBase.GetConnection()).ExecuteNonQuery();
-                                FillAllComboBoxes();
-                            }
-                            break;
-
-                        case "dataGridViewPayments":
-                            var rowStatePayments = (RowState)dataGridView.Rows[index].Cells[5].Value;
-                            if (rowStatePayments == RowState.Existed)
-                                continue;
-                            if (rowStatePayments == RowState.Deleted)
-                            {
-                                var paymentID = Convert.ToInt32(dataGridView.Rows[index].Cells[0].Value);
-                                var deleteQuery = $"DELETE FROM Payments WHERE PaymentID = '{paymentID}'";
-                                new SqlCommand(deleteQuery, dataBase.GetConnection()).ExecuteNonQuery();
-                            }
-                            if (rowStatePayments == RowState.Modified)
-                            {
-                                var paymentID = dataGridView.Rows[index].Cells[0].Value.ToString();
-                                var invoiceID = dataGridView.Rows[index].Cells[1].Value.ToString();
-                                var amount = dataGridView.Rows[index].Cells[2].Value.ToString();
-                                var paymentDate = dataGridView.Rows[index].Cells[3].Value.ToString();
-                                int? methodID = null;
-                                var methodName = dataGridView.Rows[index].Cells[4].Value?.ToString();
-                                if (!string.IsNullOrEmpty(methodName))
-                                {
-                                    var getMethodIdQuery = $"SELECT PaymentMethodID FROM PaymentMethods WHERE PaymentMethod = '{methodName}'";
-                                    var methodIdCommand = new SqlCommand(getMethodIdQuery, dataBase.GetConnection());
-                                    var result = methodIdCommand.ExecuteScalar();
-                                    if (result != null)
-                                    {
-                                        methodID = Convert.ToInt32(result);
-                                    }
-                                }
-                                var updateQuery = $"UPDATE Payments SET InvoiceID = '{invoiceID}', Amount = '{amount}', PaymentDate = '{paymentDate}', PaymentMethod = '{methodID}' WHERE PaymentID = '{paymentID}'";
-                                new SqlCommand(updateQuery, dataBase.GetConnection()).ExecuteNonQuery();
-                            }
-                            if (rowStatePayments == RowState.New)
-                            {
-                                var invoiceID = dataGridView.Rows[index].Cells[1].Value.ToString();
-                                var amount = dataGridView.Rows[index].Cells[2].Value.ToString();
-                                var paymentDate = dataGridView.Rows[index].Cells[3].Value.ToString();
-                                int? methodID = null;
-                                var methodName = dataGridView.Rows[index].Cells[4].Value?.ToString();
-                                if (!string.IsNullOrEmpty(methodName))
-                                {
-                                    var getMethodIdQuery = $"SELECT PaymentMethodID FROM PaymentMethods WHERE PaymentMethod = '{methodName}'";
-                                    var methodIdCommand = new SqlCommand(getMethodIdQuery, dataBase.GetConnection());
-                                    var result = methodIdCommand.ExecuteScalar();
-                                    if (result != null)
-                                    {
-                                        methodID = Convert.ToInt32(result);
-                                    }
-                                }
-                                var insertQuery = $"INSERT INTO Payments (InvoiceID, Amount, PaymentMethod) VALUES ('{invoiceID}', '{amount}', '{methodID}')";
+                                var insertQuery = $"INSERT INTO Services (ServiceName) VALUES ('{serviceName}')";
                                 new SqlCommand(insertQuery, dataBase.GetConnection()).ExecuteNonQuery();
                             }
                             break;
 
                         case "dataGridViewMedications":
-                            var rowStateMedications = (RowState)dataGridView.Rows[index].Cells[4].Value;
+                            var rowStateMedications = (RowState)dataGridView.Rows[index].Cells[3].Value;
                             if (rowStateMedications == RowState.Existed)
                                 continue;
                             if (rowStateMedications == RowState.Deleted)
@@ -1049,8 +810,7 @@ namespace VetAutomate
                                 var medicationID = dataGridView.Rows[index].Cells[0].Value.ToString();
                                 var name = dataGridView.Rows[index].Cells[1].Value.ToString();
                                 var description = dataGridView.Rows[index].Cells[2].Value.ToString();
-                                var price = dataGridView.Rows[index].Cells[3].Value.ToString();
-                                var updateQuery = $"UPDATE Medications SET Name = '{name}', Description = '{description}', Price = '{price}' WHERE MedicationID = '{medicationID}'";
+                                var updateQuery = $"UPDATE Medications SET Name = '{name}', Description = '{description}' WHERE MedicationID = '{medicationID}'";
                                 new SqlCommand(updateQuery, dataBase.GetConnection()).ExecuteNonQuery();
                                 FillAllComboBoxes();
                             }
@@ -1058,110 +818,9 @@ namespace VetAutomate
                             {
                                 var name = dataGridView.Rows[index].Cells[1].Value.ToString();
                                 var description = dataGridView.Rows[index].Cells[2].Value.ToString();
-                                var price = dataGridView.Rows[index].Cells[3].Value.ToString();
-                                var insertQuery = $"INSERT INTO Medications (Name, Description, Price) VALUES ('{name}', '{description}', '{price}')";
+                                var insertQuery = $"INSERT INTO Medications (Name, Description) VALUES ('{name}', '{description}')";
                                 new SqlCommand(insertQuery, dataBase.GetConnection()).ExecuteNonQuery();
                                 FillAllComboBoxes();
-                            }
-                            break;
-
-                        case "dataGridViewPrescriptions":
-                            var rowStatePrescriptions = (RowState)dataGridView.Rows[index].Cells[6].Value;
-                            if (rowStatePrescriptions == RowState.Existed)
-                                continue;
-
-                            if (rowStatePrescriptions == RowState.Deleted)
-                            {
-                                var prescriptionID = Convert.ToInt32(dataGridView.Rows[index].Cells[0].Value);
-                                var deleteQuery = $"DELETE FROM Prescriptions WHERE PrescriptionID = '{prescriptionID}'";
-                                new SqlCommand(deleteQuery, dataBase.GetConnection()).ExecuteNonQuery();
-                            }
-                            if (rowStatePrescriptions == RowState.Modified)
-                            {
-                                var prescriptionID = dataGridView.Rows[index].Cells[0].Value.ToString();
-                                int? petID = null;
-                                var petName = dataGridView.Rows[index].Cells[1].Value?.ToString();
-                                if (!string.IsNullOrEmpty(petName))
-                                {
-                                    var getPetIdQuery = $"SELECT PetID FROM Pets WHERE Name = '{petName}'";
-                                    var petIdCommand = new SqlCommand(getPetIdQuery, dataBase.GetConnection());
-                                    var result = petIdCommand.ExecuteScalar();
-                                    if (result != null)
-                                    {
-                                        petID = Convert.ToInt32(result);
-                                    }
-                                }
-                                int? vetID = null;
-                                var vetName = dataGridView.Rows[index].Cells[2].Value?.ToString();
-                                if (!string.IsNullOrEmpty(vetName))
-                                {
-                                    var getVetIdQuery = $"SELECT VetID FROM Veterinarians WHERE FullName = '{vetName}'";
-                                    var vetIdCommand = new SqlCommand(getVetIdQuery, dataBase.GetConnection());
-                                    var result = vetIdCommand.ExecuteScalar();
-                                    if (result != null)
-                                    {
-                                        vetID = Convert.ToInt32(result);
-                                    }
-                                }
-                                int? medicationID = null;
-                                var medicationName = dataGridView.Rows[index].Cells[3].Value?.ToString();
-                                if (!string.IsNullOrEmpty(medicationName))
-                                {
-                                    var getMedicationIdQuery = $"SELECT MedicationID FROM Medications WHERE Name = '{medicationName}'";
-                                    var medicationIdCommand = new SqlCommand(getMedicationIdQuery, dataBase.GetConnection());
-                                    var result = medicationIdCommand.ExecuteScalar();
-                                    if (result != null)
-                                    {
-                                        medicationID = Convert.ToInt32(result);
-                                    }
-                                }
-                                var dosage = dataGridView.Rows[index].Cells[4].Value.ToString();
-                                var instructions = dataGridView.Rows[index].Cells[5].Value.ToString();
-                                var updateQuery = $"UPDATE Prescriptions SET PetID = '{petID}', VetID = '{vetID}', MedicationID = '{medicationID}', Dosage = '{dosage}', Instructions = '{instructions}' WHERE PrescriptionID = '{prescriptionID}'";
-                                new SqlCommand(updateQuery, dataBase.GetConnection()).ExecuteNonQuery();
-                            }
-                            if (rowStatePrescriptions == RowState.New)
-                            {
-                                int? petID = null;
-                                var petName = dataGridView.Rows[index].Cells[1].Value?.ToString();
-                                if (!string.IsNullOrEmpty(petName))
-                                {
-                                    var getPetIdQuery = $"SELECT PetID FROM Pets WHERE Name = '{petName}'";
-                                    var petIdCommand = new SqlCommand(getPetIdQuery, dataBase.GetConnection());
-                                    var result = petIdCommand.ExecuteScalar();
-                                    if (result != null)
-                                    {
-                                        petID = Convert.ToInt32(result);
-                                    }
-                                }
-                                int? vetID = null;
-                                var vetName = dataGridView.Rows[index].Cells[2].Value?.ToString();
-                                if (!string.IsNullOrEmpty(vetName))
-                                {
-                                    var getVetIdQuery = $"SELECT VetID FROM Veterinarians WHERE FullName = '{vetName}'";
-                                    var vetIdCommand = new SqlCommand(getVetIdQuery, dataBase.GetConnection());
-                                    var result = vetIdCommand.ExecuteScalar();
-                                    if (result != null)
-                                    {
-                                        vetID = Convert.ToInt32(result);
-                                    }
-                                }
-                                int? medicationID = null;
-                                var medicationName = dataGridView.Rows[index].Cells[3].Value?.ToString();
-                                if (!string.IsNullOrEmpty(medicationName))
-                                {
-                                    var getMedicationIdQuery = $"SELECT MedicationID FROM Medications WHERE Name = '{medicationName}'";
-                                    var medicationIdCommand = new SqlCommand(getMedicationIdQuery, dataBase.GetConnection());
-                                    var result = medicationIdCommand.ExecuteScalar();
-                                    if (result != null)
-                                    {
-                                        medicationID = Convert.ToInt32(result);
-                                    }
-                                }
-                                var dosage = dataGridView.Rows[index].Cells[4].Value.ToString();
-                                var instructions = dataGridView.Rows[index].Cells[5].Value.ToString();
-                                var insertQuery = $"INSERT INTO Prescriptions (PetID, VetID, MedicationID, Dosage, Instructions) VALUES ('{petID}', '{vetID}', '{medicationID}', '{dosage}', '{instructions}')";
-                                new SqlCommand(insertQuery, dataBase.GetConnection()).ExecuteNonQuery();
                             }
                             break;
                     }
@@ -1230,49 +889,17 @@ namespace VetAutomate
                     case "dataGridViewServices":
                         var serviceID = textBoxServiceID.Text;
                         var serviceName = textBoxServiceName.Text;
-                        var price = textBoxPriceServices.Text;
-                        dataGridView.Rows[selectedRowIndex].SetValues(serviceID, serviceName, price);
-                        dataGridView.Rows[selectedRowIndex].Cells[3].Value = RowState.Modified;
-                        break;
-
-                    case "dataGridViewInvoices":
-                        var invoiceID = textBoxInvoiceID.Text;
-                        var clientIDInvoice = comboBoxClientIDInvoices.Text;
-                        var totalAmount = textBoxTotalAmount.Text;
-                        var invoiceDate = dateTimePickerInvoiceDate.Value;
-                        var paid = checkBoxPaid.Checked ? "True" : "False";
-                        dataGridView.Rows[selectedRowIndex].SetValues(invoiceID, clientIDInvoice, totalAmount, invoiceDate, paid);
-                        dataGridView.Rows[selectedRowIndex].Cells[5].Value = RowState.Modified;
-                        break;
-
-                    case "dataGridViewPayments":
-                        var paymentID = textBoxPaymentID.Text;
-                        var invoiceIDPayment = comboBoxInvoiceIDPayments.Text;
-                        var amount = textBoxAmount.Text;
-                        var paymentDate = dateTimePickerPaymentDate.Value;
-                        var paymentMethodID = comboBoxPaymentMethod.Text;
-                        dataGridView.Rows[selectedRowIndex].SetValues(paymentID, invoiceIDPayment, amount, paymentDate, paymentMethodID);
-                        dataGridView.Rows[selectedRowIndex].Cells[5].Value = RowState.Modified;
+                        dataGridView.Rows[selectedRowIndex].SetValues(serviceID, serviceName);
+                        dataGridView.Rows[selectedRowIndex].Cells[2].Value = RowState.Modified;
                         break;
 
                     case "dataGridViewMedications":
                         var medicationID = textBoxMedicationID.Text;
                         var nameMed = textBoxNameMedications.Text;
                         var description = textBoxDescription.Text;
-                        var priceMed = textBoxPriceMedications.Text;
+                        var priceMed = textBoxQuantityInStock.Text;
                         dataGridView.Rows[selectedRowIndex].SetValues(medicationID, nameMed, description, priceMed);
-                        dataGridView.Rows[selectedRowIndex].Cells[4].Value = RowState.Modified;
-                        break;
-
-                    case "dataGridViewPrescriptions":
-                        var prescriptionID = textBoxPrescriptionID.Text;
-                        var petIDPres = comboBoxPetIDPrescriptions.Text;
-                        var vetIDPres = comboBoxVetIDPrescriptions.Text;
-                        var medicationIDPres = comboBoxMedicationIDPrescriptions.Text;
-                        var dosage = textBoxDosage.Text;
-                        var instructions = textBoxInstructions.Text;
-                        dataGridView.Rows[selectedRowIndex].SetValues(prescriptionID, petIDPres, vetIDPres, medicationIDPres, dosage, instructions);
-                        dataGridView.Rows[selectedRowIndex].Cells[6].Value = RowState.Modified;
+                        dataGridView.Rows[selectedRowIndex].Cells[3].Value = RowState.Modified;
                         break;
                 }
             }
@@ -1314,20 +941,8 @@ namespace VetAutomate
                         title.Range.Text = "Данные услуг";
                         break;
 
-                    case "dataGridViewInvoices":
-                        title.Range.Text = "Данные счетов";
-                        break;
-
-                    case "dataGridViewPayments":
-                        title.Range.Text = "Данные платежей";
-                        break;
-
                     case "dataGridViewMedications":
                         title.Range.Text = "Данные лекарств";
-                        break;
-
-                    case "dataGridViewPrescriptions":
-                        title.Range.Text = "Данные записей в книжке";
                         break;
                 }
                 title.Range.Font.Bold = 1;
@@ -1386,20 +1001,8 @@ namespace VetAutomate
                         title = "Данные услуг";
                         break;
 
-                    case "dataGridViewInvoices":
-                        title = "Данные счетов";
-                        break;
-
-                    case "dataGridViewPayments":
-                        title = "Данные платежей";
-                        break;
-
                     case "dataGridViewMedications":
                         title = "Данные лекарств";
-                        break;
-
-                    case "dataGridViewPrescriptions":
-                        title = "Данные записей в книжке";
                         break;
                 }
                 Excel.Range titleRange = worksheet.Range[worksheet.Cells[1, 1], worksheet.Cells[1, dataGridView.ColumnCount - 1]];
@@ -1456,20 +1059,8 @@ namespace VetAutomate
                     text += "Данные услуг\n\n";
                     break;
 
-                case "dataGridViewInvoices":
-                    text += "Данные счетов\n\n";
-                    break;
-
-                case "dataGridViewPayments":
-                    text += "Данные платежей\n\n";
-                    break;
-
                 case "dataGridViewMedications":
                     text += "Данные лекарств\n\n";
-                    break;
-
-                case "dataGridViewPrescriptions":
-                    text += "Данные записей в книжке\n\n";
                     break;
             }
             for (int col = 0; col < dataGridView.ColumnCount; col++)
@@ -1503,40 +1094,6 @@ namespace VetAutomate
             string query = "";
             switch (report)
             {
-                case "Payments":
-                    title.Range.Text = "Отчет по доходам клиники за период";
-                    query = @"SELECT
-                                c.FullName AS Client,
-                                c.Phone,
-                                c.Email,
-                                p.Name AS PetName,
-                                p.Species,
-                                p.Breed,
-                                COUNT(DISTINCT i.InvoiceID) AS VisitsCount,
-                                SUM(i.TotalAmount) AS TotalSpent,
-                                MAX(i.InvoiceDate) AS LastVisitDate
-                            FROM
-                                Clients c
-                            JOIN
-                                Pets p ON c.ClientID = p.OwnerID
-                            LEFT JOIN
-                                Invoices i ON c.ClientID = i.ClientID
-                            LEFT JOIN
-                                Payments pay ON i.InvoiceID = pay.InvoiceID
-                            WHERE
-                                i.Paid = 1
-                                AND i.InvoiceDate BETWEEN '2023-01-01' AND GetDate()
-                            GROUP BY
-                                c.FullName,
-                                c.Phone,
-                                c.Email,
-                                p.Name,
-                                p.Species,
-                                p.Breed
-                            ORDER BY
-                                TotalSpent DESC;";
-                    break;
-
                 case "Veterinarians":
                     title.Range.Text = "Отчет по активности ветеринаров";
                     query = @"SELECT
@@ -1656,60 +1213,6 @@ namespace VetAutomate
                     comboBoxGender.Items.Add(gendersReader.GetString(0));
                 }
                 gendersReader.Close();
-                comboBoxClientIDInvoices.Items.Clear();
-                var clientsQuery = "SELECT FullName FROM Clients ORDER BY FullName";
-                var clientsCommand = new SqlCommand(clientsQuery, dataBase.GetConnection());
-                var clientsReader = clientsCommand.ExecuteReader();
-                while (clientsReader.Read())
-                {
-                    comboBoxClientIDInvoices.Items.Add(clientsReader.GetString(0));
-                }
-                clientsReader.Close();
-                comboBoxInvoiceIDPayments.Items.Clear();
-                var invoicesQuery = "SELECT InvoiceID FROM Invoices ORDER BY InvoiceID";
-                var invoicesCommand = new SqlCommand(invoicesQuery, dataBase.GetConnection());
-                var invoicesReader = invoicesCommand.ExecuteReader();
-                while (invoicesReader.Read())
-                {
-                    comboBoxInvoiceIDPayments.Items.Add(invoicesReader.GetInt32(0));
-                }
-                invoicesReader.Close();
-                comboBoxPaymentMethod.Items.Clear();
-                var paymentMethodsQuery = "SELECT PaymentMethod FROM PaymentMethods ORDER BY PaymentMethod";
-                var paymentMethodsCommand = new SqlCommand(paymentMethodsQuery, dataBase.GetConnection());
-                var paymentMethodsReader = paymentMethodsCommand.ExecuteReader();
-                while (paymentMethodsReader.Read())
-                {
-                    comboBoxPaymentMethod.Items.Add(paymentMethodsReader.GetString(0));
-                }
-                paymentMethodsReader.Close();
-                comboBoxPetIDPrescriptions.Items.Clear();
-                var petsQuery = "SELECT Name FROM Pets ORDER BY Name";
-                var petsCommand = new SqlCommand(petsQuery, dataBase.GetConnection());
-                var petsReader = petsCommand.ExecuteReader();
-                while (petsReader.Read())
-                {
-                    comboBoxPetIDPrescriptions.Items.Add(petsReader.GetString(0));
-                }
-                petsReader.Close();
-                comboBoxVetIDPrescriptions.Items.Clear();
-                var vetsQuery = "SELECT FullName FROM Veterinarians ORDER BY FullName";
-                var vetsCommand = new SqlCommand(vetsQuery, dataBase.GetConnection());
-                var vetsReader = vetsCommand.ExecuteReader();
-                while (vetsReader.Read())
-                {
-                    comboBoxVetIDPrescriptions.Items.Add(vetsReader.GetString(0));
-                }
-                vetsReader.Close();
-                comboBoxMedicationIDPrescriptions.Items.Clear();
-                var medicationsQuery = "SELECT Name FROM Medications ORDER BY Name";
-                var medicationsCommand = new SqlCommand(medicationsQuery, dataBase.GetConnection());
-                var medicationsReader = medicationsCommand.ExecuteReader();
-                while (medicationsReader.Read())
-                {
-                    comboBoxMedicationIDPrescriptions.Items.Add(medicationsReader.GetString(0));
-                }
-                medicationsReader.Close();
             }
             catch (Exception ex)
             {
@@ -1734,10 +1237,7 @@ namespace VetAutomate
                 RefreshDataGrid(dataGridViewPets, "Pets");
                 RefreshDataGrid(dataGridViewVeterinarians, "Veterinarians");
                 RefreshDataGrid(dataGridViewServices, "Services");
-                RefreshDataGrid(dataGridViewInvoices, "Invoices");
-                RefreshDataGrid(dataGridViewPayments, "Payments");
                 RefreshDataGrid(dataGridViewMedications, "Medications");
-                RefreshDataGrid(dataGridViewPrescriptions, "Prescriptions");
                 ClearFields();
             }
             catch (Exception ex)
@@ -1823,44 +1323,6 @@ namespace VetAutomate
         }
 
         /// <summary>
-        /// ButtonNewInvoice_Click() вызывается при нажатии на кнопку "Создать запись" на вкладке "Чеки"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ButtonNewInvoice_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                AddFormInvoices addForm = new();
-                addForm.Show();
-                ClearFields();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// ButtonNewPayment_Click() вызывается при нажатии на кнопку "Создать запись" на вкладке "Оплаты"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ButtonNewPayment_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                AddFormPayments addForm = new();
-                addForm.Show();
-                ClearFields();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        /// <summary>
         /// ButtonNewMedication_Click() вызывается при нажатии на кнопку "Создать запись" на вкладке "Лекарства"
         /// </summary>
         /// <param name="sender"></param>
@@ -1878,24 +1340,32 @@ namespace VetAutomate
                 MessageBox.Show(ex.Message);
             }
         }
-
         /// <summary>
-        /// ButtonNewPrescription_Click() вызывается при нажатии на кнопку "Создать запись" на вкладке "Записи в книжке"
+        /// ButtonNewMedicationSupplie_Click() вызывается при нажатии на кнопку "Создать запись" на вкладке "Поставки лекарств"
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonNewPrescription_Click(object sender, EventArgs e)
+        private void ButtonNewMedicationSupplie_Click(object sender, EventArgs e)
         {
-            try
-            {
-                AddFormPrescriptions addForm = new();
-                addForm.Show();
-                ClearFields();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+
+        }
+        /// <summary>
+        /// ButtonNewMedicationUsage_Click() вызывается при нажатии на кнопку "Создать запись" на вкладке "Использование лекарств"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonNewMedicationUsage_Click(object sender, EventArgs e)
+        {
+
+        }
+        /// <summary>
+        /// ButtonNewServiceUsage_Click() вызывается при нажатии на кнопку "Создать запись" на вкладке "Оказание услуг"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonNewServiceUsage_Click(object sender, EventArgs e)
+        {
+
         }
 
         /// <summary>
@@ -1971,42 +1441,6 @@ namespace VetAutomate
         }
 
         /// <summary>
-        /// ButtonDeleteInvoice_Click() вызывается при нажатии на кнопку "Удалить" на вкладке "Чеки"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ButtonDeleteInvoice_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                DeleteRow(dataGridViewInvoices);
-                ClearFields();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// ButtonDeletePayment_Click() вызывается при нажатии на кнопку "Удалить" на вкладке "Оплаты"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ButtonDeletePayment_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                DeleteRow(dataGridViewPayments);
-                ClearFields();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        /// <summary>
         /// ButtonDeleteMedication_Click() вызывается при нажатии на кнопку "Удалить" на вкладке "Лекарства"
         /// </summary>
         /// <param name="sender"></param>
@@ -2023,23 +1457,32 @@ namespace VetAutomate
                 MessageBox.Show(ex.Message);
             }
         }
-
         /// <summary>
-        /// ButtonDeletePrescription_Click() вызывается при нажатии на кнопку "Удалить" на вкладке "Записи в книжке"
+        /// ButtonDeleteMedicationSupplie_Click() вызывается при нажатии на кнопку "Удалить" на вкладке "Поставки лекарств"
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonDeletePrescription_Click(object sender, EventArgs e)
+        private void ButtonDeleteMedicationSupplie_Click(object sender, EventArgs e)
         {
-            try
-            {
-                DeleteRow(dataGridViewPrescriptions);
-                ClearFields();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+
+        }
+        /// <summary>
+        /// ButtonDeleteMedicationUsage_Click() вызывается при нажатии на кнопку "Удалить" на вкладке "Использование лекарств"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonDeleteMedicationUsage_Click(object sender, EventArgs e)
+        {
+
+        }
+        /// <summary>
+        /// ButtonDeleteServiceUsage_Click() вызывается при нажатии на кнопку "Удалить" на вкладке "Оказание услуг"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonDeleteServiceUsage_Click(object sender, EventArgs e)
+        {
+
         }
 
         /// <summary>
@@ -2115,42 +1558,6 @@ namespace VetAutomate
         }
 
         /// <summary>
-        /// ButtonChangeInvoice_Click() вызывается при нажатии на кнопку "Изменить" на вкладке "Чеки"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ButtonChangeInvoice_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Change(dataGridViewInvoices);
-                ClearFields();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// ButtonChangePayment_Click() вызывается при нажатии на кнопку "Изменить" на вкладке "Оплаты"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ButtonChangePayment_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Change(dataGridViewPayments);
-                ClearFields();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        /// <summary>
         /// ButtonChangeMedication_Click() вызывается при нажатии на кнопку "Изменить" на вкладке "Лекарства"
         /// </summary>
         /// <param name="sender"></param>
@@ -2167,23 +1574,32 @@ namespace VetAutomate
                 MessageBox.Show(ex.Message);
             }
         }
-
         /// <summary>
-        /// ButtonChangePrescription_Click() вызывается при нажатии на кнопку "Изменить" на вкладке "Записи в книжке"
+        /// ButtonChangeMedicationSupplie_Click() вызывается при нажатии на кнопку "Изменить" на вкладке "Поставки лекарств"
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonChangePrescription_Click(object sender, EventArgs e)
+        private void ButtonChangeMedicationSupplie_Click(object sender, EventArgs e)
         {
-            try
-            {
-                Change(dataGridViewPrescriptions);
-                ClearFields();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+
+        }
+        /// <summary>
+        /// ButtonChangeMedicationUsage_Click() вызывается при нажатии на кнопку "Изменить" на вкладке "Использование лекарств"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonChangeMedicationUsage_Click(object sender, EventArgs e)
+        {
+
+        }
+        /// <summary>
+        /// ButtonChangeServiceUsage_Click() вызывается при нажатии на кнопку "Изменить" на вкладке "Оказание услуг"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonChangeServiceUsage_Click(object sender, EventArgs e)
+        {
+
         }
 
         /// <summary>
@@ -2270,40 +1686,6 @@ namespace VetAutomate
         }
 
         /// <summary>
-        /// ButtonSaveInvoice_Click() вызывается при нажатии на кнопку "Сохранить" на вкладке "Чеки"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ButtonSaveInvoice_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                UpdateBase(dataGridViewInvoices);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// ButtonSavePayment_Click() вызывается при нажатии на кнопку "Сохранить" на вкладке "Оплаты"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ButtonSavePayment_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                UpdateBase(dataGridViewPayments);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        /// <summary>
         /// ButtonSaveMedication_Click() вызывается при нажатии на кнопку "Сохранить" на вкладке "Лекарства"
         /// </summary>
         /// <param name="sender"></param>
@@ -2319,22 +1701,32 @@ namespace VetAutomate
                 MessageBox.Show(ex.Message);
             }
         }
-
         /// <summary>
-        /// ButtonSavePrescription_Click() вызывается при нажатии на кнопку "Сохранить" на вкладке "Записи в книжке"
+        /// ButtonSaveMedicationSupplie_Click() вызывается при нажатии на кнопку "Сохранить" на вкладке "Поставки лекарств"
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonSavePrescription_Click(object sender, EventArgs e)
+        private void ButtonSaveMedicationSupplie_Click(object sender, EventArgs e)
         {
-            try
-            {
-                UpdateBase(dataGridViewPrescriptions);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+
+        }
+        /// <summary>
+        /// ButtonSaveMedicationUsage_Click() вызывается при нажатии на кнопку "Сохранить" на вкладке "Использование лекарств"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonSaveMedicationUsage_Click(object sender, EventArgs e)
+        {
+
+        }
+        /// <summary>
+        /// ButtonSaveServiceUsage_Click() вызывается при нажатии на кнопку "Сохранить" на вкладке "Оказание услуг"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonSaveServiceUsage_Click(object sender, EventArgs e)
+        {
+
         }
 
         /// <summary>
@@ -2406,40 +1798,6 @@ namespace VetAutomate
         }
 
         /// <summary>
-        /// ButtonWordInvoice_Click() вызывается при нажатии на кнопку "Вывод в Word" на вкладке "Чеки"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ButtonWordInvoice_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ExportToWord(dataGridViewInvoices);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// ButtonWordPayment_Click() вызывается при нажатии на кнопку "Вывод в Word" на вкладке "Оплаты"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ButtonWordPayment_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ExportToWord(dataGridViewPayments);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        /// <summary>
         /// ButtonWordMedication_Click() вызывается при нажатии на кнопку "Вывод в Word" на вкладке "Лекарства"
         /// </summary>
         /// <param name="sender"></param>
@@ -2455,22 +1813,32 @@ namespace VetAutomate
                 MessageBox.Show(ex.Message);
             }
         }
-
         /// <summary>
-        /// ButtonWordPrescription_Click() вызывается при нажатии на кнопку "Вывод в Word" на вкладке "Записи в книжке"
+        /// ButtonWordMedicationSupplie_Click() вызывается при нажатии на кнопку "Вывод в Word" на вкладке "Поставки лекарств"
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonWordPrescription_Click(object sender, EventArgs e)
+        private void ButtonWordMedicationSupplie_Click(object sender, EventArgs e)
         {
-            try
-            {
-                ExportToWord(dataGridViewPrescriptions);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+
+        }
+        /// <summary>
+        /// ButtonWordMedicationUsage_Click() вызывается при нажатии на кнопку "Вывод в Word" на вкладке "Использование лекарств"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonWordMedicationUsage_Click(object sender, EventArgs e)
+        {
+
+        }
+        /// <summary>
+        /// ButtonWordServiceUsage_Click() вызывается при нажатии на кнопку "Вывод в Word" на вкладке "Оказание услуг"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonWordServiceUsage_Click(object sender, EventArgs e)
+        {
+
         }
 
         /// <summary>
@@ -2542,40 +1910,6 @@ namespace VetAutomate
         }
 
         /// <summary>
-        /// ButtonExcelInvoice_Click() вызывается при нажатии на кнопку "Вывод в Excel" на вкладке "Чеки"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ButtonExcelInvoice_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ExportToExcel(dataGridViewInvoices);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// ButtonExcelPayment_Click() вызывается при нажатии на кнопку "Вывод в Excel" на вкладке "Оплаты"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ButtonExcelPayment_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ExportToExcel(dataGridViewPayments);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        /// <summary>
         /// ButtonExcelMedication_Click() вызывается при нажатии на кнопку "Вывод в Excel" на вкладке "Лекарства"
         /// </summary>
         /// <param name="sender"></param>
@@ -2591,158 +1925,32 @@ namespace VetAutomate
                 MessageBox.Show(ex.Message);
             }
         }
-
         /// <summary>
-        /// ButtonExcelPrescription_Click() вызывается при нажатии на кнопку "Вывод в Excel" на вкладке "Записи в книжке"
+        /// ButtonExcelMedicationSupplie_Click() вызывается при нажатии на кнопку "Вывод в Excel" на вкладке "Поставки лекарств"
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonExcelPrescription_Click(object sender, EventArgs e)
+        private void ButtonExcelMedicationSupplie_Click(object sender, EventArgs e)
         {
-            try
-            {
-                ExportToExcel(dataGridViewPrescriptions);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+
         }
-
         /// <summary>
-        /// ButtonTXTClient_Click() вызывается при нажатии на кнопку "Вывод в TXT" на вкладке "Клиенты"
+        /// ButtonExcelMedicationUsage_Click() вызывается при нажатии на кнопку "Вывод в Excel" на вкладке "Использование лекарств"
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonTXTClient_Click(object sender, EventArgs e)
+        private void ButtonExcelMedicationUsage_Click(object sender, EventArgs e)
         {
-            try
-            {
-                ExportToTXT(dataGridViewClients);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+
         }
-
         /// <summary>
-        /// ButtonTXTPet_Click() вызывается при нажатии на кнопку "Вывод в TXT" на вкладке "Питомцы"
+        /// ButtonExcelServiceUsage_Click() вызывается при нажатии на кнопку "Вывод в Excel" на вкладке "Оказание услуг"
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonTXTPet_Click(object sender, EventArgs e)
+        private void ButtonExcelServiceUsage_Click(object sender, EventArgs e)
         {
-            try
-            {
-                ExportToTXT(dataGridViewPets);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
 
-        /// <summary>
-        /// ButtonTXTVeterinarian_Click() вызывается при нажатии на кнопку "Вывод в TXT" на вкладке "Ветеринары"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ButtonTXTVeterinarian_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ExportToTXT(dataGridViewVeterinarians);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// ButtonTXTService_Click() вызывается при нажатии на кнопку "Вывод в TXT" на вкладке "Услуги"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ButtonTXTService_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ExportToTXT(dataGridViewServices);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// ButtonTXTInvoice_Click() вызывается при нажатии на кнопку "Вывод в TXT" на вкладке "Чеки"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ButtonTXTInvoice_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ExportToTXT(dataGridViewInvoices);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// ButtonTXTPayment_Click() вызывается при нажатии на кнопку "Вывод в TXT" на вкладке "Оплаты"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ButtonTXTPayment_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ExportToTXT(dataGridViewPayments);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// ButtonTXTMedication_Click() вызывается при нажатии на кнопку "Вывод в TXT" на вкладке "Лекарства"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ButtonTXTMedication_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ExportToTXT(dataGridViewMedications);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// ButtonTXTPrescription_Click() вызывается при нажатии на кнопку "Вывод в TXT" на вкладке "Записи в книжке"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ButtonTXTPrescription_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                ExportToTXT(dataGridViewPrescriptions);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
 
         /// <summary>
@@ -2830,48 +2038,6 @@ namespace VetAutomate
         }
 
         /// <summary>
-        /// DataGridViewInvoices_CellClick() вызывается при нажатии на ячейку на вкладке "Чеки"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void DataGridViewInvoices_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                selectedRow = e.RowIndex;
-                if (e.RowIndex >= 0)
-                {
-                    DataGridView_CellClick(dataGridViewInvoices, selectedRow);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// DataGridViewPayments_CellClick() вызывается при нажатии на ячейку на вкладке "Оплаты"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void DataGridViewPayments_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
-                selectedRow = e.RowIndex;
-                if (e.RowIndex >= 0)
-                {
-                    DataGridView_CellClick(dataGridViewPayments, selectedRow);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        /// <summary>
         /// DataGridViewMedications_CellClick() вызывается при нажатии на ячейку на вкладке "Лекарства"
         /// </summary>
         /// <param name="sender"></param>
@@ -2891,26 +2057,32 @@ namespace VetAutomate
                 MessageBox.Show(ex.Message);
             }
         }
-
         /// <summary>
-        /// DataGridViewPrescriptions_CellClick() вызывается при нажатии на ячейку на вкладке "Записи в книжке"
+        /// DataGridViewMedicationSupplies_CellClick() вызывается при нажатии на ячейку на вкладке "Поставки лекарств"
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void DataGridViewPrescriptions_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void DataGridViewMedicationSupplies_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            try
-            {
-                selectedRow = e.RowIndex;
-                if (e.RowIndex >= 0)
-                {
-                    DataGridView_CellClick(dataGridViewPrescriptions, selectedRow);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+
+        }
+        /// <summary>
+        /// DataGridViewMedicationUsages_CellClick() вызывается при нажатии на ячейку на вкладке "Использование лекарств"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DataGridViewMedicationUsages_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+        /// <summary>
+        /// DataGridViewServiceUsages_CellClick() вызывается при нажатии на ячейку на вкладке "Оказание услуг"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DataGridViewServiceUsages_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
 
         /// <summary>
@@ -2982,40 +2154,6 @@ namespace VetAutomate
         }
 
         /// <summary>
-        /// TextBoxSearchInvoices_TextChanged() вызывается при изменении текста на вкладке "Чеки"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void TextBoxSearchInvoices_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                Search(dataGridViewInvoices);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        /// <summary>
-        /// TextBoxSearchPayments_TextChanged() вызывается при изменении текста на вкладке "Оплаты"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void TextBoxSearchPayments_TextChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                Search(dataGridViewPayments);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        /// <summary>
         /// TextBoxSearchMedications_TextChanged() вызывается при изменении текста на вкладке "Лекарства"
         /// </summary>
         /// <param name="sender"></param>
@@ -3031,22 +2169,32 @@ namespace VetAutomate
                 MessageBox.Show(ex.Message);
             }
         }
-
         /// <summary>
-        /// TextBoxSearchPrescriptions_TextChanged() вызывается при изменении текста на вкладке "Записи в книжке"
+        /// TextBoxSearchMedicationSupplies_TextChanged() вызывается при изменении текста на вкладке "Поставки лекарств"
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void TextBoxSearchPrescriptions_TextChanged(object sender, EventArgs e)
+        private void TextBoxSearchMedicationSupplies_TextChanged(object sender, EventArgs e)
         {
-            try
-            {
-                Search(dataGridViewPrescriptions);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+
+        }
+        /// <summary>
+        /// TextBoxSearchMedicationUsages_TextChanged() вызывается при изменении текста на вкладке "Использование лекарств"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TextBoxSearchMedicationUsages_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+        /// <summary>
+        /// TextBoxSearchServiceUsages_TextChanged() вызывается при изменении текста на вкладке "Оказание услуг"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TextBoxSearchServiceUsages_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         /// <summary>
@@ -3067,16 +2215,6 @@ namespace VetAutomate
         private void ButtonReportVeterinarians_Click(object sender, EventArgs e)
         {
             Reports("Veterinarians");
-        }
-
-        /// <summary>
-        /// ButtonReportPayments_Click() вызывается при нажатии на кнопку отчета на вкладке "Оплаты"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ButtonReportPayments_Click(object sender, EventArgs e)
-        {
-            Reports("Payments");
         }
     }
 }

@@ -87,6 +87,7 @@
             // labelNamePets
             // 
             labelNamePets.AutoSize = true;
+            labelNamePets.BackColor = Color.Transparent;
             labelNamePets.ForeColor = Color.Black;
             labelNamePets.Location = new Point(232, 458);
             labelNamePets.Margin = new Padding(4, 0, 4, 0);
@@ -107,6 +108,7 @@
             // labelSpecies
             // 
             labelSpecies.AutoSize = true;
+            labelSpecies.BackColor = Color.Transparent;
             labelSpecies.ForeColor = Color.Black;
             labelSpecies.Location = new Point(215, 504);
             labelSpecies.Margin = new Padding(4, 0, 4, 0);
@@ -127,6 +129,7 @@
             // labelBreed
             // 
             labelBreed.AutoSize = true;
+            labelBreed.BackColor = Color.Transparent;
             labelBreed.ForeColor = Color.Black;
             labelBreed.Location = new Point(229, 553);
             labelBreed.Margin = new Padding(4, 0, 4, 0);
@@ -147,6 +150,7 @@
             // labelBirthDatePets
             // 
             labelBirthDatePets.AutoSize = true;
+            labelBirthDatePets.BackColor = Color.Transparent;
             labelBirthDatePets.ForeColor = Color.Black;
             labelBirthDatePets.Location = new Point(189, 595);
             labelBirthDatePets.Margin = new Padding(4, 0, 4, 0);
@@ -166,6 +170,7 @@
             // labelOwnerID
             // 
             labelOwnerID.AutoSize = true;
+            labelOwnerID.BackColor = Color.Transparent;
             labelOwnerID.ForeColor = Color.Black;
             labelOwnerID.Location = new Point(217, 639);
             labelOwnerID.Margin = new Padding(4, 0, 4, 0);

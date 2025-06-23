@@ -4,7 +4,7 @@ namespace VetAutomate
 {
     public class DataBase
     {
-        private readonly SqlConnection sqlConnection = new(@"Data Source=DESKTOP-06EKML1\SQLEXPRESS;Initial Catalog=VetAutomate;Integrated Security=True");
+        private readonly SqlConnection sqlConnection = new(@"Data Source=penis\SQLEXPRESS;Initial Catalog=VetAutomate;Integrated Security=True");
 
         /// <summary>
         /// OpenConnection() вызывается при открытии соединения с базой данных
