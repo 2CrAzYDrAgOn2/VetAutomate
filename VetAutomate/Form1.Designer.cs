@@ -250,6 +250,9 @@
             buttonSaveServiceUsage = new Button();
             buttonWordServiceUsage = new Button();
             buttonExcelServiceUsage = new Button();
+            label2 = new Label();
+            buttonMedicationUsageReport = new Button();
+            buttonServiceUsageReport = new Button();
             tabPageMedications.SuspendLayout();
             panelTitleMedications.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewMedications).BeginInit();
@@ -2029,6 +2032,7 @@
             // 
             // panelTitleMedicationSupplies
             // 
+            panelTitleMedicationSupplies.Controls.Add(label2);
             panelTitleMedicationSupplies.Controls.Add(buttonRefreshMedicationSupplies);
             panelTitleMedicationSupplies.Controls.Add(textBoxSearchMedicationSupplies);
             panelTitleMedicationSupplies.Location = new Point(0, 0);
@@ -2331,6 +2335,7 @@
             // 
             // panelTitleMedicationUsages
             // 
+            panelTitleMedicationUsages.Controls.Add(buttonMedicationUsageReport);
             panelTitleMedicationUsages.Controls.Add(labelTitleMedicationUsages);
             panelTitleMedicationUsages.Controls.Add(buttonRefreshMedicationUsages);
             panelTitleMedicationUsages.Controls.Add(textBoxSearchMedicationUsages);
@@ -2671,6 +2676,7 @@
             // 
             // panelTitleServiceUsages
             // 
+            panelTitleServiceUsages.Controls.Add(buttonServiceUsageReport);
             panelTitleServiceUsages.Controls.Add(labelTitleServiceUsages);
             panelTitleServiceUsages.Controls.Add(buttonRefreshServiceUsages);
             panelTitleServiceUsages.Controls.Add(textBoxSearchServiceUsages);
@@ -2970,6 +2976,46 @@
             buttonExcelServiceUsage.UseVisualStyleBackColor = true;
             buttonExcelServiceUsage.Click += ButtonExcelServiceUsage_Click;
             // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 36F, FontStyle.Underline, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.Black;
+            label2.Location = new Point(9, 3);
+            label2.Margin = new Padding(4, 0, 4, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(439, 65);
+            label2.TabIndex = 5;
+            label2.Text = "Поставки лекарств";
+            // 
+            // buttonMedicationUsageReport
+            // 
+            buttonMedicationUsageReport.BackgroundImage = (Image)resources.GetObject("buttonMedicationUsageReport.BackgroundImage");
+            buttonMedicationUsageReport.BackgroundImageLayout = ImageLayout.Stretch;
+            buttonMedicationUsageReport.FlatStyle = FlatStyle.Flat;
+            buttonMedicationUsageReport.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonMedicationUsageReport.Location = new Point(528, 3);
+            buttonMedicationUsageReport.Margin = new Padding(4, 3, 4, 3);
+            buttonMedicationUsageReport.Name = "buttonMedicationUsageReport";
+            buttonMedicationUsageReport.Size = new Size(78, 77);
+            buttonMedicationUsageReport.TabIndex = 6;
+            buttonMedicationUsageReport.UseVisualStyleBackColor = true;
+            buttonMedicationUsageReport.Click += ButtonMedicationUsageReport_Click;
+            // 
+            // buttonServiceUsageReport
+            // 
+            buttonServiceUsageReport.BackgroundImage = (Image)resources.GetObject("buttonServiceUsageReport.BackgroundImage");
+            buttonServiceUsageReport.BackgroundImageLayout = ImageLayout.Stretch;
+            buttonServiceUsageReport.FlatStyle = FlatStyle.Flat;
+            buttonServiceUsageReport.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            buttonServiceUsageReport.Location = new Point(528, 3);
+            buttonServiceUsageReport.Margin = new Padding(4, 3, 4, 3);
+            buttonServiceUsageReport.Name = "buttonServiceUsageReport";
+            buttonServiceUsageReport.Size = new Size(78, 77);
+            buttonServiceUsageReport.TabIndex = 6;
+            buttonServiceUsageReport.UseVisualStyleBackColor = true;
+            buttonServiceUsageReport.Click += ButtonServiceUsageReport_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -3250,7 +3296,7 @@
         private Button buttonExcelMedicationUsage;
         private TabPage tabPageMedicationSupplies;
         private Panel panelTitleMedicationSupplies;
-        private Button button1;
+        private Button buttonMedicationUsageReport;
         private Label label1;
         private Button buttonRefreshMedicationSupplies;
         private TextBox textBoxSearchMedicationSupplies;
@@ -3279,5 +3325,7 @@
         private ComboBox comboBoxPetIDMedicationUsages;
         private Label labePetIDServiceUsages;
         private ComboBox comboBoxPetIDServiceUsages;
+        private Label label2;
+        private Button buttonServiceUsageReport;
     }
 }

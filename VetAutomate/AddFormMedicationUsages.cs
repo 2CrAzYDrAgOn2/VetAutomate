@@ -72,10 +72,6 @@ namespace VetAutomate
 
                 var sqlCommand = new SqlCommand(insertQuery, dataBase.GetConnection());
                 sqlCommand.ExecuteNonQuery();
-                var updateQuery = $"UPDATE Medications SET QuantityInStock = QuantityInStock - {quantity} WHERE MedicationID = {medicationID}";
-                var updateCommand = new SqlCommand(updateQuery, dataBase.GetConnection());
-                updateCommand.ExecuteNonQuery();
-
                 MessageBox.Show("Использование лекарства успешно добавлено!", "Успех!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)

@@ -57,7 +57,6 @@ namespace VetAutomate
                 dataGridViewClients.Columns.Add("Телефон", "Телефон");
                 dataGridViewClients.Columns.Add("Email", "Email");
                 dataGridViewClients.Columns.Add("Адрес", "Адрес");
-                dataGridViewClients.Columns.Add("ИНН", "ИНН");
                 dataGridViewClients.Columns.Add("Дата регистрации", "Дата регистрации");
                 dataGridViewClients.Columns.Add("IsNew", String.Empty);
                 dataGridViewPets.Columns.Add("Номер", "Номер");
@@ -1234,7 +1233,7 @@ namespace VetAutomate
                         var dateOfEmployement = dateTimePickerDateOfEmployment.Value;
                         var genderID = comboBoxGender.Text;
                         var postID = comboBoxPost.Text;
-                        dataGridView.Rows[selectedRowIndex].SetValues(vetID, fullNameVet, birthDateVet, birthPlace, passportSeries, passportNumber, phoneVet, emailVet, innVet, dateOfEmployement, genderID, postID);
+                        dataGridView.Rows[selectedRowIndex].SetValues(vetID, fullNameVet, birthDateVet, birthPlace, passportSeries, passportNumber, phoneVet, emailVet, innVet, dateOfEmployement, postID, genderID);
                         dataGridView.Rows[selectedRowIndex].Cells[12].Value = RowState.Modified;
                         break;
 
@@ -1445,73 +1444,88 @@ namespace VetAutomate
         /// Reports() вызывается при создании отчетов
         /// </summary>
         /// <param name="report"></param>
-        private void Reports(string report)
+        private void Reports(DataGridView dataGridView)
         {
             dataBase.OpenConnection();
             var wordApp = new Application { Visible = true };
             Document doc = wordApp.Documents.Add();
             Paragraph title = doc.Paragraphs.Add();
             string query = "";
-            switch (report)
+            var selectedRowIndex = dataGridView.CurrentCell.RowIndex;
+            var selectedID = dataGridView.Rows[selectedRowIndex].Cells[0].Value.ToString();
+            switch (dataGridView.Name)
             {
-                case "Veterinarians":
-                    title.Range.Text = "Отчет по активности ветеринаров";
-                    query = @"SELECT
-                                v.FullName AS Veterinarian,
-                                p.Post AS Position,
-                                COUNT(DISTINCT pr.PrescriptionID) AS PrescriptionsCount,
-                                COUNT(DISTINCT pr.PetID) AS UniquePatientsCount,
-                                COUNT(DISTINCT pr.MedicationID) AS UniqueMedicationsPrescribed
-                            FROM
-                                Veterinarians v
-                            JOIN
-                                Posts p ON v.PostID = p.PostID
-                            LEFT JOIN
-                                Prescriptions pr ON v.VetID = pr.VetID
-                            LEFT JOIN
-                                Invoices i ON pr.PetID = i.ClientID -- Связь через клиента/владельца питомца
-                            WHERE
-                                i.InvoiceDate BETWEEN '2023-01-01' AND GETDATE() -- Используем дату из счетов
-                                OR pr.PrescriptionID IS NOT NULL -- Учитываем все рецепты
-                            GROUP BY
-                                v.FullName,
-                                p.Post
-                            ORDER BY
-                                PrescriptionsCount DESC;";
+                case "dataGridViewVeterinarians":
+                    title.Range.Text = "Отчет по ветеринару";
+                    query = $@"SELECT
+                        v.FullName AS 'ФИО ветеринара',
+                        p.Post AS 'Должность',
+                        g.Gender AS 'Пол',
+                        COUNT(DISTINCT mu.MedicationUsageID) AS 'Назначено лекарств',
+                        COUNT(DISTINCT su.ServiceUsageID) AS 'Оказано услуг',
+                        COUNT(DISTINCT CASE WHEN mu.PetID IS NOT NULL THEN mu.PetID
+                                            WHEN su.PetID IS NOT NULL THEN su.PetID END) AS 'Уникальных пациентов'
+                    FROM
+                        Veterinarians v
+                    JOIN
+                        Posts p ON v.PostID = p.PostID
+                    JOIN
+                        Genders g ON v.GenderID = g.GenderID
+                    LEFT JOIN
+                        MedicationUsages mu ON v.VetID = mu.VetID
+                    LEFT JOIN
+                        ServiceUsages su ON v.VetID = su.VetID
+                    WHERE
+                        v.VetID = {selectedID}
+                    GROUP BY
+                        v.FullName,
+                        p.Post,
+                        g.Gender";
                     break;
 
-                case "Clients":
-                    title.Range.Text = "Отчет по клиентам и их питомцам";
-                    query = @"SELECT
-                                c.FullName AS Client,
-                                c.Phone,
-                                c.Email,
-                                p.Name AS PetName,
-                                p.Species,
-                                p.Breed,
-                                COUNT(DISTINCT i.InvoiceID) AS VisitsCount,
-                                SUM(i.TotalAmount) AS TotalSpent,
-                                MAX(i.InvoiceDate) AS LastVisitDate
-                            FROM
-                                Clients c
-                            JOIN
-                                Pets p ON c.ClientID = p.OwnerID
-                            LEFT JOIN
-                                Invoices i ON c.ClientID = i.ClientID
-                            LEFT JOIN
-                                Payments pay ON i.InvoiceID = pay.InvoiceID
-                            WHERE
-                                i.Paid = 1
-                                AND i.InvoiceDate BETWEEN '2023-01-01' AND GetDate()
-                            GROUP BY
-                                c.FullName,
-                                c.Phone,
-                                c.Email,
-                                p.Name,
-                                p.Species,
-                                p.Breed
-                            ORDER BY
-                                TotalSpent DESC;";
+                case "dataGridViewMedicationUsages":
+                    title.Range.Text = "Отчет по использованию лекарства";
+                    query = $@"SELECT
+                        m.Name AS 'Название лекарства',
+                        p.Name AS 'Имя питомца',
+                        cl.FullName AS 'Владелец',
+                        v.FullName AS 'Назначил ветеринар',
+                        mu.QuantityUsed AS 'Количество',
+                        mu.Purpose AS 'Цель применения'
+                    FROM
+                        MedicationUsages mu
+                    JOIN
+                        Medications m ON mu.MedicationID = m.MedicationID
+                    JOIN
+                        Pets p ON mu.PetID = p.PetID
+                    JOIN
+                        Clients cl ON p.OwnerID = cl.ClientID
+                    LEFT JOIN
+                        Veterinarians v ON mu.VetID = v.VetID
+                    WHERE
+                        mu.MedicationUsageID = {selectedID}";
+                    break;
+
+                case "dataGridViewServiceUsages":
+                    title.Range.Text = "Отчет по оказанной услуге";
+                    query = $@"SELECT
+                        s.ServiceName AS 'Услуга',
+                        p.Name AS 'Имя питомца',
+                        cl.FullName AS 'Владелец',
+                        v.FullName AS 'Оказал ветеринар',
+                        su.Purpose AS 'Причина обращения'
+                    FROM
+                        ServiceUsages su
+                    JOIN
+                        Services s ON su.ServiceID = s.ServiceID
+                    JOIN
+                        Pets p ON su.PetID = p.PetID
+                    JOIN
+                        Clients cl ON p.OwnerID = cl.ClientID
+                    LEFT JOIN
+                        Veterinarians v ON su.VetID = v.VetID
+                    WHERE
+                        su.ServiceUsageID = {selectedID}";
                     break;
             }
             SqlCommand command = new(query, dataBase.GetConnection());
@@ -1576,51 +1590,43 @@ namespace VetAutomate
                 comboBoxMedicationIDMedicationUsages.Items.Clear();
                 using (var cmd = new SqlCommand("SELECT MedicationID, Name FROM Medications ORDER BY Name", dataBase.GetConnection()))
                 {
-                    using (var reader = cmd.ExecuteReader())
+                    using var reader = cmd.ExecuteReader();
+                    while (reader.Read())
                     {
-                        while (reader.Read())
-                        {
-                            comboBoxMedicationIDMedicationSuppplies.Items.Add(reader.GetString(1));
-                            comboBoxMedicationIDMedicationUsages.Items.Add(reader.GetString(1));
-                        }
+                        comboBoxMedicationIDMedicationSuppplies.Items.Add(reader.GetString(1));
+                        comboBoxMedicationIDMedicationUsages.Items.Add(reader.GetString(1));
                     }
                 }
                 comboBoxPetIDMedicationUsages.Items.Clear();
                 comboBoxPetIDServiceUsages.Items.Clear();
                 using (var cmd = new SqlCommand("SELECT PetID, Name FROM Pets ORDER BY Name", dataBase.GetConnection()))
                 {
-                    using (var reader = cmd.ExecuteReader())
+                    using var reader = cmd.ExecuteReader();
+                    while (reader.Read())
                     {
-                        while (reader.Read())
-                        {
-                            comboBoxPetIDMedicationUsages.Items.Add(reader.GetString(1));
-                            comboBoxPetIDServiceUsages.Items.Add(reader.GetString(1));
-                        }
+                        comboBoxPetIDMedicationUsages.Items.Add(reader.GetString(1));
+                        comboBoxPetIDServiceUsages.Items.Add(reader.GetString(1));
                     }
                 }
                 comboBoxVetIDServiceUsages.Items.Clear();
                 comboBoxVetIDMedicationUsages.Items.Clear();
                 using (var cmd = new SqlCommand("SELECT VetID, FullName FROM Veterinarians ORDER BY FullName", dataBase.GetConnection()))
                 {
-                    using (var reader = cmd.ExecuteReader())
+                    using var reader = cmd.ExecuteReader();
+                    while (reader.Read())
                     {
-                        while (reader.Read())
-                        {
-                            comboBoxVetIDServiceUsages.Items.Add(reader.GetString(1));
-                            comboBoxVetIDMedicationUsages.Items.Add(reader.GetString(1));
-                        }
+                        comboBoxVetIDServiceUsages.Items.Add(reader.GetString(1));
+                        comboBoxVetIDMedicationUsages.Items.Add(reader.GetString(1));
                     }
                 }
                 comboBoxServiceIDServiceUsages.Items.Clear();
                 using (var cmd = new SqlCommand("SELECT ServiceID, ServiceName FROM Services ORDER BY ServiceName", dataBase.GetConnection()))
                 {
-                    using (var reader = cmd.ExecuteReader())
+                    using var reader = cmd.ExecuteReader();
+                    while (reader.Read())
                     {
-                        while (reader.Read())
-                        {
-                            comboBoxServiceIDServiceUsages.Items.Add(
-                                reader.GetString(1));
-                        }
+                        comboBoxServiceIDServiceUsages.Items.Add(
+                            reader.GetString(1));
                     }
                 }
             }
@@ -1778,7 +1784,7 @@ namespace VetAutomate
         {
             try
             {
-                AddFormMedicationSupplies addForm = new();
+                AddFormMedicationUsages addForm = new();
                 addForm.Show();
                 ClearFields();
             }
@@ -1997,7 +2003,7 @@ namespace VetAutomate
             try
             {
                 Change(dataGridViewVeterinarians);
-                ClearFields();
+                //ClearFields();
             }
             catch (Exception ex)
             {
@@ -2104,8 +2110,7 @@ namespace VetAutomate
         {
             try
             {
-                Change(dataGridViewClients);
-                ClearFields();
+                UpdateBase(dataGridViewClients);
             }
             catch (Exception ex)
             {
@@ -2255,7 +2260,7 @@ namespace VetAutomate
         {
             try
             {
-                UpdateBase(dataGridViewClients);
+                ExportToWord(dataGridViewClients);
             }
             catch (Exception ex)
             {
@@ -2823,23 +2828,33 @@ namespace VetAutomate
         }
 
         /// <summary>
-        /// ButtonReportClients_Click() вызывается при нажатии на кнопку отчета на вкладке "Клиенты"
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ButtonReportClients_Click(object sender, EventArgs e)
-        {
-            Reports("Clients");
-        }
-
-        /// <summary>
         /// ButtonReportVeterinarians_Click() вызывается при нажатии на кнопку отчета на вкладке "Ветеринары"
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void ButtonReportVeterinarians_Click(object sender, EventArgs e)
         {
-            Reports("Veterinarians");
+            Reports(dataGridViewVeterinarians);
+        }
+
+        /// <summary>
+        /// ButtonMedicationUsageReport_Click() вызывается при нажатии на кнопку отчета на вкладке "Использование лекарств"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonMedicationUsageReport_Click(object sender, EventArgs e)
+        {
+            Reports(dataGridViewMedicationUsages);
+        }
+
+        /// <summary>
+        /// ButtonServiceUsageReport_Click() вызывается при нажатии на кнопку отчета на вкладке "Оказание услуг"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonServiceUsageReport_Click(object sender, EventArgs e)
+        {
+            Reports(dataGridViewServiceUsages);
         }
     }
 }

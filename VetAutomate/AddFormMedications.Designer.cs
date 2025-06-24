@@ -124,12 +124,12 @@
             // 
             labelQuantinityInStock.AutoSize = true;
             labelQuantinityInStock.ForeColor = Color.Black;
-            labelQuantinityInStock.Location = new Point(246, 573);
+            labelQuantinityInStock.Location = new Point(149, 573);
             labelQuantinityInStock.Margin = new Padding(4, 0, 4, 0);
             labelQuantinityInStock.Name = "labelQuantinityInStock";
-            labelQuantinityInStock.Size = new Size(38, 15);
+            labelQuantinityInStock.Size = new Size(135, 15);
             labelQuantinityInStock.TabIndex = 17;
-            labelQuantinityInStock.Text = "Цена:";
+            labelQuantinityInStock.Text = "Количество в наличии:";
             // 
             // textBoxQuantinityInStock
             // 

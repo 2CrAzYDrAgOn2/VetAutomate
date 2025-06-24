@@ -43,9 +43,6 @@ namespace VetAutomate
                                     ('{medicationID}', '{quantity}', '{supplier}', '{supplyDate}')";
                 var sqlCommand = new SqlCommand(insertQuery, dataBase.GetConnection());
                 sqlCommand.ExecuteNonQuery();
-                var updateQuery = $"UPDATE Medications SET QuantityInStock = QuantityInStock + {quantity} WHERE MedicationID = {medicationID}";
-                var updateCommand = new SqlCommand(updateQuery, dataBase.GetConnection());
-                updateCommand.ExecuteNonQuery();
                 MessageBox.Show("Поставка успешно добавлена!", "Успех!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
